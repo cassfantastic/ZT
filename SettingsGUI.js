@@ -182,7 +182,7 @@ function initializeAllSettings() {
     
     //Line 1
     createSetting('RManualGather2', ['Manual Gather/Build', 'Auto Gather/Build', 'Mining/Building Only'], 'Controls what you gather/build do. Manual does nothing<br>Auto Gathering of Food,Wood,Metal(w/turkimp) & Science. Auto speed-Builds your build queue. <br>Mining/Building only does exactly what it says. Only use if you are passed the early stages of the game and have the mastery foremany unlocked (No longer need to trap, food and wood are useless). ', 'multitoggle', 1, null, "Core");
-
+    createSetting('RTrapTrimps', 'Trap Trimps', 'Automatically trap trimps when needed, including building traps. (when you turn this off, you may aswell turn off the in-game autotraps button, think of the starving trimps that could eat that food!)', 'boolean', true, null, "Core");
 
 
     //Daily
@@ -1034,6 +1034,7 @@ function updateCustomButtons() {
 
     //Core
     !radonon ? turnOn('ManualGather2') : turnOff("ManualGather2");
+    !radonon ? turnOn('TrapTrimps') : turnOff("TrapTrimps");
     (getPageSetting('ManualGather2')==2 && game.talents.foreman.purchased) ? turnOn("gathermetal"): turnOff("gathermetal");
     !radonon ? turnOn("amalcoord"): turnOff("amalcoord");
     !radonon && getPageSetting('amalcoord')==true ? turnOn("amalcoordt"): turnOff("amalcoordt");
@@ -1054,6 +1055,9 @@ function updateCustomButtons() {
 
     //RCore
     radonon ? turnOn('RManualGather2') : turnOff("RManualGather2");
+    radonon ? turnOn('RTrapTrimps') : turnOff("RTrapTrimps");
+
+
 
     //Daily
     !radonon ? turnOn("buyheliumy"): turnOff("buyheliumy");
