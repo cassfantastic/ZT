@@ -151,8 +151,10 @@ function RmanualLabor2() {
     }
     else if (trapTrimpsOK && breedingTrimps < 5 && game.buildings.Trap.owned > 0) {
              setGather('trimps');
-    else if (getPageSetting('RManualGather2') != 2 && game.resources.science.owned < MODULES["gather"].minScienceAmount && document.getElementById('scienceCollectBtn').style.display != 'none' && document.getElementById('science').style.visibility != 'hidden')
+    }
+    else if (getPageSetting('RManualGather2') != 2 && game.resources.science.owned < MODULES["gather"].minScienceAmount && document.getElementById('scienceCollectBtn').style.display != 'none' && document.getElementById('science').style.visibility != 'hidden') {
              setGather('science');
+    }
     else if (!game.talents.foreman.purchased && (game.global.buildingsQueue.length ? (game.global.buildingsQueue.length > 1 || game.global.autoCraftModifier == 0 || (getPlayerModifier() > 100 && game.global.buildingsQueue[0] != 'Trap.1')) : false)) {
              setGather('buildings');
     }
