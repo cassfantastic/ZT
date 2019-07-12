@@ -144,7 +144,7 @@ function initializeAllSettings() {
 
     //Core
 
-    //Line 1:
+    //Line 1
     createSetting('ManualGather2', ['Manual Gather/Build', 'Auto Gather/Build', 'Mining/Building Only', 'Science Research OFF'], 'Controls what you gather/build do. Manual does nothing<br>Auto Gathering of Food,Wood,Metal(w/turkimp) & Science. Auto speed-Builds your build queue. <br>Mining/Building only does exactly what it says. Only use if you are passed the early stages of the game and have the mastery foremany unlocked (No longer need to trap, food and wood are useless). <br>You can disable science researching for the achievement: Reach Z120 without using manual research.', 'multitoggle', 1, null, "Core");
     createSetting('gathermetal', 'Metal Only', 'For use with Mining/Gather Only. Only gathers Metal if you have foremany unlocked. ', 'boolean', false, null, "Core");
     createSetting('BuyUpgradesNew', ['Manual Upgrades', 'Buy All Upgrades', 'Upgrades no Coords'], 'Autobuys non-equipment upgrades (equipment is controlled in the Gear tab). The second option does NOT buy coordination (use this <b>ONLY</b> if you know what you\'re doing).', 'multitoggle', 1, null, "Core");
@@ -178,6 +178,11 @@ function initializeAllSettings() {
     $radonsettings.parentNode.style.setProperty('margin-right', '1vw');
     $radonsettings.parentNode.style.setProperty('margin-left', '0');
     
+    //R Core
+    
+    //Line 1
+    createSetting('RManualGather2', ['Manual Gather/Build', 'Auto Gather/Build', 'Mining/Building Only'], 'Controls what you gather/build do. Manual does nothing<br>Auto Gathering of Food,Wood,Metal(w/turkimp) & Science. Auto speed-Builds your build queue. <br>Mining/Building only does exactly what it says. Only use if you are passed the early stages of the game and have the mastery foremany unlocked (No longer need to trap, food and wood are useless). ', 'multitoggle', 1, null, "Core");
+
 
 
     //Daily
@@ -1028,6 +1033,7 @@ function updateCustomButtons() {
     //Helium    
 
     //Core
+    !radonon ? turnOn('ManualGather2') : turnOff("ManualGather2");
     (getPageSetting('ManualGather2')==2 && game.talents.foreman.purchased) ? turnOn("gathermetal"): turnOff("gathermetal");
     !radonon ? turnOn("amalcoord"): turnOff("amalcoord");
     !radonon && getPageSetting('amalcoord')==true ? turnOn("amalcoordt"): turnOff("amalcoordt");
@@ -1045,6 +1051,9 @@ function updateCustomButtons() {
     !radonon && (heHr) ? turnOn("HeHrDontPortalBefore") : turnOff("HeHrDontPortalBefore");
     !radonon && (heHr) ? turnOn("HeliumHrBuffer") : turnOff("HeliumHrBuffer");
 
+
+    //RCore
+    radonon ? turnOn('RManualGather2') : turnOff("RManualGather2");
 
     //Daily
     !radonon ? turnOn("buyheliumy"): turnOff("buyheliumy");
