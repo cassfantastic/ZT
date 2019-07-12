@@ -76,14 +76,14 @@ function mainLoop() {
     if (getPageSetting('showautomapstatus') == true) updateAutoMapsStatus();
     if (game.global.universe == 1 && getPageSetting('ManualGather2') == 1) manualLabor2();
     if (game.global.universe == 1 && getPageSetting('TrapTrimps') && game.global.trapBuildAllowed && game.global.trapBuildToggled == false) toggleAutoTrap();
-    if (getPageSetting('ManualGather2') == 2) autogather3();
-    if (getPageSetting('ATGA2') == true) ATGA2();
+    if (game.global.universe == 1 && getPageSetting('ManualGather2') == 2) autogather3();
+    if (game.global.universe == 1 && getPageSetting('ATGA2') == true) ATGA2();
     if (aWholeNewWorld && getPageSetting('AutoRoboTrimp')) autoRoboTrimp();
-    if (game.global.challengeActive == "Daily" && getPageSetting('buyheliumy') >= 1 && getDailyHeliumValue(countDailyWeight()) >= getPageSetting('buyheliumy') && game.global.b >= 100 && !game.singleRunBonuses.heliumy.owned) purchaseSingleRunBonus('heliumy');
-    if (aWholeNewWorld && getPageSetting('FinishC2') > 0 && game.global.runningChallengeSquared) finishChallengeSquared();
-    if (getPageSetting('spendmagmite') == 2 && !magmiteSpenderChanged) autoMagmiteSpender();
-    if (getPageSetting('AutoNatureTokens') && game.global.world > 229) autoNatureTokens();
-    if (getPageSetting('autoenlight') && game.global.world > 229 && game.global.uberNature == false) autoEnlight();
+    if (game.global.universe == 1 && game.global.challengeActive == "Daily" && getPageSetting('buyheliumy') >= 1 && getDailyHeliumValue(countDailyWeight()) >= getPageSetting('buyheliumy') && game.global.b >= 100 && !game.singleRunBonuses.heliumy.owned) purchaseSingleRunBonus('heliumy');
+    if (game.global.universe == 1 && aWholeNewWorld && getPageSetting('FinishC2') > 0 && game.global.runningChallengeSquared) finishChallengeSquared();
+    if (game.global.universe == 1 && getPageSetting('spendmagmite') == 2 && !magmiteSpenderChanged) autoMagmiteSpender();
+    if (game.global.universe == 1 && getPageSetting('AutoNatureTokens') && game.global.world > 229) autoNatureTokens();
+    if (game.global.universe == 1 && getPageSetting('autoenlight') && game.global.world > 229 && game.global.uberNature == false) autoEnlight();
     if (getPageSetting('BuyUpgradesNew') != 0) buyUpgrades();
 
     //RCore
