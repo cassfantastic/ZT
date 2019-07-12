@@ -74,10 +74,10 @@ function mainLoop() {
     //Core
     if (getPageSetting('AutoMaps') > 0) autoMap();
     if (getPageSetting('showautomapstatus') == true) updateAutoMapsStatus();
-    if (getPageSetting('ManualGather2') == 1) manualLabor2();
+    if (game.global.universe == 1 && getPageSetting('ManualGather2') == 1) manualLabor2();
+    if (game.global.universe == 1 && getPageSetting('TrapTrimps') && game.global.trapBuildAllowed && game.global.trapBuildToggled == false) toggleAutoTrap();
     if (getPageSetting('ManualGather2') == 2) autogather3();
     if (getPageSetting('ATGA2') == true) ATGA2();
-    if (getPageSetting('TrapTrimps') && game.global.trapBuildAllowed && game.global.trapBuildToggled == false) toggleAutoTrap();
     if (aWholeNewWorld && getPageSetting('AutoRoboTrimp')) autoRoboTrimp();
     if (game.global.challengeActive == "Daily" && getPageSetting('buyheliumy') >= 1 && getDailyHeliumValue(countDailyWeight()) >= getPageSetting('buyheliumy') && game.global.b >= 100 && !game.singleRunBonuses.heliumy.owned) purchaseSingleRunBonus('heliumy');
     if (aWholeNewWorld && getPageSetting('FinishC2') > 0 && game.global.runningChallengeSquared) finishChallengeSquared();
@@ -85,7 +85,13 @@ function mainLoop() {
     if (getPageSetting('AutoNatureTokens') && game.global.world > 229) autoNatureTokens();
     if (getPageSetting('autoenlight') && game.global.world > 229 && game.global.uberNature == false) autoEnlight();
     if (getPageSetting('BuyUpgradesNew') != 0) buyUpgrades();
-    
+
+    //RCore
+    if (game.global.universe == 2 && getPageSetting('RManualGather2') == 1) RmanualLabor2();
+    if (game.global.universe == 2 && getPageSetting('RTrapTrimps') && game.global.trapBuildAllowed && game.global.trapBuildToggled == false) toggleAutoTrap();
+
+
+
     //Buildings
     if (getPageSetting('BuyBuildingsNew') === 0 && getPageSetting('hidebuildings') == true) buyBuildings();
     else if (getPageSetting('BuyBuildingsNew') == 1) {
