@@ -128,44 +128,12 @@ else setGather('buildings')
 //RGather
 
 function RmanualLabor2() {
-    //Time
-    		var DecimalBreed = Decimal.clone({precision: 30, rounding: 4});
-		var missingTrimps = new DecimalBreed(0);
-		var trimps = game.resources.trimps;
-		var trimpsMax = trimps.realMax();
-		var maxBreedable = new DecimalBreed(trimpsMax).minus(trimps.employed);
-		var potencyMod = new DecimalBreed(trimps.potency);
-		if (game.upgrades.Potency.done > 0) potencyMod = potencyMod.mul(Math.pow(1.1, game.upgrades.Potency.done));
-		if (game.buildings.Nursery.owned > 0) potencyMod = potencyMod.mul(Math.pow(1.01, game.buildings.Nursery.owned));
-		if (game.unlocks.impCount.Venimp > 0) potencyMod = potencyMod.mul(Math.pow(1.003, game.unlocks.impCount.Venimp));
-		if (game.global.brokenPlanet) potencyMod = potencyMod.div(10);
-		potencyMod = potencyMod.mul(1+ (game.portal.Pheromones.level * game.portal.Pheromones.modifier));
-		if (game.singleRunBonuses.quickTrimps.owned) potencyMod = potencyMod.mul(2);
-		if (game.global.challengeActive == "Daily"){
-			if (typeof game.global.dailyChallenge.dysfunctional !== 'undefined'){
-			potencyMod = potencyMod.mul(dailyModifiers.dysfunctional.getMult(game.global.dailyChallenge.dysfunctional.strength));
-			}
-			if (typeof game.global.dailyChallenge.toxic !== 'undefined'){
-			potencyMod = potencyMod.mul(dailyModifiers.toxic.getMult(game.global.dailyChallenge.toxic.strength, game.global.dailyChallenge.toxic.stacks));
-			}
-		}
-		if (game.global.challengeActive == "Toxicity" && game.challenges.Toxicity.stacks > 0){
-		potencyMod = potencyMod.mul(Math.pow(game.challenges.Toxicity.stackMult, game.challenges.Toxicity.stacks));
-		}
-		if (game.global.voidBuff == "slowBreed"){
-		potencyMod = potencyMod.mul(0.2);
-		}
-		potencyMod = calcHeirloomBonusDecimal("Shield", "breedSpeed", potencyMod);
-		if (game.jobs.Geneticist.owned > 0) potencyMod = potencyMod.mul(Math.pow(.98, game.jobs.Geneticist.owned));
-		potencyMod = potencyMod.div(10).add(1);
-		var decimalOwned = missingTrimps.add(trimps.owned);
-		var timeRemaining = DecimalBreed.log10(maxBreedable.div(decimalOwned.minus(trimps.employed))).div(DecimalBreed.log10(potencyMod)).div(10);
-		var currentSend = game.resources.trimps.getCurrentSend();
 		
     //Vars
     var lowOnTraps = game.buildings.Trap.owned < 5;
     var trapTrimpsOK = getPageSetting('RTrapTrimps');
     var hasTurkimp = game.talents.turkimp4.purchased || game.global.turkimpTimer > 0;
+    var needToTrap = (game.resources.trimps.max - game.resources.trimps.owned >= game.resources.trimps.max * 0.05) || (game.resources.trimps.getCurrentSend() > game.resources.trimps.owned);
 
     //FRESH GAME NO RADON CODE.
     if (game.global.world <=3 && game.global.totalRadonEarned<=5000) {
@@ -178,11 +146,11 @@ function RmanualLabor2() {
 	return;
     }
 
-    if (trapTrimpsOK && timeRemaining < 1 && game.buildings.Trap.owned == 0 && canAffordBuilding('Trap')) {
+    if (trapTrimpsOK && needToTrap && game.buildings.Trap.owned == 0 && canAffordBuilding('Trap')) {
         if (!safeBuyBuilding('Trap'))
             setGather('buildings');
     }
-    else if (trapTrimpsOK && timeRemaining < 1 && game.buildings.Trap.owned > 0) {
+    else if (trapTrimpsOK && needToTrap < 1 && game.buildings.Trap.owned > 0) {
              setGather('trimps');
     }
     else if (getPageSetting('RManualGather2') != 2 && game.resources.science.owned < MODULES["gather"].minScienceAmount && document.getElementById('scienceCollectBtn').style.display != 'none' && document.getElementById('science').style.visibility != 'hidden') {
