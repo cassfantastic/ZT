@@ -127,7 +127,7 @@ else setGather('buildings')
 
 //RGather
 
-MODULES["gather"].RminScienceAmount = 50000;
+MODULES["gather"].RminScienceAmount = 200;
 
 function RmanualLabor2() {
 		
@@ -150,6 +150,9 @@ function RmanualLabor2() {
 
     if (getPageSetting('RManualGather2') != 2 && game.resources.science.owned < MODULES["gather"].RminScienceAmount && document.getElementById('scienceCollectBtn').style.display != 'none' && document.getElementById('science').style.visibility != 'hidden') {
              setGather('science');
+    }
+    else if (game.resources.science.owned < (scienceNeeded*0.8) && document.getElementById('scienceCollectBtn').style.display != 'none' && document.getElementById('science').style.visibility != 'hidden') {
+	     setGather('science');
     }
     else if (trapTrimpsOK && needToTrap && game.buildings.Trap.owned == 0 && canAffordBuilding('Trap')) {
         if (!safeBuyBuilding('Trap'))
