@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name         AutoTrimps-Zek
+// @name         AutoTrimps-ZekBeta
 // @version      1.0-Zek
 // @namespace    https://zsaur192.github.io/ZT
 // @updateURL    https://zsaur192.github.io/ZT/.user.js
