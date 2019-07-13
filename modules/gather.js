@@ -133,7 +133,7 @@ function RmanualLabor2() {
     var lowOnTraps = game.buildings.Trap.owned < 5;
     var trapTrimpsOK = getPageSetting('RTrapTrimps');
     var hasTurkimp = game.talents.turkimp4.purchased || game.global.turkimpTimer > 0;
-    var needToTrap = (game.resources.trimps.max - game.resources.trimps.owned >= game.resources.trimps.max * 0.05) || (game.resources.trimps.getCurrentSend() > game.resources.trimps.owned);
+    var needToTrap = (game.resources.trimps.max - game.resources.trimps.owned >= game.resources.trimps.max * 0.05) || (game.resources.trimps.getCurrentSend() > game.resources.trimps.owned - game.resources.trimps.employed);
 
     //FRESH GAME NO RADON CODE.
     if (game.global.world <=3 && game.global.totalRadonEarned<=5000) {
@@ -150,7 +150,7 @@ function RmanualLabor2() {
         if (!safeBuyBuilding('Trap'))
             setGather('buildings');
     }
-    else if (trapTrimpsOK && needToTrap < 1 && game.buildings.Trap.owned > 0) {
+    else if (trapTrimpsOK && needToTrap && game.buildings.Trap.owned > 0) {
              setGather('trimps');
     }
     else if (getPageSetting('RManualGather2') != 2 && game.resources.science.owned < MODULES["gather"].minScienceAmount && document.getElementById('scienceCollectBtn').style.display != 'none' && document.getElementById('science').style.visibility != 'hidden') {
