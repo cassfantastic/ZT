@@ -286,15 +286,15 @@ function RbuyFoodEfficientHousing() {
         }
     }
     var buildorder = [];
-    for (var house2 in unlockedHousing) {
-        var building = game.buildings[unlockedHousing[house2]];
+    for (var house in unlockedHousing) {
+        var building = game.buildings[unlockedHousing[house]];
         var cost = getBuildingItemPrice(building, "food", false, 1);
         var ratio = cost / building.increase.by;
         buildorder.push({
-            'name': unlockedHousing[house2],
+            'name': unlockedHousing[house],
             'ratio': ratio
         });
-        document.getElementById(unlockedHousing[house2]).style.border = "1px solid #FFFFFF";
+        document.getElementById(unlockedHousing[house]).style.border = "1px solid #FFFFFF";
     }
     buildorder.sort(function (a, b) {
         return a.ratio - b.ratio;
@@ -320,14 +320,14 @@ function RbuyGemEfficientHousing() {
         }
     }
     var obj = {};
-    for (var house2 in unlockedHousing) {
-        var building = game.buildings[unlockedHousing[house2]];
+    for (var house in unlockedHousing) {
+        var building = game.buildings[unlockedHousing[house]];
         var cost = getBuildingItemPrice(building, "gems", false, 1);
         var ratio = cost / building.increase.by;
-	if (unlockedHousing[house2] == "Gateway" && !canAffordBuilding('Gateway'))
+	if (unlockedHousing[house] == "Gateway" && !canAffordBuilding('Gateway'))
             continue;
-        obj[unlockedHousing[house2]] = ratio;
-        document.getElementById(unlockedHousing[house2]).style.border = "1px solid #FFFFFF";
+        obj[unlockedHousing[house]] = ratio;
+        document.getElementById(unlockedHousing[house]).style.border = "1px solid #FFFFFF";
     }
     var keysSorted = Object.keys(obj).sort(function (a, b) {
             return obj[a] - obj[b];
