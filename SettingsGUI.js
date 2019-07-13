@@ -1299,16 +1299,16 @@ function updateCustomButtons() {
     //RMaps
     radonon ? turnOn("RAutoMaps"): turnOff("RAutoMaps");
     radonon ? turnOn("Rmapselection"): turnOff("Rmapselection");
-    radonon ? turnOn("MaxMapBonusAfterZone"): turnOff("MaxMapBonusAfterZone");
-    radonon ? turnOn("MaxMapBonuslimit"): turnOff("MaxMapBonuslimit");
-    radonon ? turnOn("MaxMapBonushealth"): turnOff("MaxMapBonushealth");
-    radonon ? turnOn("mapcuntoff"): turnOff("mapcuntoff");
-    radonon ? turnOn("DisableFarm"): turnOff("DisableFarm");
-    radonon ? turnOn("VoidMaps"): turnOff("VoidMaps");
-    radonon ? turnOn("RunNewVoidsUntilNew"): turnOff("RunNewVoidsUntilNew");
-    radonon ? turnOn("onlystackedvoids"): turnOff("onlystackedvoids");
-    radonon ? turnOn("scryvoidmaps"): turnOff("scryvoidmaps");
-    radonon ? turnOn("buywepsvoid"): turnOff("buywepsvoid");
+    radonon ? turnOn("RMaxMapBonusAfterZone"): turnOff("RMaxMapBonusAfterZone");
+    radonon ? turnOn("RMaxMapBonuslimit"): turnOff("RMaxMapBonuslimit");
+    radonon ? turnOn("RMaxMapBonushealth"): turnOff("RMaxMapBonushealth");
+    radonon ? turnOn("Rmapcuntoff"): turnOff("Rmapcuntoff");
+    radonon ? turnOn("RDisableFarm"): turnOff("RDisableFarm");
+    radonon ? turnOn("RVoidMaps"): turnOff("RVoidMaps");
+    radonon ? turnOn("RRunNewVoidsUntilNew"): turnOff("RRunNewVoidsUntilNew");
+    radonon ? turnOn("Ronlystackedvoids"): turnOff("Ronlystackedvoids");
+    radonon ? turnOn("Rscryvoidmaps"): turnOff("Rscryvoidmaps");
+    radonon ? turnOn("Rbuywepsvoid"): turnOff("Rbuywepsvoid");
 
 
     //Spire
