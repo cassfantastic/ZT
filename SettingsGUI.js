@@ -99,7 +99,9 @@ function initializeAllTabs() {
     }
     if (game.global.universe == 1) {
         createTabs("ATGA", "Geneticassist Settings");
-        createTabs("Scryer", "Scryer Settings");
+    }
+    createTabs("Scryer", "Scryer Settings");
+    if (game.global.universe == 1) {
         createTabs("Magma", "Dimensional Generator & Magmite Settings");
     }
     createTabs("Heirlooms", "Heirloom Settings");
