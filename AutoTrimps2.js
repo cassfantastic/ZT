@@ -117,12 +117,21 @@ function mainLoop() {
 
 
     //Jobs
-    if (getPageSetting('BuyJobsNew') === 0);
-    else if (getPageSetting('BuyJobsNew') == 1) {
+    if (game.global.universe == 1 && getPageSetting('BuyJobsNew') == 1) {
         workerRatios();
         buyJobs();
-    } else if (getPageSetting('BuyJobsNew') == 2) buyJobs();
+    } 
+    else if (game.global.universe == 1 && getPageSetting('BuyJobsNew') == 2) buyJobs();
 
+    //RJobs
+    if (game.global.universe == 2 && getPageSetting('RBuyJobsNew') == 1) {
+        RworkerRatios();
+        RbuyJobs();
+    } 
+    else if (game.global.universe == 2 && getPageSetting('RBuyJobsNew') == 2) RbuyJobs();
+
+    
+    
     //Portal
     if (autoTrimpSettings.AutoPortal.selected != "Off" && game.global.challengeActive != "Daily" && !game.global.runningChallengeSquared) autoPortal();
     if (getPageSetting('AutoPortalDaily') > 0 && game.global.challengeActive == "Daily") dailyAutoPortal();
