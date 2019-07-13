@@ -301,7 +301,7 @@ function RbuyFoodEfficientHousing() {
     });
     var bestfoodBuilding = null;
     var bb = buildorder[0];
-    var max = getPageSetting('Max' + bb.name);
+    var max = getPageSetting('RMax' + bb.name);
     if (game.buildings[bb.name].owned < max || max == -1) {
         bestfoodBuilding = bb.name;
     }
@@ -334,7 +334,7 @@ function RbuyGemEfficientHousing() {
         });
     bestBuilding = null;
     for (var best in keysSorted) {
-        var max = getPageSetting('Max' + keysSorted[best]);
+        var max = getPageSetting('RMax' + keysSorted[best]);
         if (max === false) max = -1;
         if (game.buildings[keysSorted[best]].owned < max || max == -1) {
             bestBuilding = keysSorted[best];
@@ -361,7 +361,7 @@ function RbuyBuildings() {
     RbuyGemEfficientHousing();
 
     //Tributes
-    if (!game.buildings.Tribute.locked &&(getPageSetting('MaxTribute') > game.buildings.Tribute.owned || getPageSetting('MaxTribute') == -1)) {
+    if (!game.buildings.Tribute.locked &&(getPageSetting('RMaxTribute') > game.buildings.Tribute.owned || getPageSetting('RMaxTribute') == -1)) {
         RsafeBuyBuilding('Tribute');
     }
 
