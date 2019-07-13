@@ -1596,4 +1596,19 @@ function checkPortalSettings() {
 
 function getDailyHeHrStats(){var a="";if("Daily"==game.global.challengeActive){var b=game.stats.heliumHour.value()/(game.global.totalHeliumEarned-(game.global.heliumLeftover+game.resources.helium.owned));b*=100+getDailyHeliumValue(countDailyWeight()),a="<b>After Daily He/Hr: "+b.toFixed(3)+"%"}return a}
 function settingsProfileMakeGUI(){}
-function toggleAutoMaps(){getPageSetting('AutoMaps')?setPageSetting('AutoMaps',0):setPageSetting('AutoMaps',1),document.getElementById('autoMapBtn').setAttribute('class','noselect settingsBtn settingBtn'+autoTrimpSettings.AutoMaps.value)}
+function toggleAutoMaps() {
+         if (game.global.universe == 1 && getPageSetting('AutoMaps')) { 
+             setPageSetting('AutoMaps',0);
+         }
+         else {
+             setPageSetting('AutoMaps',1);
+             document.getElementById('autoMapBtn').setAttribute('class','noselect settingsBtn settingBtn'+autoTrimpSettings.AutoMaps.value);
+         }
+        if (game.global.universe == 2 && getPageSetting('RAutoMaps')) { 
+             setPageSetting('RAutoMaps',0);
+         }
+         else {
+             setPageSetting('RAutoMaps',1);
+             document.getElementById('autoMapBtn').setAttribute('class','noselect settingsBtn settingBtn'+autoTrimpSettings.RAutoMaps.value);
+         }
+}
