@@ -281,9 +281,9 @@ function workerRatios() {
 
 //Radon
 
-MODULES["jobs"].RscientistRatio = 2;
-MODULES["jobs"].RscientistRatio2 = 1;
-MODULES["jobs"].RscientistRatio3 = 4;
+MODULES["jobs"].RscientistRatio = 8;
+MODULES["jobs"].RscientistRatio2 = 4;
+MODULES["jobs"].RscientistRatio3 = 16;
 //Worker Ratios = [Farmer,Lumber,Miner]
 MODULES["jobs"].RautoRatio7 = [1, 1, 98];
 MODULES["jobs"].RautoRatio6 = [1, 7, 12];
