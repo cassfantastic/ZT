@@ -1,5 +1,59 @@
-function automationMenuInit(){for(var a=document.getElementsByClassName("btn btn-default"),b=0;b<a.length;b++)"toggleSettingsMenu()"===a[b].getAttribute("onclick")&&a[b].setAttribute("onclick","autoPlusSettingsMenu()");var c=document.createElement("TD");c.appendChild(document.createTextNode("AutoTrimps")),c.setAttribute("class","btn btn-default"),c.setAttribute("onclick","autoToggle()");var d=document.getElementById("settingsTable").firstElementChild.firstElementChild;d.insertBefore(c,d.childNodes[10]);var e=document.createElement("DIV");e.setAttribute("style","margin-top: 0.2vw; display: block; font-size: 1.1vw; height: 1.5em; text-align: center; border-radius: 4px"),e.setAttribute("id","autoMapBtn"),e.setAttribute("class","noselect settingsBtn"),e.setAttribute("onClick","toggleAutoMaps()"),e.setAttribute("onmouseover","tooltip(\"Toggle Automapping\", \"customText\", event, \"Toggle automapping on and off.\")"),e.setAttribute("onmouseout","tooltip(\"hide\")");var f=document.createElement("SPAN");f.appendChild(document.createTextNode("Auto Maps")),f.setAttribute("id","autoMapLabel");var g=document.getElementById("battleBtnsColumn");e.appendChild(f),g.appendChild(e),e=document.createElement("DIV"),e.setAttribute("style","display: block; font-size: 1.1vw; text-align: center; background-color: rgba(0,0,0,0.3);"),e.setAttribute("onmouseover","tooltip(\"Health to Damage ratio\", \"customText\", event, \"This status box displays the current mode Automaps is in. The number usually shown here during Farming or Want more Damage modes is the 'HDratio' meaning EnemyHealth to YourDamage Ratio (in X stance). Above 16 will trigger farming, above 4 will trigger going for Map bonus up to 10 stacks.<p><b>enoughHealth: </b>\" + enoughHealth + \"<br><b>enoughDamage: </b>\" + enoughDamage +\"<br><b>shouldFarm: </b>\" + shouldFarm +\"<br><b>H:D ratio = </b>\" + calcHDratio() + \"<br>\")"),e.setAttribute("onmouseout","tooltip(\"hide\")"),f=document.createElement("SPAN"),f.id="autoMapStatus",e.appendChild(f),g.appendChild(e),e=document.createElement("DIV"),e.setAttribute("style","display: block; font-size: 1vw; text-align: center; margin-top: 2px; background-color: rgba(0,0,0,0.3);"),e.setAttribute("onmouseover","tooltip(\"Helium/Hr Info\", \"customText\", event, \"1st is Current He/hr % out of Lifetime He(not including current+unspent).<br> 0.5% is an ideal peak target. This can tell you when to portal... <br>2nd is Current run Total He earned / Lifetime He(not including current)<br>\" + getDailyHeHrStats())"),e.setAttribute("onmouseout","tooltip(\"hide\")"),f=document.createElement("SPAN"),f.id="hiderStatus",e.appendChild(f),g.appendChild(e);var h=document.getElementById("portalTimer");h.setAttribute("onclick","toggleSetting('pauseGame')"),h.setAttribute("style","cursor: default");for(var j=document.getElementsByClassName("fightBtn"),k=0;k<j.length;k++)j[k].style.padding="0.01vw 0.01vw"}
+function automationMenuInit() {
+    var settingBtnSrch = document.getElementsByClassName("btn btn-default");
+    for (var i = 0; i < settingBtnSrch.length; i++) {
+        if (settingBtnSrch[i].getAttribute("onclick") === "toggleSettingsMenu()")
+            settingBtnSrch[i].setAttribute("onclick", "autoPlusSettingsMenu()");
+    }
+    var newItem = document.createElement("TD");
+    newItem.appendChild(document.createTextNode("AutoTrimps"));
+    newItem.setAttribute("class", "btn btn-default");
+    newItem.setAttribute("onclick", "autoToggle()");
+    var settingbarRow = document.getElementById("settingsTable").firstElementChild.firstElementChild;
+    settingbarRow.insertBefore(newItem, settingbarRow.childNodes[10]);
+
+    var newContainer = document.createElement("DIV");
+    newContainer.setAttribute("style", "margin-top: 0.2vw; display: block; font-size: 1.1vw; height: 1.5em; text-align: center; border-radius: 4px");
+    newContainer.setAttribute("id", "autoMapBtn");
+    newContainer.setAttribute("class", "noselect settingsBtn");
+    newContainer.setAttribute("onClick", "toggleAutoMaps()");
+    newContainer.setAttribute("onmouseover", 'tooltip(\"Toggle Automapping\", \"customText\", event, \"Toggle automapping on and off.\")');
+    newContainer.setAttribute("onmouseout", 'tooltip("hide")');
+    var abutton = document.createElement("SPAN");
+    abutton.appendChild(document.createTextNode("Auto Maps"));    
+    abutton.setAttribute("id", "autoMapLabel");
+    var fightButtonCol = document.getElementById("battleBtnsColumn");
+    newContainer.appendChild(abutton);
+    fightButtonCol.appendChild(newContainer);
+
+    newContainer = document.createElement("DIV");
+    newContainer.setAttribute("style", "display: block; font-size: 1.1vw; text-align: center; background-color: rgba(0,0,0,0.3);");
+    newContainer.setAttribute("onmouseover", 'tooltip(\"Health to Damage ratio\", \"customText\", event, \"This status box displays the current mode Automaps is in. The number usually shown here during Farming or Want more Damage modes is the \'HDratio\' meaning EnemyHealth to YourDamage Ratio (in X stance). Above 16 will trigger farming, above 4 will trigger going for Map bonus up to 10 stacks.<p><b>enoughHealth: </b>\" + enoughHealth + \"<br><b>enoughDamage: </b>\" + enoughDamage +\"<br><b>shouldFarm: </b>\" + shouldFarm +\"<br><b>H:D ratio = </b>\" + HDratio + \"<br>\")');
+    newContainer.setAttribute("onmouseout", 'tooltip("hide")');
+    abutton = document.createElement("SPAN");
+    abutton.id = 'autoMapStatus';
+    newContainer.appendChild(abutton);
+    fightButtonCol.appendChild(newContainer);
+
+    newContainer = document.createElement("DIV");
+    newContainer.setAttribute("style", "display: block; font-size: 1vw; text-align: center; margin-top: 2px; background-color: rgba(0,0,0,0.3);");
+    newContainer.setAttribute("onmouseover", 'tooltip(\"Helium/Hr Info\", \"customText\", event, \"1st is Current He/hr % out of Lifetime He(not including current+unspent).<br> 0.5% is an ideal peak target. This can tell you when to portal... <br>2nd is Current run Total He earned / Lifetime He(not including current)<br>\" + getDailyHeHrStats())');
+    newContainer.setAttribute("onmouseout", 'tooltip("hide")');
+    abutton = document.createElement("SPAN");
+    abutton.id = 'hiderStatus';
+    newContainer.appendChild(abutton);
+    fightButtonCol.appendChild(newContainer);
+
+    var $portalTimer = document.getElementById('portalTimer');
+    $portalTimer.setAttribute('onclick', 'toggleSetting(\'pauseGame\')');
+    $portalTimer.setAttribute('style', 'cursor: default');
+
+    var btns = document.getElementsByClassName("fightBtn");
+    for (var x = 0; x < btns.length; x++) {
+        btns[x].style.padding = "0.01vw 0.01vw";
+    }
+}
 automationMenuInit();
+
 function automationMenuSettingsInit(){var a=document.getElementById("settingsRow"),b=document.createElement("DIV");b.id="autoSettings",b.setAttribute("style","display: none; max-height: 92.5vh;overflow: auto;"),b.setAttribute("class","niceScroll"),a.appendChild(b)}
 automationMenuSettingsInit();
 var link1=document.createElement("link");link1.rel="stylesheet",link1.type="text/css",link1.href=basepath+"tabs.css",document.head.appendChild(link1);function createTabs(a,b){var c=document.createElement("li"),d=document.createElement("a");d.className="tablinks",d.setAttribute("onclick","toggleTab(event, '"+a+"')"),d.href="#",d.appendChild(document.createTextNode(a)),c.id="tab"+a,c.appendChild(d),addtabsUL.appendChild(c),createTabContents(a,b)}
