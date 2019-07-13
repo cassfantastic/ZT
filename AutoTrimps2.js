@@ -73,8 +73,8 @@ function mainLoop() {
     autoLevelEquipment();
 
     //Core
-    if (getPageSetting('AutoMaps') > 0) autoMap();
-    if (getPageSetting('showautomapstatus') == true) updateAutoMapsStatus();
+    if (game.global.universe == 1 && getPageSetting('AutoMaps') > 0) autoMap();
+    if (game.global.universe == 1 && getPageSetting('showautomapstatus') == true) updateAutoMapsStatus();
     if (game.global.universe == 1 && getPageSetting('ManualGather2') == 1) manualLabor2();
     if (game.global.universe == 1 && getPageSetting('TrapTrimps') && game.global.trapBuildAllowed && game.global.trapBuildToggled == false) toggleAutoTrap();
     if (game.global.universe == 1 && getPageSetting('ManualGather2') == 2) autogather3();
@@ -228,8 +228,8 @@ function mainCleanup() {
     if (game.global.universe == 2 && currentworld == 1 && aWholeNewWorld) {
         lastRadonZone = 0;
         zonePostpone = 0;
-        if (getPageSetting('AutoMaps')==0 && !game.upgrades.Battle.done)
-            autoTrimpSettings["AutoMaps"].value = 1;
+        if (getPageSetting('RAutoMaps') == 0 && !game.upgrades.Battle.done)
+            autoTrimpSettings["RAutoMaps"].value = 1;
         return true;
     }
 }
