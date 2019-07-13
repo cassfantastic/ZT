@@ -86,6 +86,7 @@ function mainLoop() {
     if (game.global.universe == 1 && getPageSetting('autoenlight') && game.global.world > 229 && game.global.uberNature == false) autoEnlight();
     if (game.global.universe == 1 && getPageSetting('BuyUpgradesNew') != 0) buyUpgrades();
 
+    
     //RCore
     if (game.global.universe == 2 && getPageSetting('RManualGather2') == 1) RmanualLabor2();
     if (game.global.universe == 2 && getPageSetting('RTrapTrimps') && game.global.trapBuildAllowed && game.global.trapBuildToggled == false) toggleAutoTrap();
@@ -102,6 +103,7 @@ function mainLoop() {
     else if (game.global.universe == 1 && getPageSetting('BuyBuildingsNew') == 3) buyStorage();
     if (game.global.universe == 1 && getPageSetting('UseAutoGen') == true && game.global.world > 229) autoGenerator();
 
+    
     //RBuildings
     if (game.global.universe == 2 && getPageSetting('RBuyBuildingsNew') == 1) {
         RbuyBuildings();
@@ -123,6 +125,7 @@ function mainLoop() {
     } 
     else if (game.global.universe == 1 && getPageSetting('BuyJobsNew') == 2) buyJobs();
 
+    
     //RJobs
     if (game.global.universe == 2 && getPageSetting('RBuyJobsNew') == 1) {
         RworkerRatios();
@@ -133,10 +136,16 @@ function mainLoop() {
     
     
     //Portal
-    if (autoTrimpSettings.AutoPortal.selected != "Off" && game.global.challengeActive != "Daily" && !game.global.runningChallengeSquared) autoPortal();
-    if (getPageSetting('AutoPortalDaily') > 0 && game.global.challengeActive == "Daily") dailyAutoPortal();
-    if (getPageSetting('c2runnerstart') == true && getPageSetting('c2runnerportal') > 0 && game.global.runningChallengeSquared && game.global.world > getPageSetting('c2runnerportal')) c2runnerportal();
+    if (game.global.universe == 1 && autoTrimpSettings.AutoPortal.selected != "Off" && game.global.challengeActive != "Daily" && !game.global.runningChallengeSquared) autoPortal();
+    if (game.global.universe == 1 && getPageSetting('AutoPortalDaily') > 0 && game.global.challengeActive == "Daily") dailyAutoPortal();
+    if (game.global.universe == 1 && getPageSetting('c2runnerstart') == true && getPageSetting('c2runnerportal') > 0 && game.global.runningChallengeSquared && game.global.world > getPageSetting('c2runnerportal')) c2runnerportal();
+    
+    
+    //RPortal
+    if (game.global.universe == 2 && autoTrimpSettings.RAutoPortal.selected != "Off" && game.global.challengeActive != "Daily" && !game.global.runningChallengeSquared) RautoPortal();
 
+    
+    
     //Combat
     if (game.global.universe == 1 && getPageSetting('ForceAbandon') == true || getPageSetting('fuckanti') > 0) trimpcide();
     if (getPageSetting('trimpsnotdie') == true && game.global.world > 1) helptrimpsnotdie();
