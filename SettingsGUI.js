@@ -411,8 +411,27 @@ function initializeAllSettings() {
     createSetting('scryvoidmaps', 'VM Scryer', 'Only use if you have Scryhard II, for er, obvious reasons. Works without the scryer options. ', 'boolean', false, null, 'Maps');
     createSetting('buywepsvoid', 'VM Buy Weps', 'Buys gear in Void maps regardless of your H:D ratio. Useful if you want to overkill as much as possible. ', 'boolean', false, null, 'Maps');
 
+    
+    //RMaps
+
+    //Line 1
+    createSetting('RAutoMaps', ["Auto Maps Off", "Auto Maps On", "Auto Maps No Unique"], 'Automaps. The no unique setting will not run unique maps such as dimensions of rage. Recommended ON. ', 'multitoggle', 1, null, "Maps");
+    createSetting('Rmapselection', 'Map Selection', 'Select which you prefer to use. Recommend Gardens if you have unlocked it. ', 'dropdown', 'Mountain', ["Random", "Mountain", "Forest", "Sea", "Depths", "Gardens"], 'Maps');
+    createSetting('RMaxMapBonusAfterZone', 'Max MapBonus After', 'Always gets Max Map Bonus from this zone on. (inclusive and after).<br><b>NOTE:</b> Set -1 to disable entirely (default). Set 0 to use it always. ', 'value', '-1', null, 'Maps');
+    createSetting('RMaxMapBonuslimit', 'Max MapBonus Limit', 'Limit the amount of Map Bonuses you get. Default is 10. ', 'value', '10', null, 'Maps');
+    createSetting('RMaxMapBonushealth', 'Max MapBonus Health', 'Limit the amount of map bonuses you get when AutoMaps requires more health. Default is 10. ', 'value', '10', null, 'Maps');
+    createSetting('Rmapcuntoff', 'Map Cut Off', 'Decides when to get max map bonus. 4 is default. This means it will take 1 hit to kill an enemy if in D stance. ', 'value', '4', null, 'Maps');
+    createSetting('RDisableFarm', 'Farming H:D', 'If H:D goes above this value, it will farm for Damage & Health. The lower this setting, the more it will want to farm. Default is <b>16<b/>. <b>-1 to disable farming!</b>', 'value', -1, null, 'Maps');
+
+    //Line 2
+    createSetting('RVoidMaps', 'Void Maps', '<b>0 to disable</b> The zone at which you want all your void maps to be cleared inclusive of the zone you type. Runs them at Cell 70. Use odd zones on Lead.<br>', 'value', '0', null, "Maps");
+    createSetting('RRunNewVoidsUntilNew', 'New Voids Mod', '<b>0 to disable. Positive numbers are added to your Void Map zone. -1 for no cap.</b> This allows you to run new Void Maps obtained after your Void Map zone by adding this number to your Void Map zone. <br> <b>Example</b> Void map zone=187 and This setting=10. New Voids run until 197).<br>This means that any new void maps gained until Z197. CAUTION: May severely slow you down by trying to do too-high level void maps. Default 0 (OFF).', 'value', '0', null, 'Maps');
+    createSetting('Ronlystackedvoids', 'Stacked Voids Only', 'Only run stacked voids. ', 'boolean', false, null, 'Maps');
+    createSetting('Rscryvoidmaps', 'VM Scryer', 'Only use if you have Scryhard II, for er, obvious reasons. Works without the scryer options. ', 'boolean', false, null, 'Maps');
+    createSetting('Rbuywepsvoid', 'VM Buy Weps', 'Buys gear in Void maps regardless of your H:D ratio. Useful if you want to overkill as much as possible. ', 'boolean', false, null, 'Maps');
 
 
+    
     //Spire
     if (game.global.universe == 1) {
     //Line 1
@@ -1257,6 +1276,8 @@ function updateCustomButtons() {
 
 
     //Maps
+    !radonon ? turnOn("AutoMaps"): turnOff("AutoMaps");
+    !radonon ? turnOn("mapselection"): turnOff("mapselection");
     !radonon ? turnOn("DynamicSiphonology"): turnOff("DynamicSiphonology");
     !radonon ? turnOn("PreferMetal"): turnOff("PreferMetal");
     !radonon ? turnOn("MaxMapBonusAfterZone"): turnOff("MaxMapBonusAfterZone");
@@ -1273,6 +1294,20 @@ function updateCustomButtons() {
     !radonon ? turnOn("AdvMapSpecialModifier"): turnOff("AdvMapSpecialModifier");
     !radonon ? turnOn("scryvoidmaps"): turnOff("scryvoidmaps");
     !radonon ? turnOn("buywepsvoid"): turnOff("buywepsvoid");
+    
+    //RMaps
+    radonon ? turnOn("RAutoMaps"): turnOff("RAutoMaps");
+    radonon ? turnOn("Rmapselection"): turnOff("Rmapselection");
+    radonon ? turnOn("MaxMapBonusAfterZone"): turnOff("MaxMapBonusAfterZone");
+    radonon ? turnOn("MaxMapBonuslimit"): turnOff("MaxMapBonuslimit");
+    radonon ? turnOn("MaxMapBonushealth"): turnOff("MaxMapBonushealth");
+    radonon ? turnOn("mapcuntoff"): turnOff("mapcuntoff");
+    radonon ? turnOn("DisableFarm"): turnOff("DisableFarm");
+    radonon ? turnOn("VoidMaps"): turnOff("VoidMaps");
+    radonon ? turnOn("RunNewVoidsUntilNew"): turnOff("RunNewVoidsUntilNew");
+    radonon ? turnOn("onlystackedvoids"): turnOff("onlystackedvoids");
+    radonon ? turnOn("scryvoidmaps"): turnOff("scryvoidmaps");
+    radonon ? turnOn("buywepsvoid"): turnOff("buywepsvoid");
 
 
     //Spire
