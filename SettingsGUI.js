@@ -1109,7 +1109,7 @@ function updateCustomButtons() {
     radonon ? turnOn('RBuyUpgradesNew') : turnOff("RBuyUpgradesNew");
     
     //RPortal
-    radonon ? turnOn("AutoPortal"): turnOff("AutoPortal");
+    radonon ? turnOn("RAutoPortal"): turnOff("RAutoPortal");
     (radonon && autoTrimpSettings.RAutoPortal.selected == "Custom") ? turnOn("RCustomAutoPortal") : turnOff("RCustomAutoPortal");
     var rnHr = (autoTrimpSettings.RAutoPortal.selected == "Radon Per Hour");
     radonon && (rnHr || autoTrimpSettings.RAutoPortal.selected == "Custom") ? turnOn("RadonHourChallenge") : turnOff("RadonHourChallenge");
