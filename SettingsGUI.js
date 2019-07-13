@@ -1658,7 +1658,7 @@ function toggleAutoMaps() {
              setPageSetting('AutoMaps',1);
              document.getElementById('autoMapBtn').setAttribute('class','noselect settingsBtn settingBtn'+autoTrimpSettings.AutoMaps.value);
          }
-        if (game.global.universe == 2 && getPageSetting('RAutoMaps')) { 
+         if (game.global.universe == 2 && getPageSetting('RAutoMaps')) { 
              setPageSetting('RAutoMaps',0);
          }
          else {
