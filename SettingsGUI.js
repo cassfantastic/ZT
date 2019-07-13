@@ -277,8 +277,8 @@ function initializeAllSettings() {
     createSetting('MaxGateway', 'Max Gateways', 'Gateways', 'value', '25', null, "Buildings");
     createSetting('MaxWormhole', 'Max Wormholes', 'WARNING: Wormholes cost helium! Values below 0 do nothing.', 'value', '0', null, "Buildings");
     createSetting('MaxCollector', 'Max Collectors', 'recommend: -1', 'value', '-1', null, "Buildings");
-    createSetting('MaxGym', 'Max Gyms', 'Advanced. recommend: -1', 'value', '-1', null, "Buildings"); //Remove?
-    createSetting('MaxTribute', 'Max Tributes', 'Advanced. recommend: -1 ', 'value', '-1', null, "Buildings"); //Remove? (More gems is never a bad thing...)
+    createSetting('MaxGym', 'Max Gyms', 'Advanced. recommend: -1', 'value', '-1', null, "Buildings");
+    createSetting('MaxTribute', 'Max Tributes', 'Advanced. recommend: -1 ', 'value', '-1', null, "Buildings");
     createSetting('GymWall', 'Gym Wall', 'Conserves Wood. Only buys 1 Gym when you can afford <b>X</b> gyms wood cost (at the first one\'s price, simple math). -1 or 0 to disable. In other words, only allows gyms that cost less than 1/nth your currently owned wood. (to save wood for nurseries for new z230+ Magma nursery strategy). Takes decimal numbers. (Identical to the Warpstation wall setting which is why its called that). Setting to 1 does nothing besides stopping gyms from being bought 2 at a time due to the mastery.', 'value', -1, null, 'Buildings'); //remove?
 
     //Line 3
@@ -288,6 +288,20 @@ function initializeAllSettings() {
     createSetting('MaxNursery', 'Max Nurseries', 'Advanced. Recommend: -1 until you reach Magma (z230+)', 'value', '-1', null, "Buildings");
     createSetting('NoNurseriesUntil', 'No Nurseries Until z', 'Builds Nurseries starting from this zone. -1 to build from when they are unlocked. ', 'value', '-1', null, 'Buildings');
 
+    //RBuildings
+
+    //Line 1
+    createSetting('RBuyBuildingsNew', ['Buy Neither', 'Buy Buildings & Storage', 'Buy Buildings', 'Buy Storage'], 'AutoBuys Storage when it is almost full (it even anticipates Jestimp) and Non-Storage Buildings (As soon as they are available). Takes cost efficiency into account before buying Non-Storage Buildings.', 'multitoggle', 1, null, "Buildings");
+    createSetting('RMaxHut', 'Max Huts', 'Huts', 'value', '100', null, "Buildings");
+    createSetting('RMaxHouse', 'Max Houses', 'Houses', 'value', '100', null, "Buildings");
+    createSetting('RMaxMansion', 'Max Mansions', 'Mansions', 'value', '100', null, "Buildings");
+    createSetting('RMaxHotel', 'Max Hotels', 'Hotels', 'value', '100', null, "Buildings");
+    createSetting('RMaxResort', 'Max Resorts', 'Resorts', 'value', '100', null, "Buildings");
+    createSetting('RMaxGateway', 'Max Gateways', 'Gateways', 'value', '25', null, "Buildings");
+
+    //Line 2
+    createSetting('RMaxCollector', 'Max Collectors', 'recommend: -1', 'value', '-1', null, "Buildings");
+    createSetting('MaxTribute', 'Max Tributes', 'Advanced. recommend: -1 ', 'value', '-1', null, "Buildings");
 
 
     //Jobs
@@ -1137,6 +1151,18 @@ function updateCustomButtons() {
     (!radonon && !fuckbuilding) ? turnOn("FirstGigastation") : turnOff("FirstGigastation");
     (!radonon && !fuckbuilding) ? turnOn("DeltaGigastation") : turnOff("DeltaGigastation");
     (!radonon && !fuckbuilding) ? turnOn("WarpstationWall3") : turnOff("WarpstationWall3");
+
+    //RBuildings
+    radonon ? turnOn("RBuyBuildingsNew"): turnOff("RBuyBuildingsNew");
+    radonon ? turnOn("RMaxHut") : turnOff("RMaxHut");
+    radonon ? turnOn("RMaxHouse") : turnOff("RMaxHouse");
+    radonon ? turnOn("RMaxMansion") : turnOff("RMaxMansion");
+    radonon ? turnOn("RMaxHotel") : turnOff("RMaxHotel");
+    radonon ? turnOn("RMaxResort") : turnOff("RMaxResort");
+    radonon ? turnOn("RMaxGateway") : turnOff("RMaxGateway");
+    radonon ? turnOn("RMaxCollector") : turnOff("RMaxCollector");
+    radonon ? turnOn("RMaxTribute") : turnOff("RMaxTribute");
+
 
 
     //Jobs
