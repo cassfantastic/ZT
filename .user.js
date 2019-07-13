@@ -15,7 +15,7 @@
 // ==/UserScript==
 
 var script = document.createElement('script');
-script.id = 'AutoTrimps-Zek';
+script.id = 'AutoTrimps-ZekBeta';
 //This can be edited to point to your own Github Repository URL.
 script.src = 'https://zsaur192.github.io/ZT/AutoTrimps2.js';
 //script.setAttribute('crossorigin',"use-credentials");
