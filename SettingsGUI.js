@@ -319,8 +319,18 @@ function initializeAllSettings() {
     //Line 2
     createSetting('MaxTrainers', 'Max Trainers', 'Advanced. Cap your trainers (This is an absolute number not a ratio). recommend: -1', 'value', '-1', null, "Jobs");
 
+    //RJobs
+
+    //Line 1
+    createSetting('RBuyJobsNew', ['Don\'t Buy Jobs', 'Auto Worker Ratios', 'Manual Worker Ratios'], 'Manual Worker Ratios buys jobs for your trimps according to the ratios below, <b>Make sure they are all different values, if two of them are the same it might causing an infinite loop of hiring and firing!</b> Auto Worker ratios automatically changes these ratios based on current progress, <u>overriding your ratio settings</u>.<br>AutoRatios: 1/1/1 up to 300k trimps, 3/3/5 up to 3mil trimps, then 3/1/4 above 3 mil trimps, then 1/1/10 above 1000 tributes, then 1/2/22 above 1500 tributes, then 1/12/12 above 3000 tributes.<br>CAUTION: You cannot manually assign jobs with this, turn it off if you have to', 'multitoggle', 1, null, "Jobs");
+    createSetting('RFarmerRatio', 'Farmer Ratio', '', 'value', '1', null, "Jobs");
+    createSetting('RLumberjackRatio', 'Lumberjack Ratio', '', 'value', '1', null, "Jobs");
+    createSetting('RMinerRatio', 'Miner Ratio', '', 'value', '1', null, "Jobs");
+    createSetting('RMaxScientists', 'Max Scientists', 'Advanced. Cap your scientists (This is an absolute number not a ratio). recommend: -1 (infinite still controls itself)', 'value', '-1', null, "Jobs");
+    createSetting('RMaxExplorers', 'Max Explorers', 'Advanced. Cap your explorers (This is an absolute number not a ratio). recommend: -1', 'value', '-1', null, "Jobs");
 
 
+    
     //Gear
 
     //Line 1
@@ -1176,6 +1186,15 @@ function updateCustomButtons() {
     (!radonon && !fuckjobbies) ? turnOn("MaxScientists") : turnOff("MaxScientists");
     (!radonon && !fuckjobbies) ? turnOn("MaxExplorers") : turnOff("MaxExplorers");
     (!radonon && !fuckjobbies) ? turnOn("MaxTrainers") : turnOff("MaxTrainers");
+
+    //RJobs
+    radonon ? turnOn("RBuyJobsNew"): turnOff("RBuyJobsNew");
+    radonon ? turnOn("RFarmerRatio") : turnOff("RFarmerRatio");
+    radonon ? turnOn("RLumberjackRatio") : turnOff("RLumberjackRatio");
+    radonon ? turnOn("RMinerRatio") : turnOff("RMinerRatio");
+    radonon ? turnOn("RMaxScientists") : turnOff("RMaxScientists");
+    radonon ? turnOn("RMaxExplorers") : turnOff("RMaxExplorers");
+
 
 
     //Gear
