@@ -127,6 +127,8 @@ else setGather('buildings')
 
 //RGather
 
+MODULES["gather"].RminScienceAmount = 50000;
+
 function RmanualLabor2() {
 		
     //Vars
@@ -146,15 +148,15 @@ function RmanualLabor2() {
 	return;
     }
 
-    if (trapTrimpsOK && needToTrap && game.buildings.Trap.owned == 0 && canAffordBuilding('Trap')) {
+    if (getPageSetting('RManualGather2') != 2 && game.resources.science.owned < MODULES["gather"].RminScienceAmount && document.getElementById('scienceCollectBtn').style.display != 'none' && document.getElementById('science').style.visibility != 'hidden') {
+             setGather('science');
+    }
+    else if (trapTrimpsOK && needToTrap && game.buildings.Trap.owned == 0 && canAffordBuilding('Trap')) {
         if (!safeBuyBuilding('Trap'))
             setGather('buildings');
     }
     else if (trapTrimpsOK && needToTrap && game.buildings.Trap.owned > 0) {
              setGather('trimps');
-    }
-    else if (getPageSetting('RManualGather2') != 2 && game.resources.science.owned < MODULES["gather"].minScienceAmount && document.getElementById('scienceCollectBtn').style.display != 'none' && document.getElementById('science').style.visibility != 'hidden') {
-             setGather('science');
     }
     else if (!game.talents.foreman.purchased && (game.global.buildingsQueue.length ? (game.global.buildingsQueue.length > 1 || game.global.autoCraftModifier == 0 || (getPlayerModifier() > 100 && game.global.buildingsQueue[0] != 'Trap.1')) : false)) {
              setGather('buildings');
