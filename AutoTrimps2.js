@@ -84,12 +84,12 @@ function mainLoop() {
     if (game.global.universe == 1 && getPageSetting('spendmagmite') == 2 && !magmiteSpenderChanged) autoMagmiteSpender();
     if (game.global.universe == 1 && getPageSetting('AutoNatureTokens') && game.global.world > 229) autoNatureTokens();
     if (game.global.universe == 1 && getPageSetting('autoenlight') && game.global.world > 229 && game.global.uberNature == false) autoEnlight();
-    if (getPageSetting('BuyUpgradesNew') != 0) buyUpgrades();
+    if (game.global.universe == 1 && getPageSetting('BuyUpgradesNew') != 0) buyUpgrades();
 
     //RCore
     if (game.global.universe == 2 && getPageSetting('RManualGather2') == 1) RmanualLabor2();
     if (game.global.universe == 2 && getPageSetting('RTrapTrimps') && game.global.trapBuildAllowed && game.global.trapBuildToggled == false) toggleAutoTrap();
-
+    if (game.global.universe == 2 && getPageSetting('RBuyUpgradesNew') != 0) RbuyUpgrades();
 
 
     //Buildings
