@@ -217,8 +217,15 @@ function mainCleanup() {
     lastrunworld = currentworld;
     currentworld = game.global.world;
     aWholeNewWorld = lastrunworld != currentworld;
-    if (currentworld == 1 && aWholeNewWorld) {
+    if (game.global.universe == 1 && currentworld == 1 && aWholeNewWorld) {
         lastHeliumZone = 0;
+        zonePostpone = 0;
+        if (getPageSetting('AutoMaps')==0 && !game.upgrades.Battle.done)
+            autoTrimpSettings["AutoMaps"].value = 1;
+        return true;
+    }
+    if (game.global.universe == 2 && currentworld == 1 && aWholeNewWorld) {
+        lastRadonZone = 0;
         zonePostpone = 0;
         if (getPageSetting('AutoMaps')==0 && !game.upgrades.Battle.done)
             autoTrimpSettings["AutoMaps"].value = 1;
