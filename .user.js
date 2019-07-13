@@ -7,7 +7,7 @@
 // @author       zininzinin, spindrjr, Ishkaru, genBTC, Zeker0
 // @include      *trimps.github.io*
 // @include      *kongregate.com/games/GreenSatellite/trimps
-// @include      *nervous-lumiere-8ba84e.netlify.com*
+// @include      *trimpstesting5.netlify.com*
 // @connect      *zsaur192.github.io/ZT*
 // @connect      *trimps.github.io*
 // @connect      self
