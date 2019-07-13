@@ -486,7 +486,6 @@ function RworkerRatios() {
         ratioSet = MODULES["jobs"].RautoRatio2;
     } else {
         ratioSet = MODULES["jobs"].RautoRatio1;
-    }
     } else if (game.global.challengeActive == 'Transmute') {
         ratioSet = [4, 5, 0];
     }
