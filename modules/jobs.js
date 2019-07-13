@@ -488,7 +488,7 @@ function RworkerRatios() {
         ratioSet = [4, 5, 0];
     } else {
         ratioSet = MODULES["jobs"].RautoRatio1;
-
+    }
     setPageSetting('RFarmerRatio', ratioSet[0]);
     setPageSetting('RLumberjackRatio', ratioSet[1]);
     setPageSetting('RMinerRatio', ratioSet[2]);
