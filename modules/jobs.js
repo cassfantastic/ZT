@@ -484,11 +484,11 @@ function RworkerRatios() {
         ratioSet = MODULES["jobs"].RautoRatio3;
     } else if (game.resources.trimps.realMax() > 300000) {
         ratioSet = MODULES["jobs"].RautoRatio2;
-    } else {
-        ratioSet = MODULES["jobs"].RautoRatio1;
     } else if (game.global.challengeActive == 'Transmute') {
         ratioSet = [4, 5, 0];
-    }
+    } else {
+        ratioSet = MODULES["jobs"].RautoRatio1;
+
     setPageSetting('RFarmerRatio', ratioSet[0]);
     setPageSetting('RLumberjackRatio', ratioSet[1]);
     setPageSetting('RMinerRatio', ratioSet[2]);
