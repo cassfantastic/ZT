@@ -87,18 +87,26 @@ function initializeAllTabs() {
     createTabs("Jobs", "Jobs - Worker Settings");
     createTabs("Gear", "Gear - Equipment Settings");
     createTabs("Maps", "Maps - AutoMaps & VoidMaps Settings");
-    createTabs("Spire", "Spire - Settings for Spires");
+    if (game.global.universe == 1) {
+        createTabs("Spire", "Spire - Settings for Spires");
+    }
     createTabs("Raiding", "Raiding - Settings for Raiding");
     createTabs("Daily", "Dailies - Settings for Dailies");
     createTabs("C2", "C2 - Settings for C2s");
     createTabs("Combat", "Combat & Stance Settings");
-    createTabs("Windstacking", "Windstacking Settings");
-    createTabs("ATGA", "Geneticassist Settings");
-    createTabs("Scryer", "Scryer Settings");
-    createTabs("Magma", "Dimensional Generator & Magmite Settings");
+    if (game.global.universe == 1) {
+        createTabs("Windstacking", "Windstacking Settings");
+    }
+    if (game.global.universe == 1) {
+        createTabs("ATGA", "Geneticassist Settings");
+        createTabs("Scryer", "Scryer Settings");
+        createTabs("Magma", "Dimensional Generator & Magmite Settings");
+    }
     createTabs("Heirlooms", "Heirloom Settings");
     createTabs("Golden", "Golden Upgrade Settings");
-    createTabs("Nature", "Nature Settings");
+    if (game.global.universe == 1) {
+        createTabs("Nature", "Nature Settings");
+    }
     createTabs("Display", "Display & Spam Settings");
     createTabs("Import Export", "Import & Export Settings");
     var li_0 = document.createElement('li');
@@ -390,7 +398,7 @@ function initializeAllSettings() {
 
 
     //Spire
-
+    if (game.global.universe == 1) {
     //Line 1
     createSetting('MaxStacksForSpire', 'Max Map Bonus for Spire', 'Get max map bonus before running the Spire.', 'boolean', false, null, 'Spire');
     createSetting('MinutestoFarmBeforeSpire', 'Farm Before Spire', 'Farm level 200/199(or BW) maps for X minutes before continuing onto attempting Spire.<br><b>NOTE:</b> Set 0 to disable entirely (default). <br>Setting to -1/Infinite does not work here, set a very high number instead.', 'value', '0', null, 'Spire');
@@ -400,7 +408,7 @@ function initializeAllSettings() {
     createSetting('PreSpireNurseries', 'Nurseries pre-Spire', 'Set the maximum number of Nurseries to build for Spires. Overrides No Nurseries Until z and Max Nurseries so you can keep them seperate! Will build nurseries before z200 for Spire 1, but only on the zone of Spires 2+ to avoid unnecessary burning. Disable with -1.', 'value', -1, null, 'Spire');
     createSetting('spireshitbuy', 'Buy Gear in Spire', 'Will buy Weapons and Armor in Spire regardless of your H:D ratio. Respects your max gear level and ignore spires setting. ', 'boolean', false, null, 'Spire');
     createSetting('SkipSpires', 'Skip Spires', 'Will disregard your H:D ratio after Farm Before Spire is done (if set). Useful to die in spires if farming takes too long', 'boolean', false, null, 'Spire');
-
+    }
 
 
     //Raiding
@@ -420,7 +428,7 @@ function initializeAllSettings() {
 
 
     //Windstacking
-
+    if (game.global.universe == 1) {
     //Line 1
     createSetting('turnwson', 'Turn WS On!', 'Turn on Windstacking Stance in Combat to see the settings! ', 'boolean', 'false', null, 'Windstacking');
     createSetting('WindStackingMin', 'Windstack Min Zone', 'For use with Windstacking Stance, enables windstacking in zones above and inclusive of the zone set. (Get specified windstacks then change to D, kill bad guy, then repeat). This is designed to force S use until you have specified stacks in wind zones, overriding scryer settings. All windstack settings apart from WS MAX work off this setting. ', 'value', '-1', null, 'Windstacking');
@@ -430,11 +438,11 @@ function initializeAllSettings() {
     createSetting('windcutoffmap', 'Wind Map Cutoff', 'Set this value to optimise your windstacking. Can work without AS3, but not recommended. AT normally uses 4 as its cutoff. I.e if the cutoff is above 4 it will get map bonus. If you set this to 160, it will not get more map bonus till you are above x160. Essentially, the higher the value, the less damage AT wants to get, this will enable you to windstack to incredibly high amounts. -1 to disable/go back to default. Must set your windstacking min zone to use. ', 'value', '-1', null, 'Windstacking');
     createSetting('wsmax', 'WS MAX', 'For maximising Windstacking an entire run. Withholds damage to try and get your max windstacks every wind zone. Not recommended for normal usage. Good for BPs. ', 'value', '-1', null, 'Windstacking');
     createSetting('wsmaxhd', 'WSM H:D', 'Fiddle with this to maximise your WSM settings. Default is 0.00025. ', 'value', '-1', null, 'Windstacking');
-    
+    }
 
 
     //ATGA
-
+    if (game.global.universe == 1) {
     //Line 1
     createSetting('ATGA2', 'ATGA', '<b>ATGA MASTER BUTTON</b><br>AT Geneticassist. Do not use vanilla GA, as it will conflict otherwise. May get fucky with super high values. ', 'boolean', 'false', null, 'ATGA');
     createSetting('ATGA2gen', 'ATGA: Gen %', '<b>ATGA: Geneassist %</b><br>ATGA will only hire geneticists if they cost less than this value. E.g if this setting is 1 it will only buy geneticists if they cost less than 1% of your food. Default is 1%. ', 'value', '1', null, 'ATGA');
@@ -462,7 +470,7 @@ function initializeAllSettings() {
     document.getElementById('dhATGA2timer').parentNode.insertAdjacentHTML('afterend', '<br>');
     createSetting('cATGA2timer', 'ATGA: T: C2', '<b>ATGA Timer: C2s</b><br>ATGA will use this value in C2s. Overwrites Default, Before Z and After Z. ', 'value', '-1', null, 'ATGA');
     createSetting('chATGA2timer', 'ATGA: T: C: Hard', '<b>ATGA Timer: Hard C2s</b><br>ATGA will use this value in C2s that are considered Hard. Electricity, Nom, Toxicity. Overwrites Default, Before Z and After Z and C2 ATGA', 'value', '-1', null, 'ATGA');
-
+    }
 
 
     //Combat
@@ -513,7 +521,7 @@ function initializeAllSettings() {
 
 
     //Magma
-
+    if (game.global.universe == 1) {
     createSetting('UseAutoGen', 'Auto Generator', 'Turn this on to use these settings. ', 'boolean', false, null, 'Magma');
     createSetting('beforegen', ['Gain Mi', 'Gain Fuel', 'Hybrid'], '<b>MODE BEFORE FUELING: </b>Which mode to use before fueling. This is the mode which the generator will use if you fuel after z230. ', 'multitoggle', 1, null, 'Magma');
     createSetting('fuellater', 'Start Fuel Z', 'Start fueling at this zone instead of 230. I would suggest you have a value lower than your max, for obvious reasons. Recommend starting at a value close-ish to your max supply. Use 230 to use your <b>BEFORE FUEL</b> setting. ', 'value', -1, null, 'Magma');
@@ -533,7 +541,7 @@ function initializeAllSettings() {
     createSetting('SupplyWall', 'Throttle Supply (or Capacity)', 'Positive number NOT 1 e.g. 2.5: Consider Supply when its cost * 2.5 is < Capacity, instead of immediately when < Cap. Effectively throttles supply for when you don\'t need too many.<br><br>Negative number (-1 is ok) e.g. -2.5: Consider Supply if it costs < Capacity * 2.5, buy more supplys! Effectively throttling capacity instead.<br><br><b>Set to 1: DISABLE SUPPLY only spend magmite on Efficiency, Capacity and Overclocker. Always try to get supply close to your HZE. <br>Set to 0: IGNORE SETTING and use old behaviour (will still try to buy overclocker)</b>', 'valueNegative', 0.4, null, 'Magma');
     createSetting('spendmagmitesetting', ['Normal', 'Normal & No OC', 'OneTime Only', 'OneTime & OC'], '<b>Normal:</b> Spends Magmite Normally as Explained in Magmite spending behaviour. <br><b>Normal & No OC:</b> Same as normal, except skips OC afterbuying 1 OC upgrade. <br><b>OneTime Only:</b> Only Buys the One off upgrades except skips OC afterbuying 1 OC upgrade. <br><b>OneTime & OC:</b> Buys all One off upgrades, then buys OC only. ', 'multitoggle', 0, null, 'Magma');
     createSetting('MagmiteExplain', 'Magmite spending behaviour', '1. Buy one-and-done upgrades, expensive first, then consider 1st level of Overclocker;<br>2. Buy Overclocker IF AND ONLY IF we can afford it;<br>2.5. Exit if OneTimeOnly<br>3. Buy Efficiency if it is better than capacity;<br>4. Buy Capacity or Supply depending on which is cheaper, or based on SupplyWall', 'infoclick', 'MagmiteExplain', null, 'Magma');
-
+    }
 
 
     //Heirloom
@@ -607,7 +615,7 @@ function initializeAllSettings() {
 
 
     //Nature
-
+    if (game.global.universe == 1) {
     //Tokens
     createSetting('AutoNatureTokens', 'Spend Nature Tokens', '<b>MASTER BUTTON</b> Automatically spend or convert nature tokens.', 'boolean', false, null, 'Nature');
     createSetting('tokenthresh', 'Token Threshold', 'If Tokens would go below this value it will not convert tokens. ', 'value', -1, null, 'Nature');
@@ -630,7 +638,7 @@ function initializeAllSettings() {
     createSetting('pc2enlightthresh', 'E: C: Poison', 'Activate Poison Enlight when Enlight cost is below this Thresh in C2s. Consumes Tokens. -1 to disable. ', 'value', -1, null, 'Nature');
     createSetting('wc2enlightthresh', 'E: C: Wind', 'Activate Wind Enlight when Enlight cost is below this Thresh in C2s. Consumes Tokens. -1 to disable. ', 'value', -1, null, 'Nature');
     createSetting('ic2enlightthresh', 'E: C: Ice', 'Activate Ice Enlight when Enlight cost is below this Thresh in C2s. Consumes Tokens. -1 to disable. ', 'value', -1, null, 'Nature');
-
+    }
 
 
     //Display
@@ -1244,6 +1252,7 @@ function updateCustomButtons() {
 
 
     //Spire
+    if (game.global.universe == 1) {
     !radonon ? turnOn("MaxStacksForSpire"): turnOff("MaxStacksForSpire");
     !radonon ? turnOn("MinutestoFarmBeforeSpire"): turnOff("MinutestoFarmBeforeSpire");
     !radonon ? turnOn("IgnoreSpiresUntil"): turnOff("IgnoreSpiresUntil");
@@ -1252,7 +1261,8 @@ function updateCustomButtons() {
     !radonon ? turnOn("PreSpireNurseries"): turnOff("PreSpireNurseries");
     !radonon ? turnOn("spireshitbuy"): turnOff("spireshitbuy");
     !radonon ? turnOn("SkipSpires"): turnOff("SkipSpires");
-
+    }
+    
 
     //Raiding
     !radonon ? turnOn("Praidingzone"): turnOff("Praidingzone");
@@ -1266,6 +1276,7 @@ function updateCustomButtons() {
 
 
     //Windstacking
+    if (game.global.universe == 1) {
     var wson = (getPageSetting('AutoStance')==3);
     (!radonon && !wson) ? turnOn("turnwson"): turnOff("turnwson");
     (!radonon && wson) ? turnOn("windhealthy"): turnOff("windhealthy");
@@ -1277,9 +1288,11 @@ function updateCustomButtons() {
     (!radonon && wson) ? turnOn("windcutoffmap"): turnOff("windcutoffmap");
     (!radonon && wson) ? turnOn("wsmax"): turnOff("wsmax");
     (!radonon && wson) ? turnOn("wsmaxhd"): turnOff("wsmaxhd");
+    }
 
-
+    
     //ATGA
+    if (game.global.universe == 1) {
     !radonon ? turnOn("ATGA2"): turnOff("ATGA2");
     !radonon && getPageSetting('ATGA2') == true ? turnOn("ATGA2timer"): turnOff("ATGA2timer");
     !radonon && getPageSetting('ATGA2') == true ? turnOn("ATGA2gen"): turnOff("ATGA2gen");
@@ -1295,8 +1308,9 @@ function updateCustomButtons() {
     (!radonon && ATGAon) ? turnOn("cATGA2timer") : turnOff("cATGA2timer");
     (!radonon && ATGAon) ? turnOn("chATGA2timer") : turnOff("chATGA2timer");
     (!radonon && ATGAon) ? turnOn("dATGA2Auto") : turnOff("dATGA2Auto");
+    }
 
-
+    
     //Combat
     !radonon ? turnOn("DynamicGyms"): turnOff("DynamicGyms");
     !radonon ? turnOn("AutoRoboTrimp"): turnOff("AutoRoboTrimp");
@@ -1327,6 +1341,7 @@ function updateCustomButtons() {
 
 
     //Magma
+    if (game.global.universe == 1) {
     !radonon ? turnOn("UseAutoGen"): turnOff("UseAutoGen");
     !radonon ? turnOn("beforegen"): turnOff("beforegen");
     !radonon ? turnOn("fuellater"): turnOff("fuellater");
@@ -1344,7 +1359,8 @@ function updateCustomButtons() {
     (!radonon && ratiospend) ? turnOn("capratio"): turnOff("capratio");
     (!radonon && ratiospend) ? turnOn("supratio"): turnOff("supratio");
     (!radonon && ratiospend) ? turnOn("ocratio"): turnOff("ocratio");
-
+    }
+    
 
     //Golden
     !radonon ? turnOn("AutoGoldenUpgrades"): turnOff("AutoGoldenUpgrades");
@@ -1362,6 +1378,7 @@ function updateCustomButtons() {
 
 
     //Nature
+    if (game.global.universe == 1) {
     !radonon ? turnOn("AutoNatureTokens"): turnOff("AutoNatureTokens");
     !radonon && getPageSetting('AutoNatureTokens') == true ? turnOn("tokenthresh"): turnOff("tokenthresh");
     !radonon && getPageSetting('AutoNatureTokens') == true ? turnOn("AutoPoison"): turnOff("AutoPoison");
@@ -1379,7 +1396,7 @@ function updateCustomButtons() {
     !radonon && getPageSetting('autoenlight') == true ? turnOn("pc2enlightthresh"): turnOff("pc2enlightthresh");
     !radonon && getPageSetting('autoenlight') == true ? turnOn("wc2enlightthresh"): turnOff("wc2enlightthresh");
     !radonon && getPageSetting('autoenlight') == true ? turnOn("ic2enlightthresh"): turnOff("ic2enlightthresh");
-
+    }
 
     //Display
     (game.worldUnlocks.easterEgg.locked == false) ? turnOn('AutoEggs') : turnOff('AutoEggs');
@@ -1440,9 +1457,11 @@ function updateCustomButtons() {
     document.getElementById('RAutoGoldenUpgrades').value = autoTrimpSettings.RAutoGoldenUpgrades.selected;
     document.getElementById('RdAutoGoldenUpgrades').value = autoTrimpSettings.RdAutoGoldenUpgrades.selected;
     document.getElementById('RcAutoGoldenUpgrades').value = autoTrimpSettings.RcAutoGoldenUpgrades.selected;
+    if (game.global.universe == 1) {
     document.getElementById('AutoPoison').value = autoTrimpSettings.AutoPoison.selected;
     document.getElementById('AutoWind').value = autoTrimpSettings.AutoWind.selected;
     document.getElementById('AutoIce').value = autoTrimpSettings.AutoIce.selected;
+    }
 
     //Heirloom dropdowns
     document.getElementById('raretokeep').value = autoTrimpSettings.raretokeep.selected;
