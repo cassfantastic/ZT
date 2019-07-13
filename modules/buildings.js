@@ -3,6 +3,8 @@ MODULES["buildings"].storageMainCutoff = 0.85;
 MODULES["buildings"].storageLowlvlCutoff1 = 0.7;
 MODULES["buildings"].storageLowlvlCutoff2 = 0.5;
 
+//Helium
+
 var housingList = ['Hut', 'House', 'Mansion', 'Hotel', 'Resort', 'Gateway', 'Collector', 'Warpstation'];
 
 function safeBuyBuilding(building) {
@@ -229,6 +231,164 @@ function buyStorage() {
             (owned + jest > max * customVars.storageMainCutoff)) {
             if (canAffordBuilding(B) && game.triggers[B].done) {
                 safeBuyBuilding(B);
+            }
+        }
+    }
+}
+
+//Radon
+
+var RhousingList = ['Hut', 'House', 'Mansion', 'Hotel', 'Resort', 'Gateway', 'Collector'];
+
+function RsafeBuyBuilding(building) {
+    if (isBuildingInQueue(building))
+        return false;
+    if (game.buildings[building].locked)
+        return false;
+    var oldBuy = preBuy2();
+
+  if (game.talents.deciBuild.purchased) {
+        game.global.buyAmt = 10;
+    if (!canAffordBuilding(building)) {
+        game.global.buyAmt = 2;
+	if (!canAffordBuilding(building))
+            game.global.buyAmt = 1;
+     }
+  }
+  else if (game.talents.doubleBuild.purchased) {
+        game.global.buyAmt = 2;
+  	if (!canAffordBuilding(building)) 
+        game.global.buyAmt = 1;
+  }        
+  else game.global.buyAmt = 1;
+
+  if (!canAffordBuilding(building)) {
+      postBuy2(oldBuy);
+      return false;
+  }
+
+    game.global.firing = false;
+	
+    debug('Building ' + building, "buildings", '*hammer2');
+    if (!game.buildings[building].locked && canAffordBuilding(building)) {
+	    buyBuilding(building, true, true);
+    }
+    postBuy2(oldBuy);
+    return true;
+}
+
+function RbuyFoodEfficientHousing() {
+    var foodHousing = ["Hut", "House", "Mansion", "Hotel", "Resort"];
+    var unlockedHousing = [];
+    for (var house in foodHousing) {
+        if (game.buildings[foodHousing[house]].locked === 0) {
+            unlockedHousing.push(foodHousing[house]);
+        }
+    }
+    var buildorder = [];
+    for (var house2 in unlockedHousing) {
+        var building = game.buildings[unlockedHousing[house2]];
+        var cost = getBuildingItemPrice(building, "food", false, 1);
+        var ratio = cost / building.increase.by;
+        buildorder.push({
+            'name': unlockedHousing[house2],
+            'ratio': ratio
+        });
+        document.getElementById(unlockedHousing[house2]).style.border = "1px solid #FFFFFF";
+    }
+    buildorder.sort(function (a, b) {
+        return a.ratio - b.ratio;
+    });
+    var bestfoodBuilding = null;
+    var bb = buildorder[0];
+    var max = getPageSetting('Max' + bb.name);
+    if (game.buildings[bb.name].owned < max || max == -1) {
+        bestfoodBuilding = bb.name;
+    }
+    if (bestfoodBuilding) {
+        document.getElementById(bestfoodBuilding).style.border = "1px solid #00CC01";
+        RsafeBuyBuilding(bestfoodBuilding);
+    }
+}
+
+function RbuyGemEfficientHousing() {
+    var gemHousing = ["Hotel", "Resort", "Gateway", "Collector"];
+    var unlockedHousing = [];
+    for (var house in gemHousing) {
+        if (game.buildings[gemHousing[house]].locked === 0) {
+            unlockedHousing.push(gemHousing[house]);
+        }
+    }
+    var obj = {};
+    for (var house2 in unlockedHousing) {
+        var building = game.buildings[unlockedHousing[house2]];
+        var cost = getBuildingItemPrice(building, "gems", false, 1);
+        var ratio = cost / building.increase.by;
+	if (unlockedHousing[house2] == "Gateway" && !canAffordBuilding('Gateway'))
+            continue;
+        obj[unlockedHousing[house2]] = ratio;
+        document.getElementById(unlockedHousing[house2]).style.border = "1px solid #FFFFFF";
+    }
+    var keysSorted = Object.keys(obj).sort(function (a, b) {
+            return obj[a] - obj[b];
+        });
+    bestBuilding = null;
+    for (var best in keysSorted) {
+        var max = getPageSetting('Max' + keysSorted[best]);
+        if (max === false) max = -1;
+        if (game.buildings[keysSorted[best]].owned < max || max == -1) {
+            bestBuilding = keysSorted[best];
+            document.getElementById(bestBuilding).style.border = "1px solid #00CC00";
+        }
+        break;
+    }
+	if (bestBuilding) {
+        RsafeBuyBuilding(bestBuilding);
+    }
+}
+
+function RbuyBuildings() {
+
+    var oldBuy = preBuy2();
+    game.global.buyAmt = 1;
+	
+    //Smithy
+    if (!game.buildings.Smithy.locked && canAffordBuilding('Smithy')) {
+        RsafeBuyBuilding('Smithy');
+    }
+	
+    RbuyFoodEfficientHousing();
+    RbuyGemEfficientHousing();
+
+    //Tributes
+    if (!game.buildings.Tribute.locked &&(getPageSetting('MaxTribute') > game.buildings.Tribute.owned || getPageSetting('MaxTribute') == -1)) {
+        RsafeBuyBuilding('Tribute');
+    }
+
+    postBuy2(oldBuy);
+}
+
+function RbuyStorage() {
+    var packMod = 1 + game.portal.Packrat.level * game.portal.Packrat.modifier;
+    var Bs = {
+        'Barn': 'food',
+        'Shed': 'wood',
+        'Forge': 'metal'
+    };
+    for (var B in Bs) {
+        var jest = 0;
+        var owned = game.resources[Bs[B]].owned;
+        var max = game.resources[Bs[B]].max * packMod;
+        max = calcHeirloomBonus("Shield", "storageSize", max);
+        if (game.global.mapsActive && game.unlocks.imps.Jestimp) {
+            jest = simpleSeconds(Bs[B], 45);
+            jest = scaleToCurrentMap(jest);
+        }
+        if ((game.global.world == 1 && owned > max * customVars.storageLowlvlCutoff1) ||
+            (game.global.world >= 2 && game.global.world < 10 && owned > max * customVars.storageLowlvlCutoff2) ||
+            (owned + jest > max * customVars.storageMainCutoff)) {
+            if (canAffordBuilding(B) && game.triggers[B].done) {
+                RsafeBuyBuilding(B);
             }
         }
     }
