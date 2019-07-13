@@ -34,6 +34,25 @@ function autoGoldenUpgradesAT(setting) {
     }
 }
 
+function RautoGoldenUpgradesAT(setting) {
+    var num = getAvailableGoldenUpgrades();
+    if (num == 0) return;
+    if (setting == "Radon")
+	setting = "Helium";
+    if (setting == "Void" || setting == "Void + Battle")
+        setting = "Void";
+    var success = buyGoldenUpgrade(setting);
+    if (!success && setting == "Void") {
+        num = getAvailableGoldenUpgrades();
+        if (num == 0) return;
+	if ((autoTrimpSettings.RAutoGoldenUpgrades.selected == "Void" && !game.global.dailyChallenge.seed && !game.global.runningChallengeSquared) || (autoTrimpSettings.RdAutoGoldenUpgrades.selected == "Void" && game.global.dailyChallenge.seed))
+	setting = "Helium";
+	if (((autoTrimpSettings.RAutoGoldenUpgrades.selected == "Void" && getPageSetting('voidheliumbattle') > 0 && game.global.world >= getPageSetting('Rvoidheliumbattle')) || (autoTrimpSettings.RdAutoGoldenUpgrades.selected == "Void" && getPageSetting('Rdvoidheliumbattle') > 0 && game.global.world >= getPageSetting('Rdvoidheliumbattle'))) || ((autoTrimpSettings.RAutoGoldenUpgrades.selected == "Void + Battle" && !game.global.dailyChallenge.seed && !game.global.runningChallengeSquared) || (autoTrimpSettings.RdAutoGoldenUpgrades.selected == "Void + Battle" && game.global.dailyChallenge.seed) || (autoTrimpSettings.RcAutoGoldenUpgrades.selected == "Void + Battle" && game.global.runningChallengeSquared)))
+        setting = "Battle";
+	buyGoldenUpgrade(setting);
+    }
+}
+
 //Praiding
 
 function Praiding() {
