@@ -369,6 +369,7 @@ function RbuyBuildings() {
 }
 
 function RbuyStorage() {
+    var customVars = MODULES["buildings"];
     var packMod = 1 + game.portal.Packrat.level * game.portal.Packrat.modifier;
     var Bs = {
         'Barn': 'food',
