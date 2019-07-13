@@ -93,13 +93,28 @@ function mainLoop() {
 
 
     //Buildings
-    if (getPageSetting('BuyBuildingsNew') === 0 && getPageSetting('hidebuildings') == true) buyBuildings();
-    else if (getPageSetting('BuyBuildingsNew') == 1) {
+    if (game.global.universe == 1 && getPageSetting('BuyBuildingsNew') === 0 && getPageSetting('hidebuildings') == true) buyBuildings();
+    else if (game.global.universe == 1 && getPageSetting('BuyBuildingsNew') == 1) {
         buyBuildings();
         buyStorage();
-    } else if (getPageSetting('BuyBuildingsNew') == 2) buyBuildings();
-    else if (getPageSetting('BuyBuildingsNew') == 3) buyStorage();
-    if (getPageSetting('UseAutoGen') == true && game.global.world > 229) autoGenerator();
+    }
+    else if (game.global.universe == 1 && getPageSetting('BuyBuildingsNew') == 2) buyBuildings();
+    else if (game.global.universe == 1 && getPageSetting('BuyBuildingsNew') == 3) buyStorage();
+    if (game.global.universe == 1 && getPageSetting('UseAutoGen') == true && game.global.world > 229) autoGenerator();
+
+    //RBuildings
+    if (game.global.universe == 2 && getPageSetting('RBuyBuildingsNew') == 1) {
+        RbuyBuildings();
+        RbuyStorage();
+    } 
+    else if (game.global.universe == 2 && getPageSetting('RBuyBuildingsNew') == 2) {
+             RbuyBuildings();
+    }
+    else if (game.global.universe == 2 && getPageSetting('RBuyBuildingsNew') == 3) {
+             RbuyStorage();
+    }
+
+
 
     //Jobs
     if (getPageSetting('BuyJobsNew') === 0);
@@ -114,7 +129,7 @@ function mainLoop() {
     if (getPageSetting('c2runnerstart') == true && getPageSetting('c2runnerportal') > 0 && game.global.runningChallengeSquared && game.global.world > getPageSetting('c2runnerportal')) c2runnerportal();
 
     //Combat
-    if (getPageSetting('ForceAbandon') == true || getPageSetting('fuckanti') > 0) trimpcide();
+    if (game.global.universe == 1 && getPageSetting('ForceAbandon') == true || getPageSetting('fuckanti') > 0) trimpcide();
     if (getPageSetting('trimpsnotdie') == true && game.global.world > 1) helptrimpsnotdie();
     if (!game.global.fighting) {
         if (getPageSetting('fightforever') == 0) fightalways();
@@ -141,10 +156,10 @@ function mainLoop() {
     if (getPageSetting('AutoStanceNew') == true) autoStanceNew();
 
     //Spire
-    if (getPageSetting('ExitSpireCell') > 0 && game.global.challengeActive != "Daily" && getPageSetting('IgnoreSpiresUntil') <= game.global.world && game.global.spireActive) exitSpireCell();
-    if (getPageSetting('dExitSpireCell') >= 1 && game.global.challengeActive == "Daily" && getPageSetting('dIgnoreSpiresUntil') <= game.global.world && game.global.spireActive) dailyexitSpireCell();
-    if (getPageSetting('SpireBreedTimer') > 0 && getPageSetting('IgnoreSpiresUntil') <= game.global.world) ATspirebreed();
-    if (getPageSetting('spireshitbuy') == true && (isActiveSpireAT() || disActiveSpireAT())) buyshitspire();
+    if (game.global.universe == 1 && getPageSetting('ExitSpireCell') > 0 && game.global.challengeActive != "Daily" && getPageSetting('IgnoreSpiresUntil') <= game.global.world && game.global.spireActive) exitSpireCell();
+    if (game.global.universe == 1 && getPageSetting('dExitSpireCell') >= 1 && game.global.challengeActive == "Daily" && getPageSetting('dIgnoreSpiresUntil') <= game.global.world && game.global.spireActive) dailyexitSpireCell();
+    if (game.global.universe == 1 && getPageSetting('SpireBreedTimer') > 0 && getPageSetting('IgnoreSpiresUntil') <= game.global.world) ATspirebreed();
+    if (game.global.universe == 1 && getPageSetting('spireshitbuy') == true && (isActiveSpireAT() || disActiveSpireAT())) buyshitspire();
 
     //Raiding
 
