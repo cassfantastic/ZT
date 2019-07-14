@@ -771,7 +771,7 @@ function RautoMap() {
     }
 
     //Vars
-	var mapenoughdamagecutoff = getPageSetting("Rmapcuntoff");
+    var mapenoughdamagecutoff = getPageSetting("Rmapcuntoff");
     var customVars = MODULES["maps"];
     var prestige = autoTrimpSettings.RPrestige.selected;
     if (prestige != "Off" && game.options.menu.mapLoot.enabled != 1) toggleSetting('mapLoot');
@@ -860,12 +860,12 @@ function RautoMap() {
 
     //Calc
     var ourBaseDamage = RcalcOurDmg("avg", false, true);
-    var enemyDamage = RcalcBadGuyDmg(null, getEnemyMaxAttack(game.global.world + 1, 50, 'Snimp', 1.0), true, true);
+    var enemyDamage = RcalcBadGuyDmg(null, RgetEnemyMaxAttack(game.global.world + 1, 50, 'Snimp', 1.0), true, true);
     var enemyHealth = RcalcEnemyHealth();
 
     if (getPageSetting('RDisableFarm') >= 1) {
-        RRshouldFarm = (RcalcHDratio() >= getPageSetting('RDisableFarm'));
-        if (game.options.menu.repeatUntil.enabled == 1 && RRshouldFarm)
+        RshouldFarm = (RcalcHDratio() >= getPageSetting('RDisableFarm'));
+        if (game.options.menu.repeatUntil.enabled == 1 && RshouldFarm)
             toggleSetting('repeatUntil');
     }
     highDamageShield();
@@ -876,8 +876,8 @@ function RautoMap() {
     var mapbonusmulti = 1 + (0.20 * game.global.mapBonus);
     var ourBaseDamage2 = ourBaseDamage;
     ourBaseDamage2 /= mapbonusmulti;
-    RenoughHealth = (calcOurHealth() > customVars.numHitsSurvived * enemyDamage);
-    enoughDamage = (ourBaseDamage * mapenoughdamagecutoff > enemyHealth);
+    RenoughHealth = (RcalcOurHealth() > customVars.numHitsSurvived * enemyDamage);
+    RenoughDamage = (ourBaseDamage * mapenoughdamagecutoff > enemyHealth);
     RupdateAutoMapsStatus();
 
     //Farming
@@ -885,19 +885,19 @@ function RautoMap() {
     var RshouldFarmLowerZone = false;
     RRshouldDoMaps = false;
     if (ourBaseDamage > 0) {
-        RshouldDoMaps = (!RenoughDamage || RRshouldFarm || RscryerStuck);
+        RshouldDoMaps = (!RenoughDamage || RshouldFarm || RscryerStuck);
     }
     var shouldDoHealthMaps = false;
     if (game.global.mapBonus >= getPageSetting('RMaxMapBonuslimit') && !RshouldFarm)
         RshouldDoMaps = false;
-    else if (game.global.mapBonus < getPageSetting('RMaxMapBonushealth') && !RRenoughHealth && !RshouldDoMaps && !RneedPrestige) {
+    else if (game.global.mapBonus < getPageSetting('RMaxMapBonushealth') && !RenoughHealth && !RshouldDoMaps && !RneedPrestige) {
         RshouldDoMaps = true;
         shouldDoHealthMaps = true;
     }
     var restartVoidMap = false;
 
     //Prestige
-    if (RRshouldFarm && !RRneedPrestige) {
+    if (RshouldFarm && !RneedPrestige) {
         var capped = areWeAttackLevelCapped();
         var prestigeitemsleft;
         if (game.global.mapsActive) {
@@ -913,8 +913,8 @@ function RautoMap() {
                 numUnbought++;
         }
         if (capped && prestigeitemsleft == 0 && numUnbought == 0) {
-            RRshouldFarm = false;
-            if (game.global.mapBonus >= getPageSetting('RMaxMapBonuslimit') && !RRshouldFarm)
+            RshouldFarm = false;
+            if (game.global.mapBonus >= getPageSetting('RMaxMapBonuslimit') && !RshouldFarm)
                 RshouldDoMaps = false;
         }
     }
