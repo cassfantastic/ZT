@@ -956,7 +956,7 @@ function RautoMap() {
                     selectedMap = theMap.id;
                     break;
                 }
-                if (game.global.world > 15 && theMap.name == 'Dimension of Rage' && document.getElementById("portalBtn").style.display == "none") {
+                if (game.global.world > 15 && theMap.name == 'Dimension of Rage' && document.getElementById("portalBtn").style.display == "none" && game.upgrades.Rage.done == 0) {
                     var theMapDifficulty = Math.ceil(theMap.difficulty / 2);
                     if (game.global.world < 15 + theMapDifficulty) continue;
                     selectedMap = theMap.id;
@@ -1139,7 +1139,7 @@ function RautoMap() {
                 updateMapCost();
             }
             if (updateMapCost(true) > game.resources.fragments.owned) {
-                if (RneedPrestige && !enoughDamage) decrement.push('diff');
+                if (RneedPrestige && !RenoughDamage) decrement.push('diff');
                 if (RshouldFarm) decrement.push('size');
             }
             while (decrement.indexOf('loot') > -1 && lootAdvMapsRange.value > 0 && updateMapCost(true) > game.resources.fragments.owned) {
@@ -1166,7 +1166,7 @@ function RautoMap() {
                 debug("Can't afford the map we designed, #" + maplvlpicked, "maps", '*crying2');
                 debug("...selected our highest map instead # " + game.global.mapsOwnedArray[highestMap].id + " Level: " + game.global.mapsOwnedArray[highestMap].level, "maps", '*happy2');
                 runMap();
-                lastMapWeWereIn = getCurrentMapObject();
+                RlastMapWeWereIn = getCurrentMapObject();
             } else {
                 debug("Buying a Map, level: #" + maplvlpicked, "maps", 'th-large');
                 var result = buyMap();
