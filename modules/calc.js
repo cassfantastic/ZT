@@ -798,7 +798,7 @@ function RcalcOurHealth() {
     return health;
 }
 
-function RcalcBadGuyDmg(enemy,attack,daily,maxormin,disableFlucts) {
+function RcalcBadGuyDmg(enemy,attack) {
     var number;
     if (enemy)
         number = enemy.attack;
@@ -814,18 +814,7 @@ function RcalcBadGuyDmg(enemy,attack,daily,maxormin,disableFlucts) {
     if (!enemy && game.global.usingShriek) {
         number *= game.mapUnlocks.roboTrimp.getShriekValue();
     }
-
-    if (!disableFlucts) {
-        if (minFluct > 1) minFluct = 1;
-        if (maxFluct == -1) maxFluct = fluctuation;
-        if (minFluct == -1) minFluct = fluctuation;
-        var min = Math.floor(number * (1 - minFluct));
-        var max = Math.ceil(number + (number * maxFluct));
-        if (maxormin == "max") return max;
-	else if (maxormin == "min") return min;
-    }
-    else
-        return number;
+    return number;
 }
 
 function RcalcEnemyBaseHealth(world, level, name) {
