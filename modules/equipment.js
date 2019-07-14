@@ -650,7 +650,7 @@ function RautoLevelEquipment() {
     var enemyDamage = RcalcBadGuyDmg(null, RgetEnemyMaxAttack(game.global.world + 1, 50, 'Snimp', 1.0), true, true);
     var enemyHealth = RcalcEnemyHealth();
     var numHits = MODULES["equipment"].RnumHitsSurvived;
-    var enoughHealthE = (RcalcOurHealth(true) > numHits * enemyDamage;
+    var enoughHealthE = (RcalcOurHealth(true) > numHits * enemyDamage);
     var enoughDamageE = (ourDamage * enoughDamageCutoff > enemyHealth);
 
     for (var equipName in RequipmentList) {
