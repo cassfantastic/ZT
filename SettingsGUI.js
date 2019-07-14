@@ -1263,9 +1263,9 @@ function updateCustomButtons() {
     !radonon ? turnOn("dPreSpireNurseries"): turnOff("dPreSpireNurseries");
     !radonon ? turnOn("DailyVoidMod"): turnOff("DailyVoidMod");
     !radonon ? turnOn("dRunNewVoidsUntilNew"): turnOff("dRunNewVoidsUntilNew");
-    !radonon ? turnOn("Ravoidempower"): turnOff("Ravoidempower");
-    !radonon ? turnOn("Rdfightforever"): turnOff("Rdfightforever");
-    !radonon ? turnOn("Rdarmormagic"): turnOff("Rdarmormagic");
+    !radonon ? turnOn("avoidempower"): turnOff("avoidempower");
+    !radonon ? turnOn("dfightforever"): turnOff("dfightforever");
+    !radonon ? turnOn("darmormagic"): turnOff("darmormagic");
 
     //DRaid
     !radonon ? turnOn("dPraidingzone"): turnOff("dPraidingzone");
