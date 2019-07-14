@@ -797,3 +797,32 @@ function RcalcOurHealth() {
 	
     return health;
 }
+
+function RcalcBadGuyDmg(enemy,attack,daily,maxormin,disableFlucts) {
+    var number;
+    if (enemy)
+        number = enemy.attack;
+    else
+        number = attack;
+    var fluctuation = .2;
+    var maxFluct = -1;
+    var minFluct = -1;
+
+    if (game.global.challengeActive == "Daily")
+        number = RcalcDailyAttackMod(number);
+    }
+    if (!enemy && game.global.usingShriek) {
+        number *= game.mapUnlocks.roboTrimp.getShriekValue();
+    }
+
+    if (!disableFlucts) {
+        if (minFluct > 1) minFluct = 1;
+        if (maxFluct == -1) maxFluct = fluctuation;
+        if (minFluct == -1) minFluct = fluctuation;
+        var min = Math.floor(number * (1 - minFluct));
+        var max = Math.ceil(number + (number * maxFluct));
+        return maxormin ? max : min;
+    }
+    else
+        return number;
+}
