@@ -1,3 +1,5 @@
+//Helium
+
 MODULES["equipment"] = {};
 MODULES["equipment"].numHitsSurvived = 10;
 MODULES["equipment"].numHitsSurvivedScry = 80;
@@ -396,3 +398,354 @@ function autoLevelEquipment() {
     postBuy3();
 }
 function areWeAttackLevelCapped(){var a=[];for(var b in equipmentList){var c=equipmentList[b],d=c.Equip?game.equipment[b]:game.buildings[b];if(!d.locked){var e=evaluateEquipmentEfficiency(b);"attack"==e.Stat&&a.push(e)}}return a.every(f=>0==f.Factor&&!0==f.Wall)}
+
+//Radon
+
+MODULES["equipment"].RnumHitsSurvived = 10;
+MODULES["equipment"].RnumHitsSurvivedScry = 80;
+MODULES["equipment"].RcapDivisor = 10;
+MODULES["equipment"].alwaysLvl2 = getPageSetting('Ralways2');
+MODULES["equipment"].RwaitTill60 = true;
+MODULES["equipment"].RequipHealthDebugMessage = false;
+var RequipmentList = {
+    'Dagger': {
+        Upgrade: 'Dagadder',
+        Stat: 'attack',
+        Resource: 'metal',
+        Equip: true
+    },
+    'Mace': {
+        Upgrade: 'Megamace',
+        Stat: 'attack',
+        Resource: 'metal',
+        Equip: true
+    },
+    'Polearm': {
+        Upgrade: 'Polierarm',
+        Stat: 'attack',
+        Resource: 'metal',
+        Equip: true
+    },
+    'Battleaxe': {
+        Upgrade: 'Axeidic',
+        Stat: 'attack',
+        Resource: 'metal',
+        Equip: true
+    },
+    'Greatsword': {
+        Upgrade: 'Greatersword',
+        Stat: 'attack',
+        Resource: 'metal',
+        Equip: true
+    },
+    'Boots': {
+        Upgrade: 'Bootboost',
+        Stat: 'health',
+        Resource: 'metal',
+        Equip: true
+    },
+    'Helmet': {
+        Upgrade: 'Hellishmet',
+        Stat: 'health',
+        Resource: 'metal',
+        Equip: true
+    },
+    'Pants': {
+        Upgrade: 'Pantastic',
+        Stat: 'health',
+        Resource: 'metal',
+        Equip: true
+    },
+    'Shoulderguards': {
+        Upgrade: 'Smoldershoulder',
+        Stat: 'health',
+        Resource: 'metal',
+        Equip: true
+    },
+    'Breastplate': {
+        Upgrade: 'Bestplate',
+        Stat: 'health',
+        Resource: 'metal',
+        Equip: true
+    },
+    'Arbalest': {
+        Upgrade: 'Harmbalest',
+        Stat: 'attack',
+        Resource: 'metal',
+        Equip: true
+    },
+    'Gambeson': {
+        Upgrade: 'GambesOP',
+        Stat: 'health',
+        Resource: 'metal',
+        Equip: true
+    },
+    'Shield': {
+        Upgrade: 'Supershield',
+        Stat: 'health',
+        Resource: 'wood',
+        Equip: true
+    }
+};
+
+var Rmapresourcetojob = {"food": "Farmer", "wood": "Lumberjack", "metal": "Miner", "science": "Scientist"}; 
+
+function RequipEffect(gameResource, equip) {
+    if (equip.Equip) {
+        return gameResource[equip.Stat + 'Calculated'];
+    }
+}
+
+/*function RequipCost(gameResource, equip) {
+    var price = parseFloat(getBuildingItemPrice(gameResource, equip.Resource, equip.Equip, 1));
+    if (equip.Equip)
+        price = Math.ceil(price * (Math.pow(1 - game.portal.Artisanistry.modifier, game.portal.Artisanistry.level)));
+    else
+        price = Math.ceil(price * (Math.pow(1 - game.portal.Resourceful.modifier, game.portal.Resourceful.level)));
+    return price;
+}*/
+
+function RPrestigeValue(what) {
+    var name = game.upgrades[what].prestiges;
+    var equipment = game.equipment[name];
+    var stat;
+    stat = (typeof equipment.health !== 'undefined') ? "health" : "attack";
+    var toReturn = Math.round(equipment[stat] * Math.pow(1.19, ((equipment.prestige) * game.global.prestige[stat]) + 1));
+    return toReturn;
+}
+
+function RevaluateEquipmentEfficiency(equipName) {
+    var equip = RequipmentList[equipName];
+    var gameResource = equip.Equip ? game.equipment[equipName] : game.buildings[equipName];
+    var Effect = equipEffect(gameResource, equip);
+    var Cost = equipCost(gameResource, equip);
+    var Factor = Effect / Cost;
+    var StatusBorder = 'white';
+    var Wall = false;
+
+    var BuyWeaponUpgrades = ((getPageSetting('RBuyWeaponsNew') == 1) || (getPageSetting('RBuyWeaponsNew') == 2));
+    var BuyArmorUpgrades = ((getPageSetting('RBuyArmorNew') == 1) || (getPageSetting('RBuyArmorNew') == 2));
+    if (!game.upgrades[equip.Upgrade].locked) {
+        var CanAfford = canAffordTwoLevel(game.upgrades[equip.Upgrade]);
+        if (equip.Equip) {
+            var NextEffect = PrestigeValue(equip.Upgrade);
+            var NextCost = Math.ceil(getNextPrestigeCost(equip.Upgrade)/* * Math.pow(1 - game.portal.Artisanistry.modifier, game.portal.Artisanistry.level)*/);
+            Wall = (NextEffect / NextCost > Factor);
+        }
+
+        if (!CanAfford) {
+            StatusBorder = 'yellow';
+        } else {
+            if (!equip.Equip) {
+
+                StatusBorder = 'red';
+            } else {
+                var CurrEffect = gameResource.level * Effect;
+                var NeedLevel = Math.ceil(CurrEffect / NextEffect);
+                var Ratio = gameResource.cost[equip.Resource][1];
+                var NeedResource = NextCost * (Math.pow(Ratio, NeedLevel) - 1) / (Ratio - 1);
+                if (game.resources[equip.Resource].owned > NeedResource) {
+                    StatusBorder = 'red';
+                } else {
+                    StatusBorder = 'orange';
+                }
+            }
+        }
+    }
+    if (game.jobs[Rmapresourcetojob[equip.Resource]].locked && (game.global.challengeActive != 'Transmute')) {
+
+        Factor = 0;
+        Wall = true;
+    }
+
+    var isLiquified = (game.options.menu.liquification.enabled && game.talents.liquification.purchased && !game.global.mapsActive && game.global.gridArray && game.global.gridArray[0] && game.global.gridArray[0].name == "Liquimp");
+    var cap = 100;
+    if (RequipmentList[equipName].Stat == 'health') cap = getPageSetting('RCapEquiparm');
+    if (RequipmentList[equipName].Stat == 'attack') cap = getPageSetting('RCapEquip2');
+    if ((isLiquified) && cap > 0 && gameResource.level >= (cap / MODULES["equipment"].RcapDivisor)) {
+        Factor = 0;
+        Wall = true;
+    } else if (cap > 0 && gameResource.level >= cap) {
+        Factor = 0;
+        Wall = true;
+    }
+    if (game.global.world < 60 && game.global.world >= 58 && MODULES["equipment"].RwaitTill60) {
+        Wall = true;
+    }
+    if (gameResource.level < 2 && MODULES["equipment"].RalwaysLvl2) {
+        Factor = 999 - gameResource.prestige;
+    }
+    return {
+        Stat: equip.Stat,
+        Factor: Factor,
+        StatusBorder: StatusBorder,
+        Wall: Wall,
+        Cost: Cost
+    };
+}
+
+var RresourcesNeeded;
+var RBest;
+var RpreBuyAmt2=1;
+var RpreBuyFiring2=1;
+var RpreBuyTooltip2=false;
+var RpreBuymaxSplit2=1;
+var RpreBuyCustomFirst2=1;
+var RpreBuyCustomLast2=1;
+
+function RpreBuy3() {
+    RpreBuyAmt2 = game.global.buyAmt;
+    RpreBuyFiring2 = game.global.firing;
+    RpreBuyTooltip2 = game.global.lockTooltip;
+    RpreBuymaxSplit2 = game.global.maxSplit;
+    RpreBuyCustomFirst2 = game.global.firstCustomAmt;
+    RpreBuyCustomLast2 = game.global.lastCustomAmt;
+}
+
+function RpostBuy3() {
+    game.global.buyAmt = RpreBuyAmt2;
+    game.global.firing = RpreBuyFiring2;
+    game.global.lockTooltip = RpreBuyTooltip2;
+    game.global.maxSplit = RpreBuymaxSplit2;
+    game.global.firstCustomAmt = RpreBuyCustomFirst2;
+    game.global.lastCustomAmt = RpreBuyCustomLast2;
+}
+
+function RautoLevelEquipment() {
+
+    var enoughDamageCutoff = getPageSetting("Rdmgcuntoff");
+
+    if (RcalcOurDmg("avg", false, true) <= 0) return;
+    RresourcesNeeded = {
+        "food": 0,
+        "wood": 0,
+        "metal": 0,
+        "science": 0,
+        "gems": 0
+    };
+    RBest = {};
+    var keys = ['healthwood', 'healthmetal', 'attackmetal'];
+    for (var i = 0; i < keys.length; i++) {
+        RBest[keys[i]] = {
+            Factor: 0,
+            Name: '',
+            Wall: false,
+            StatusBorder: 'white',
+            Cost: 0
+        };
+    }
+    var ourDamage = RcalcOurDmg("avg", false, true);
+    var mapbonusmulti = 1 + (0.20 * game.global.mapBonus);
+    if (game.global.mapBonus > 0) {
+        ourDamage *= mapbonusmulti;
+    }
+	
+    //Shield
+    highDamageShield();
+    if (getPageSetting('loomswap') > 0 && game.global.challengeActive != "Daily" && game.global.ShieldEquipped.name != getPageSetting('highdmg'))
+	ourDamage *= trimpAA;
+    if (getPageSetting('dloomswap') > 0 && game.global.challengeActive == "Daily" && game.global.ShieldEquipped.name != getPageSetting('dhighdmg'))
+	ourDamage *= trimpAA;
+
+    var enemyDamage = RcalcBadGuyDmg(null, RgetEnemyMaxAttack(game.global.world + 1, 50, 'Snimp', 1.0), true, true);
+    var enemyHealth = RcalcEnemyHealth();
+    var numHits = MODULES["equipment"].RnumHitsSurvived;
+    var enoughHealthE = (RcalcOurHealth(true) > numHits * enemyDamage;
+    var enoughDamageE = (ourDamage * enoughDamageCutoff > enemyHealth);
+
+    for (var equipName in RequipmentList) {
+        var equip = RequipmentList[equipName];
+        var gameResource = game.equipment[equipName];
+        if (!gameResource.locked) {
+            var $equipName = document.getElementById(equipName);
+            $equipName.style.color = 'white';
+            var evaluation = RevaluateEquipmentEfficiency(equipName);
+            var BKey = equip.Stat + equip.Resource;
+
+            if (RBest[BKey].Factor === 0 || RBest[BKey].Factor < evaluation.Factor) {
+                RBest[BKey].Factor = evaluation.Factor;
+                RBest[BKey].Name = equipName;
+                RBest[BKey].Wall = evaluation.Wall;
+                RBest[BKey].StatusBorder = evaluation.StatusBorder;
+            }
+            RBest[BKey].Cost = evaluation.Cost;
+            RresourcesNeeded[equip.Resource] += RBest[BKey].Cost;
+
+            if (evaluation.Wall)
+                $equipName.style.color = 'yellow';
+            $equipName.style.border = '1px solid ' + evaluation.StatusBorder;
+
+            var $equipUpgrade = document.getElementById(equip.Upgrade);
+            if (evaluation.StatusBorder != 'white' && evaluation.StatusBorder != 'yellow' && $equipUpgrade)
+                $equipUpgrade.style.color = evaluation.StatusBorder;
+            if (evaluation.StatusBorder == 'yellow' && $equipUpgrade)
+                $equipUpgrade.style.color = 'white';
+            if (evaluation.StatusBorder == 'red' && !(game.global.world < 60 && game.global.world >= 58 && MODULES["equipment"].RwaitTill60)) {
+                var BuyWeaponUpgrades = ((getPageSetting('RBuyWeaponsNew') == 1) || (getPageSetting('RBuyWeaponsNew') == 2));
+                var BuyArmorUpgrades = ((getPageSetting('RBuyArmorNew') == 1) || (getPageSetting('RBuyArmorNew') == 2));
+                var DelayArmorWhenNeeded = getPageSetting('RDelayArmorWhenNeeded');
+
+                if (
+                    (BuyWeaponUpgrades && RequipmentList[equipName].Stat == 'attack') ||
+                    (BuyArmorUpgrades && RequipmentList[equipName].Stat == 'health' &&
+                        (
+                            (DelayArmorWhenNeeded && !shouldFarm) ||
+                            (DelayArmorWhenNeeded && enoughDamageE) ||
+                            (DelayArmorWhenNeeded && !enoughDamageE && !enoughHealthE) ||
+                            (DelayArmorWhenNeeded && RequipmentList[equipName].Resource == 'wood') ||
+                            (!DelayArmorWhenNeeded)
+                        )
+                    )
+                )
+
+                {
+                    var upgrade = RequipmentList[equipName].Upgrade;
+                    debug('Upgrading ' + upgrade + " - Prestige " + game.equipment[equipName].prestige, "equips", '*upload');
+                    buyUpgrade(upgrade, true, true);
+                } else {
+                    $equipName.style.color = 'orange';
+                    $equipName.style.border = '2px solid orange';
+                }
+            }
+        }
+    }
+
+    var BuyWeaponLevels = ((getPageSetting('RBuyWeaponsNew') == 1) || (getPageSetting('RBuyWeaponsNew') == 3));
+    var BuyArmorLevels = ((getPageSetting('RBuyArmorNew') == 1) || (getPageSetting('RBuyArmorNew') == 3));
+    RpreBuy3();
+    for (var stat in RBest) {
+        var eqName = RBest[stat].Name;
+        if (eqName !== '') {
+            var $eqName = document.getElementById(eqName);
+            var DaThing = RequipmentList[eqName];
+            $eqName.style.color = RBest[stat].Wall ? 'orange' : 'red';
+            $eqName.style.border = '2px solid red';
+            var maxmap = getPageSetting('RMaxMapBonusAfterZone') && RdoMaxMapBonus;
+            if (BuyArmorLevels && DaThing.Stat == 'health' && (!enoughHealthE || maxmap)) {
+                game.global.buyAmt = getPageSetting('Rgearamounttobuy');
+                if (DaThing.Equip && !RBest[stat].Wall && canAffordBuilding(eqName, null, null, true)) {
+                    debug('Leveling equipment ' + eqName, "equips", '*upload3');
+                    buyEquipment(eqName, null, true);
+                }
+            }
+            var aalvl2 = MODULES["equipment"].RalwaysLvl2;
+            if (BuyArmorLevels && (DaThing.Stat == 'health') && aalvl2 && game.equipment[eqName].level < 2) {
+                game.global.buyAmt = 1;
+                if (DaThing.Equip && !RBest[stat].Wall && canAffordBuilding(eqName, null, null, true)) {
+                    debug('Leveling equipment ' + eqName + " (AlwaysLvl2)", "equips", '*upload3');
+                    buyEquipment(eqName, null, true);
+                }
+            }
+            if (BuyWeaponLevels && DaThing.Stat == 'attack' && (!enoughDamageE || enoughHealthE || maxmap)) {
+                game.global.buyAmt = getPageSetting('Rgearamounttobuy');
+                if (DaThing.Equip && !RBest[stat].Wall && canAffordBuilding(eqName, null, null, true)) {
+                    debug('Leveling equipment ' + eqName, "equips", '*upload3');
+                    buyEquipment(eqName, null, true);
+                }
+            }
+        }
+    }
+    RpostBuy3();
+}
+
+function RareWeAttackLevelCapped(){var a=[];for(var b in RequipmentList){var c=RequipmentList[b],d=c.Equip?game.equipment[b]:game.buildings[b];if(!d.locked){var e=RevaluateEquipmentEfficiency(b);"attack"==e.Stat&&a.push(e)}}return a.every(f=>0==f.Factor&&!0==f.Wall)}
