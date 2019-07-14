@@ -647,7 +647,7 @@ function RautoLevelEquipment() {
     if (getPageSetting('dloomswap') > 0 && game.global.challengeActive == "Daily" && game.global.ShieldEquipped.name != getPageSetting('dhighdmg'))
 	ourDamage *= trimpAA;
 
-    var enemyDamage = RcalcBadGuyDmg(null, RgetEnemyMaxAttack(game.global.world + 1, 50, 'Snimp', 1.0), true, true);
+    var enemyDamage = RcalcBadGuyDmg(null, RgetEnemyMaxAttack(game.global.world + 1, 50, 'Snimp', 1.0));
     var enemyHealth = RcalcEnemyHealth();
     var numHits = MODULES["equipment"].RnumHitsSurvived;
     var enoughHealthE = (RcalcOurHealth(true) > numHits * enemyDamage);
