@@ -956,7 +956,7 @@ function RautoMap() {
                     selectedMap = theMap.id;
                     break;
                 }
-                if (theMap.name == 'Dimension of Rage' && document.getElementById("portalBtn").style.display == "none" && !game.talents.portal.purchased) {
+                if (game.global.world > 15 && theMap.name == 'Dimension of Rage' && document.getElementById("portalBtn").style.display == "none") {
                     var theMapDifficulty = Math.ceil(theMap.difficulty / 2);
                     if (game.global.world < 15 + theMapDifficulty) continue;
                     selectedMap = theMap.id;
