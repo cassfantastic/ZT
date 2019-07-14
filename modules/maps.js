@@ -861,7 +861,7 @@ function RautoMap() {
 
     //Calc
     var ourBaseDamage = RcalcOurDmg("avg", false, true);
-    var enemyDamage = RcalcBadGuyDmg(null, RgetEnemyMaxAttack(game.global.world + 1, 50, 'Snimp', 1.0));
+    var enemyDamage = RcalcBadGuyDmg(null, RgetEnemyMaxAttack(game.global.world, 50, 'Snimp', 1.0));
     var enemyHealth = RcalcEnemyHealth();
 
     if (getPageSetting('RDisableFarm') >= 1) {
@@ -869,15 +869,10 @@ function RautoMap() {
         if (game.options.menu.repeatUntil.enabled == 1 && RshouldFarm)
             toggleSetting('repeatUntil');
     }
-    highDamageShield();
-    if (getPageSetting('loomswap') > 0 && game.global.challengeActive != "Daily" && game.global.ShieldEquipped.name != getPageSetting('highdmg'))
-        ourBaseDamage *= trimpAA;
-    if (getPageSetting('dloomswap') > 0 && game.global.challengeActive == "Daily" && game.global.ShieldEquipped.name != getPageSetting('dhighdmg'))
-        ourBaseDamage *= trimpAA;
     var mapbonusmulti = 1 + (0.20 * game.global.mapBonus);
     var ourBaseDamage2 = ourBaseDamage;
     ourBaseDamage2 /= mapbonusmulti;
-    RenoughHealth = (RcalcOurHealth() > customVars.numHitsSurvived * enemyDamage);
+    RenoughHealth = (RcalcOurHealth() > customVars.RnumHitsSurvived * enemyDamage);
     RenoughDamage = (ourBaseDamage * mapenoughdamagecutoff > enemyHealth);
     RupdateAutoMapsStatus();
 
