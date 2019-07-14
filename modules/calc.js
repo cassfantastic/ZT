@@ -675,6 +675,9 @@ function RcalcOurHealth() {
     if (typeof game.global.dailyChallenge.pressure !== 'undefined') {
         health *= (dailyModifiers.pressure.getMult(game.global.dailyChallenge.pressure.strength, game.global.dailyChallenge.pressure.stacks));
     }
+    if (game.buildings.Smithy.owned > 0) {
+	health *= Math.pow(1.25, game.buildings.Smithy.owned);
+    }
 	
     //Pris
 	
