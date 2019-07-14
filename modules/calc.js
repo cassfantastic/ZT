@@ -821,8 +821,8 @@ function RcalcBadGuyDmg(enemy,attack,daily,maxormin,disableFlucts) {
         if (minFluct == -1) minFluct = fluctuation;
         var min = Math.floor(number * (1 - minFluct));
         var max = Math.ceil(number + (number * maxFluct));
-        if (maxormin == max) return max;
-	else if (maxormin == min) return min;
+        if (maxormin == "max") return max;
+	else if (maxormin == "min") return min;
     }
     else
         return number;
