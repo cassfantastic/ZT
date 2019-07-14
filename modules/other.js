@@ -17,6 +17,8 @@ function helptrimpsnotdie(){if(!game.global.preMapsActive&&!game.global.fighting
 function usedaily3(){!0!=getPageSetting('use3daily')||'Daily'!=game.global.challengeActive||daily3||(daily3=!0),!1==getPageSetting('use3daily')&&'Daily'!=game.global.challengeActive&&daily3&&(daily3=!1),!0==getPageSetting('use3daily')&&'Daily'!=game.global.challengeActive&&daily3&&(daily3=!1)}
 function buyshitspire(){!0==getPageSetting('spireshitbuy')&&game.global.spireActive&&game.global.world>=getPageSetting('IgnoreSpiresUntil')&&(buyWeps(),buyArms())}
 
+//Helium
+
 function autoGoldenUpgradesAT(setting) {
     var num = getAvailableGoldenUpgrades();
     if (num == 0) return;
@@ -29,25 +31,6 @@ function autoGoldenUpgradesAT(setting) {
 	if ((autoTrimpSettings.AutoGoldenUpgrades.selected == "Void" && !game.global.dailyChallenge.seed && !game.global.runningChallengeSquared) || (autoTrimpSettings.dAutoGoldenUpgrades.selected == "Void" && game.global.dailyChallenge.seed))
 	setting = "Helium";
 	if (((autoTrimpSettings.AutoGoldenUpgrades.selected == "Void" && getPageSetting('voidheliumbattle') > 0 && game.global.world >= getPageSetting('voidheliumbattle')) || (autoTrimpSettings.dAutoGoldenUpgrades.selected == "Void" && getPageSetting('dvoidheliumbattle') > 0 && game.global.world >= getPageSetting('dvoidheliumbattle'))) || ((autoTrimpSettings.AutoGoldenUpgrades.selected == "Void + Battle" && !game.global.dailyChallenge.seed && !game.global.runningChallengeSquared) || (autoTrimpSettings.dAutoGoldenUpgrades.selected == "Void + Battle" && game.global.dailyChallenge.seed) || (autoTrimpSettings.cAutoGoldenUpgrades.selected == "Void + Battle" && game.global.runningChallengeSquared)))
-        setting = "Battle";
-	buyGoldenUpgrade(setting);
-    }
-}
-
-function RautoGoldenUpgradesAT(setting) {
-    var num = getAvailableGoldenUpgrades();
-    if (num == 0) return;
-    if (setting == "Radon")
-	setting = "Helium";
-    if (setting == "Void" || setting == "Void + Battle")
-        setting = "Void";
-    var success = buyGoldenUpgrade(setting);
-    if (!success && setting == "Void") {
-        num = getAvailableGoldenUpgrades();
-        if (num == 0) return;
-	if ((autoTrimpSettings.RAutoGoldenUpgrades.selected == "Void" && !game.global.dailyChallenge.seed && !game.global.runningChallengeSquared) || (autoTrimpSettings.RdAutoGoldenUpgrades.selected == "Void" && game.global.dailyChallenge.seed))
-	setting = "Helium";
-	if (((autoTrimpSettings.RAutoGoldenUpgrades.selected == "Void" && getPageSetting('voidheliumbattle') > 0 && game.global.world >= getPageSetting('Rvoidheliumbattle')) || (autoTrimpSettings.RdAutoGoldenUpgrades.selected == "Void" && getPageSetting('Rdvoidheliumbattle') > 0 && game.global.world >= getPageSetting('Rdvoidheliumbattle'))) || ((autoTrimpSettings.RAutoGoldenUpgrades.selected == "Void + Battle" && !game.global.dailyChallenge.seed && !game.global.runningChallengeSquared) || (autoTrimpSettings.RdAutoGoldenUpgrades.selected == "Void + Battle" && game.global.dailyChallenge.seed) || (autoTrimpSettings.RcAutoGoldenUpgrades.selected == "Void + Battle" && game.global.runningChallengeSquared)))
         setting = "Battle";
 	buyGoldenUpgrade(setting);
     }
@@ -692,3 +675,538 @@ playerSpire.drawInfo = function() {
         infoHtml += "</div>"; //playerSpireUpgradesArea
         elem.innerHTML = infoHtml;
     }
+
+//Radon
+function RbuyWeps(){if(!((getPageSetting('RBuyWeaponsNew')==1)||(getPageSetting('RBuyWeaponsNew')==3)))return;preBuy(),game.global.buyAmt=getPageSetting('Rgearamounttobuy'),game.equipment.Dagger.level<getPageSetting('RCapEquip2')&&canAffordBuilding('Dagger',null,null,!0)&&buyEquipment('Dagger',!0,!0),game.equipment.Mace.level<getPageSetting('RCapEquip2')&&canAffordBuilding('Mace',null,null,!0)&&buyEquipment('Mace',!0,!0),game.equipment.Polearm.level<getPageSetting('RCapEquip2')&&canAffordBuilding('Polearm',null,null,!0)&&buyEquipment('Polearm',!0,!0),game.equipment.Battleaxe.level<getPageSetting('RCapEquip2')&&canAffordBuilding('Battleaxe',null,null,!0)&&buyEquipment('Battleaxe',!0,!0),game.equipment.Greatsword.level<getPageSetting('RCapEquip2')&&canAffordBuilding('Greatsword',null,null,!0)&&buyEquipment('Greatsword',!0,!0),game.equipment.Arbalest.level<getPageSetting('RCapEquip2')&&canAffordBuilding('Arbalest',null,null,!0)&&buyEquipment('Arbalest',!0,!0),postBuy()}
+function RbuyArms(){if(!((getPageSetting('RBuyArmorNew')==1)||(getPageSetting('RBuyArmorNew')==3)))return;preBuy(),game.global.buyAmt=10,game.equipment.Shield.level<getPageSetting('RCapEquiparm')&&canAffordBuilding('Shield',null,null,!0)&&buyEquipment('Shield',!0,!0),game.equipment.Boots.level<getPageSetting('RCapEquiparm')&&canAffordBuilding('Boots',null,null,!0)&&buyEquipment('Boots',!0,!0),game.equipment.Helmet.level<getPageSetting('RCapEquiparm')&&canAffordBuilding('Helmet',null,null,!0)&&buyEquipment('Helmet',!0,!0),game.equipment.Pants.level<getPageSetting('RCapEquiparm')&&canAffordBuilding('Pants',null,null,!0)&&buyEquipment('Pants',!0,!0),game.equipment.Shoulderguards.level<getPageSetting('RCapEquiparm')&&canAffordBuilding('Shoulderguards',null,null,!0)&&buyEquipment('Shoulderguards',!0,!0),game.equipment.Breastplate.level<getPageSetting('RCapEquiparm')&&canAffordBuilding('Breastplate',null,null,!0)&&buyEquipment('Breastplate',!0,!0),game.equipment.Gambeson.level<getPageSetting('RCapEquiparm')&&canAffordBuilding('Gambeson',null,null,!0)&&buyEquipment('Gambeson',!0,!0),postBuy()}
+function Rhelptrimpsnotdie(){if(!game.global.preMapsActive&&!game.global.fighting)RbuyArms();}
+
+function RautoGoldenUpgradesAT(setting) {
+    var num = getAvailableGoldenUpgrades();
+    if (num == 0) return;
+    if (setting == "Radon")
+	setting = "Helium";
+    if (setting == "Void" || setting == "Void + Battle")
+        setting = "Void";
+    var success = buyGoldenUpgrade(setting);
+    if (!success && setting == "Void") {
+        num = getAvailableGoldenUpgrades();
+        if (num == 0) return;
+	if ((autoTrimpSettings.RAutoGoldenUpgrades.selected == "Void" && !game.global.dailyChallenge.seed && !game.global.runningChallengeSquared) || (autoTrimpSettings.RdAutoGoldenUpgrades.selected == "Void" && game.global.dailyChallenge.seed))
+	setting = "Helium";
+	if (((autoTrimpSettings.RAutoGoldenUpgrades.selected == "Void" && getPageSetting('voidheliumbattle') > 0 && game.global.world >= getPageSetting('Rvoidheliumbattle')) || (autoTrimpSettings.RdAutoGoldenUpgrades.selected == "Void" && getPageSetting('Rdvoidheliumbattle') > 0 && game.global.world >= getPageSetting('Rdvoidheliumbattle'))) || ((autoTrimpSettings.RAutoGoldenUpgrades.selected == "Void + Battle" && !game.global.dailyChallenge.seed && !game.global.runningChallengeSquared) || (autoTrimpSettings.RdAutoGoldenUpgrades.selected == "Void + Battle" && game.global.dailyChallenge.seed) || (autoTrimpSettings.RcAutoGoldenUpgrades.selected == "Void + Battle" && game.global.runningChallengeSquared)))
+        setting = "Battle";
+	buyGoldenUpgrade(setting);
+    }
+}
+
+var Rprestraid=!1,Rdprestraid=!1,Rfailpraid=!1,Rdfailpraid=!1,Rbwraided=!1,Rdbwraided=!1,Rfailbwraid=!1,Rdfailbwraid=!1,Rprestraidon=!1,Rdprestraidon=!1,Rmapbought=!1,Rdmapbought=!1,Rbwraidon=!1,Rdbwraidon=!1,Rpresteps=null,RminMaxMapCost,RfMap,RpMap,RshouldFarmFrags=!1,RpraidDone=!1;
+
+function RPraiding() {
+  var RpMap;
+  if (getPageSetting('RPraidingzone').length) {
+    if (getPageSetting('RPraidingzone').includes(game.global.world) && !Rprestraid && !Rfailpraid) {
+      debug('World Zone matches a Praiding Zone!');
+	    Rprestraidon = true;
+
+      if (getPageSetting('RAutoMaps') == 1 && !Rprestraid && !Rfailpraid) {
+        autoTrimpSettings["RAutoMaps"].value = 0;
+      }
+      if (!game.global.preMapsActive && !game.global.mapsActive && !Rprestraid && !Rfailpraid) {
+        mapsClicked();
+		    if (!game.global.preMapsActive) {
+          mapsClicked();
+        }
+		    debug("Beginning Prestige Raiding...");
+      }
+      if (game.options.menu.repeatUntil.enabled!=2 && !Rprestraid && !Rfailpraid) {
+        game.options.menu.repeatUntil.enabled = 2;
+      }
+      if (game.global.preMapsActive && !Rprestraid && !Rfailpraid) {
+        plusPres();
+        if ((updateMapCost(true) <= game.resources.fragments.owned)) {
+          buyMap();
+          Rfailpraid = false;
+          Rmapbought = true;
+        }
+        else if ((updateMapCost(true) > game.resources.fragments.owned)) {
+          if (getPageSetting('RAutoMaps') == 0 && !Rprestraid) {
+            autoTrimpSettings["RAutoMaps"].value = 1;
+            game.options.menu.repeatUntil.enabled = 0;
+            Rfailpraid = true;
+            Rprestraidon = false;
+            Rmapbought = false;
+            RpraidDone = true;
+            debug("Failed to prestige raid. Looks like you can't afford to..");
+          }
+          return;
+        }
+	    }
+	    if (Rmapbought == true) {
+        RpMap = game.global.mapsOwnedArray[game.global.mapsOwnedArray.length-1].id;
+        selectMap(RpMap);
+	      runMap();
+      }
+      if (!Rprestraid && !Rfailpraid && !game.global.repeatMap) {
+        repeatClicked();
+      }
+	    Rprestraid = true;
+	    Rfailpraid = false
+	    Rmapbought = false;
+    }
+  }
+
+  if (getPageSetting('RAutoMaps') == 0 && game.global.preMapsActive && Rprestraid && !Rfailpraid && Rprestraidon) {
+    RpraidDone = true;
+    Rprestraidon = false;
+    autoTrimpSettings["RAutoMaps"].value = 1;
+    game.options.menu.repeatUntil.enabled = 0;
+    debug("Prestige raiding successful! - recycling Praid map");
+    recycleMap(getMapIndex(RpMap));
+    debug("Turning AutoMaps back on");
+  }
+  if (getPageSetting('RPraidingzone').every(isBelowThreshold)) {
+    Rprestraid = false;
+    Rfailpraid = false;
+    Rprestraidon = false;
+    Rmapbought = false;
+    RpraidDone = false;
+  }
+}
+
+function RPraidHarder() {
+  var maxPlusZones;
+  var mapModifiers = ["p","fa","0"];
+  var farmFragments;
+  var praidBeforeFarm;
+  var pRaidIndex;
+  var maxPraidZSetting;
+  var RisRbwraidZ;
+
+  // Determine whether to use daily or normal run settings
+  if (game.global.challengeActive == "Daily") {
+    praidSetting = 'RdPraidingzone';
+    maxPraidZSetting = 'RdMaxPraidZone';
+    RisRbwraidZ = getPageSetting('RRdBWraidingz').includes(game.global.world) && getPageSetting('RDailybwraid');
+    farmFragments = getPageSetting('RdPraidFarmFragsZ').includes(game.global.world);
+    praidBeforeFarm = getPageSetting('RdPraidBeforeFarmZ').includes(game.global.world);
+  }
+  else {
+    praidSetting = 'RPraidingzone';
+    maxPraidZSetting = 'RMaxPraidZone';
+    RisRbwraidZ = getPageSetting('RBWraidingz').includes(game.global.world) && getPageSetting('RBWraid');
+    farmFragments = getPageSetting('RPraidFarmFragsZ').includes(game.global.world);
+    praidBeforeFarm = getPageSetting('RPraidBeforeFarmZ').includes(game.global.world);
+  }
+
+  pRaidIndex = getPageSetting(RpraidSetting).indexOf(game.global.world);
+  if (pRaidIndex == -1 || typeof(getPageSetting(RmaxPraidZSetting)[pRaidIndex]) === "undefined") maxPlusZones = plusMapToRun(game.global.world);
+  else maxPlusZones = getPageSetting(RmaxPraidZSetting)[pRaidIndex] - game.global.world;
+
+  // Check we have a valid number for maxPlusZones
+  maxPlusZones = maxPlusZones > 10 ? 10 : (maxPlusZones < 0 ? 10 : maxPlusZones);
+
+  // Work out the max number of +map zones it's worth farming for prestige.
+  if ((game.global.world + maxPlusZones) % 10 > 5)
+    maxPlusZones = Math.max(maxPlusZones + (5 - (game.global.world + maxPlusZones) % 10),0);
+  else if ((game.global.world + maxPlusZones) % 10 == 0)
+    maxPlusZones = Math.min(5,maxPlusZones);
+
+  // If we have any Praiding zones defined...
+  if (getPageSetting(RpraidSetting).length) {
+    if (getPageSetting(RpraidSetting).includes(game.global.world) && !Rprestraid && !Rfailpraid && !RshouldFarmFrags) {
+      debug('Beginning Praiding');
+      // Initialise RshouldFarmFrags to false
+      RshouldFarmFrags = false;
+      // Mark that we are prestige raiding and turn off automaps to stop it interfering
+      Rprestraidon = true;
+      autoTrimpSettings["RAutoMaps"].value = 0;
+      // Get into the preMaps screen
+      if (!game.global.preMapsActive && !game.global.mapsActive) {
+        mapsClicked();
+	if (!game.global.preMapsActive) {
+          mapsClicked();
+        }
+      }
+      // Set repeat for items
+      game.options.menu.repeatUntil.enabled = 2;
+      toggleSetting("repeatUntil", null, false, true);
+      // if we can farm for fragments, work out the minimum number we need to get all available prestiges
+      if (farmFragments) {
+        plusPres();
+        document.getElementById('advExtraLevelSelect').value = maxPlusZones;
+        document.getElementById('sizeAdvMapsRange').value = 0;
+        document.getElementById('difficultyAdvMapsRange').value = 0;
+        document.getElementById('advSpecialSelect').value = "0";
+        RminMaxMapCost = updateMapCost(true);
+        // If we are not Praiding before farming, and cannot afford a max plus map, set flags for farming
+        if (!praidBeforeFarm && game.resources.fragments.owned < RminMaxMapCost) {
+          Rprestraid = true;
+          Rfailpraid = false;
+          RshouldFarmFrags = true;
+        }
+      }
+      // Set map settings to the best map for Praiding (even if we can't afford it)
+      plusPres();
+      document.getElementById('advExtraLevelSelect').value = maxPlusZones;
+      // Iterate down through plusMaps setting until we find one we can afford
+      for (var curPlusZones = maxPlusZones; curPlusZones >= 0; curPlusZones--) {
+        // If the current targeted zone has no prestiges, decrement the number of plusZones and continue
+        if ((game.global.world + curPlusZones) % 10 == 0 || (game.global.world + curPlusZones) % 10 > 5) continue;
+        // Otherwise check to see if we can afford a map at the current plusZones setting
+        document.getElementById('advExtraLevelSelect').value = curPlusZones;
+        // If we find a map we can afford, break out of the loop
+        if (relaxMapReqs(mapModifiers)) break;
+        // conserve fragments if going to farm after by selecting only maps with no special modifier
+        else if (farmFragments) mapModifiers = ["0"];
+      }
+      // If the map is not at the highest level with prestiges possible, set RshouldFarmFrags to true
+      if (maxPlusZones > curPlusZones) RshouldFarmFrags = true;
+
+      // If we found a suitable map...
+      if (curPlusZones >= 0 && (praidBeforeFarm || RshouldFarmFrags == false)) {
+        // ...buy it
+        buyMap();
+        RpMap = game.global.mapsOwnedArray[game.global.mapsOwnedArray.length-1].id;
+        selectMap(RpMap);
+        // Set flags to avoid rerunning this step
+        Rprestraid = true;
+        // Rprestraidon = false;
+        Rfailpraid = false;
+        // Set repeat on and run the map
+        game.global.repeatMap = true;
+        runMap();
+        repeatClicked(true);
+      }
+      // If we can't afford a map, and can't farm fragments, fail and turn automaps back on
+      else if (!farmFragments){
+        Rfailpraid = true;
+        Rprestraidon = false;
+        RpraidDone = true;
+        debug("Failed to prestige raid. Looks like you can't afford to.");
+        if (RisRbwraidZ) {
+          // resetting these out of an abundance of caution
+          Rbwraided = false;
+          Rfailbwraid = false;
+          Rdbwraided = false;
+          Rdfailbwraid = false;
+          // BWraiding();
+        }
+        else {
+          debug("Turning AutoMaps back on");
+          autoTrimpSettings['RAutoMaps'].value = 1;
+          game.options.menu.repeatUntil.enabled = 0;
+        }
+        return;
+      }
+    }
+  }
+  if (farmFragments && RshouldFarmFrags && game.global.preMapsActive && Rprestraid && !RfMap) {
+    if (RpMap) recycleMap(getMapIndex(RpMap));
+    RpMap = null;
+    // Choose a fragment farming map
+    document.getElementById("biomeAdvMapsSelect").value = "Depths";
+    document.getElementById('advExtraLevelSelect').value = 0;
+    document.getElementById('advSpecialSelect').value = "fa";
+    document.getElementById("lootAdvMapsRange").value = 9;
+    document.getElementById("difficultyAdvMapsRange").value = 9;
+    document.getElementById("sizeAdvMapsRange").value = 9;
+    document.getElementById('advPerfectCheckbox').checked = true;
+    document.getElementById("mapLevelInput").value = game.global.world - 1;
+    game.options.menu.repeatUntil.enabled = 0;
+    toggleSetting("repeatUntil", null, false, true);
+    if (updateMapCost(true) <= game.resources.fragments.owned) {
+      debug("Buying perfect sliders fragment farming map");
+      buyMap();
+      RfMap = game.global.mapsOwnedArray[game.global.mapsOwnedArray.length-1].id;
+      selectMap(RfMap);
+      game.global.repeatMap = true;
+      runMap();
+      repeatClicked(true);
+    }
+    else {
+      document.getElementById('advPerfectCheckbox').checked = false;
+      if (updateMapCost(true) <= game.resources.fragments.owned) {
+        debug("Buying imperfect sliders fragment farming map");
+        buyMap();
+        RfMap = game.global.mapsOwnedArray[game.global.mapsOwnedArray.length-1].id;
+        selectMap(RfMap);
+        game.global.repeatMap = true;
+        runMap();
+        repeatClicked(true);
+      }
+      // if we can't buy a map, wait until the next main loop iteration and try again
+      else debug("Can't afford fragment farming map yet");
+    }
+  }
+
+  if ((game.global.mapsActive || game.global.preMapsActive) && RminMaxMapCost <= game.resources.fragments.owned && RshouldFarmFrags) {
+    game.global.repeatMap = false;
+    repeatClicked(true);
+    if (game.global.preMapsActive) {
+      RminMaxMapCost = null;
+      RshouldFarmFrags = false;
+      Rprestraid = false;
+      Rfailpraid = false;
+    }
+  }
+  if (game.global.preMapsActive && Rprestraid && !Rfailpraid && !RshouldFarmFrags && Rprestraidon) {
+    Rprestraidon = false;
+    RpraidDone = true;
+    debug("Prestige raiding successful! - recycling Praid map");
+    if (RpMap) recycleMap(getMapIndex(RpMap));
+    if (RfMap) recycleMap(getMapIndex(RfMap));
+    RpMap = null;
+    RfMap = null;
+    if (RisRbwraidZ) {
+      Rbwraided = false;
+      Rfailbwraid = false;
+      Rdbwraided = false;
+      Rdfailbwraid = false;
+    }
+    else {
+      debug("Turning AutoMaps back on");
+      game.options.menu.repeatUntil.enabled = 0;
+      autoTrimpSettings['AutoMaps'].value = 1;    
+    }
+  }
+
+  if (!getPageSetting(praidSetting).includes(game.global.world)) {
+    Rprestraid = false;
+    Rfailpraid = false;
+    Rprestraidon = false;
+    RshouldFarmFrags = false;
+    RpraidDone = false;
+  }
+}
+
+function BWraiding() {
+  var RbwraidZ;
+  var bwraidSetting;
+  var RbwraidMax;
+  var isPraidZ;
+  var ispraidon;
+  var RisRbwraidZ;
+  var targetBW;
+  var bwIndex;
+
+  if (game.global.challengeActive == "Daily") {
+    RbwraidZ = 'RdBWraidingz';
+    bwraidSetting = 'RDailybwraid';
+    RbwraidMax = 'RdBWraidingmax';
+    isPraidZ = getPageSetting('RdPraidingzone').includes(game.global.world);
+    ispraidon = Rdprestraidon;
+  }
+  else {
+    RbwraidZ = 'RBWraidingz';
+    bwraidSetting = 'RBWraid';
+    RbwraidMax = 'RBWraidingmax';
+    isPraidZ = getPageSetting('RPraidingzone').includes(game.global.world);
+    ispraidon = Rprestraidon;
+  }
+
+  // Convert old BWraid settings to multivalue
+  if (typeof(autoTrimpSettings['RBWraidingz'].value) == "number")
+    setPageSetting('RBWraidingz', Array.of(autoTrimpSettings['RBWraidingz'].value));
+  if (typeof(autoTrimpSettings['RBWraidingmax'].value) == "number")
+    setPageSetting('RBWraidingmax', Array.of(autoTrimpSettings['RBWraidingmax'].value));
+  if (typeof(autoTrimpSettings['RdBWraidingz'].value) == "number")
+      setPageSetting('RdBWraidingz', Array.of(autoTrimpSettings['RdBWraidingz'].value));
+  if (typeof(autoTrimpSettings['RdBWraidingmax'].value) == "number")
+      setPageSetting('RdBWraidingmax', Array.of(autoTrimpSettings['RdBWraidingmax'].value));
+
+
+  RisRbwraidZ = getPageSetting(RbwraidZ).includes(game.global.world);
+  bwIndex = getPageSetting(RbwraidZ).indexOf(game.global.world);
+  if (bwIndex == -1 || typeof(getPageSetting(RbwraidMax)[bwIndex]) === "undefined") targetBW = -1;
+  else targetBW = getPageSetting(RbwraidMax)[bwIndex];
+
+  if ((!isPraidZ || RpraidDone) && !ispraidon && RisRbwraidZ && !Rbwraided && !Rfailbwraid && getPageSetting(RbwraidSetting)) {
+    if (getPageSetting('RAutoMaps') == 1 && !Rbwraided && !Rfailbwraid) {
+      autoTrimpSettings["RAutoMaps"].value = 0;
+    }
+
+    while (!game.global.preMapsActive && !Rbwraidon) mapsClicked();
+
+    if (game.options.menu.repeatUntil.enabled != 2 && !Rbwraided && !Rfailbwraid) {
+      game.options.menu.repeatUntil.enabled = 2;
+    }
+
+    if (game.global.preMapsActive && !Rbwraided && !Rfailbwraid && findLastBionic()) {
+      selectMap(findLastBionic().id);
+      Rfailbwraid = false;
+      debug("Beginning BW Raiding...");
+    }
+
+    else if (game.global.preMapsActive && !Rbwraided && !Rfailbwraid) {
+      if (getPageSetting('RAutoMaps') == 0 && RisRbwraidZ && !Rbwraided) {
+        autoTrimpSettings["RAutoMaps"].value = 1;
+        Rfailbwraid = true;
+        debug("Failed to BW raid. Looks like you don't have a BW to raid...");
+      }
+    }
+
+    if (findLastBionic().level <= targetBW && !Rbwraided && !Rfailbwraid && game.global.preMapsActive) {
+      runMap();
+      Rbwraidon = true;
+    }
+
+    if (!game.global.repeatMap && !Rbwraided && !Rfailbwraid && game.global.mapsActive) {
+      repeatClicked();
+    }
+
+    if (findLastBionic().level > targetBW && !Rbwraided && !Rfailbwraid) {
+      Rbwraided = true;
+      Rfailbwraid = false;
+      Rbwraidon = false;
+      debug("...Successfully BW raided!");
+    }
+  }
+
+  if (getPageSetting('RAutoMaps') == 0 && game.global.preMapsActive && Rbwraided && !Rfailbwraid) {
+    autoTrimpSettings["RAutoMaps"].value = 1;
+    debug("Turning AutoMaps back on");
+  }
+
+  if (!RisRbwraidZ) {
+    Rbwraided = false;
+    Rfailbwraid = false;
+    Rbwraidon = false;
+  }
+}
+
+function RdailyPraiding() {
+    var dpMap;
+    if (getPageSetting('RdPraidingzone').length) {
+   	if (getPageSetting('RdPraidingzone').includes(game.global.world) && !Rdprestraid && !Rdfailpraid) {
+            debug('World Zone matches a Daily Praiding Zone!');
+	    Rdprestraidon = true;
+             if (getPageSetting('RAutoMaps') == 1 && !Rdprestraid && !Rdfailpraid) {
+                autoTrimpSettings["RAutoMaps"].value = 0;
+            }
+            if (!game.global.preMapsActive && !game.global.mapsActive && !Rdprestraid && !Rdfailpraid) {
+                mapsClicked();
+		if (!game.global.preMapsActive) {
+                    mapsClicked();
+                }
+		debug("Beginning Daily Prestige Raiding...");
+            }
+            if (game.options.menu.repeatUntil.enabled!=2 && !Rdprestraid && !Rdfailpraid) {
+                game.options.menu.repeatUntil.enabled = 2;
+            }
+            if (game.global.preMapsActive && !Rdprestraid && !Rdfailpraid) {
+                plusPres();
+                if ((updateMapCost(true) <= game.resources.fragments.owned)) {
+                    buyMap();
+                    Rdfailpraid = false;
+		    Rdmapbought = true;
+                }
+                else if ((updateMapCost(true) > game.resources.fragments.owned)) {
+                    if (getPageSetting('RAutoMaps') == 0 && !Rdprestraid) {
+                        autoTrimpSettings["RAutoMaps"].value = 1;
+                        Rdfailpraid = true;
+			                  Rdprestraidon = false;
+			                  Rdmapbought = false;
+                        RpraidDone = true;
+                        debug("Failed to Daily Prestige Raid. Looks like you can't afford to..");
+                    }
+                    return;
+                 }
+	    }
+	    if (Rdmapbought == true) {
+		dpMap = game.global.mapsOwnedArray[game.global.mapsOwnedArray.length-1].id;
+                selectMap(dpMap);
+		runMap();
+            }
+            if (!Rdprestraid && !Rdfailpraid && !game.global.repeatMap) {
+                repeatClicked();
+             }
+	    Rdprestraid = true;
+	    Rdfailpraid = false;
+	    Rdmapbought = false;
+	}
+    }
+     if (getPageSetting('RAutoMaps') == 0 && game.global.preMapsActive && Rdprestraid && !Rdfailpraid && Rdprestraidon) {
+        RpraidDone = true;
+        Rdprestraidon = false;
+        autoTrimpSettings["RAutoMaps"].value = 1;
+	      debug("Daily Prestige Raiding successful! - recycling Praid map");
+	      recycleMap(getMapIndex(dpMap));
+	      debug("Turning AutoMaps back on");
+    }
+    if (getPageSetting('RdPraidingzone').every(isBelowThreshold)) {
+        Rdprestraid = false;
+        Rdfailpraid = false
+        Rdprestraidon = false;
+        Rdmapbought = false;
+        RpraidDone = false;
+    }
+}
+
+function RdailyBWraiding() {
+ 	 if (!Rdprestraidon && game.global.world == getPageSetting('RdBWraidingz') && !Rdbwraided && !Rdfailbwraid && getPageSetting('RDailybwraid')) {
+ 	     if (getPageSetting('RAutoMaps') == 1 && !Rdbwraided && !Rdfailbwraid) {
+                 autoTrimpSettings["RAutoMaps"].value = 0;
+                 }
+              if (!game.global.preMapsActive && !game.global.mapsActive && !Rdbwraided && !Rdfailbwraid) {
+                 mapsClicked();
+ 		 if (!game.global.preMapsActive) {
+                     mapsClicked();
+                     }
+                 }
+ 	     if (game.options.menu.repeatUntil.enabled != 2 && !Rdbwraided && !Rdfailbwraid) {
+            	 game.options.menu.repeatUntil.enabled = 2;
+                 }
+ 	     if (game.global.preMapsActive && !Rdbwraided && !Rdfailbwraid) {
+		 selectMap(findLastBionic().id);
+		 Rdfailbwraid = false;
+		 debug("Beginning Daily BW Raiding...");
+                 }
+ 	     else if (game.global.preMapsActive && !Rdbwraided && !Rdfailbwraid) {
+                      if (getPageSetting('RAutoMaps') == 0 && game.global.world == getPageSetting('RdBWraidingz') && !Rdbwraided) {
+                          autoTrimpSettings["RAutoMaps"].value = 1;
+                          Rdfailbwraid = true;
+                          debug("Failed to Daily BW raid. Looks like you don't have a BW to raid...");
+                          }
+                       }
+ 	     if (findLastBionic().level <= getPageSetting('RdBWraidingmax') && !Rdbwraided && !Rdfailbwraid && game.global.preMapsActive) {
+		 runMap();
+		 Rdbwraidon = true;
+		 }
+ 	     if (!game.global.repeatMap && !Rdbwraided && !Rdfailbwraid && game.global.mapsActive) {
+		 repeatClicked();
+		 }
+ 	     if (findLastBionic().level > getPageSetting('RdBWraidingmax') && !Rdbwraided && !Rdfailbwraid) {
+                 Rdbwraided = true;
+            	 Rdfailbwraid = false;
+		 Rdbwraidon = false;
+           	 debug("...Successfully Daily BW raided!");
+		 }
+ 	     if (getPageSetting('RAutoMaps') == 0 && game.global.preMapsActive && game.global.world == getPageSetting('RdBWraidingz') && Rdbwraided && !Rdfailbwraid) {
+                 autoTrimpSettings["RAutoMaps"].value = 1;
+		 debug("Turning AutoMaps back on");
+                 }
+ 	    }
+ 	if (getPageSetting('RAutoMaps') == 0 && game.global.preMapsActive && Rdbwraided && !Rdfailbwraid) {
+            autoTrimpSettings["RAutoMaps"].value = 1;
+	    debug("Turning AutoMaps back on");
+	    }
+ 	if (Rdbwraided && !Rdfailbwraid && game.global.world !== getPageSetting('RdBWraidingz')) {
+            Rdbwraided = false;
+	    Rdfailbwraid = false;
+	    Rdbwraidon = false;
+            }
+ }
+
+function Rfightalways() {
+	if (game.global.gridArray.length === 0 || game.global.preMapsActive || !game.upgrades.Battle.done || game.global.fighting)
+	    return;
+	if (!game.global.fighting)
+	    fightManual();
+}
+
+function Rarmormagic() {
+	var armormagicworld =  Math.floor((game.global.highestLevelCleared + 1) * 0.8);
+	if (((getPageSetting('Rcarmormagic') == 1 || getPageSetting('Rdarmormagic') == 1) && game.global.world >= armormagicworld && (game.global.soldierHealth <= game.global.soldierHealthMax*0.4)) || ((getPageSetting('Rcarmormagic') == 2 || getPageSetting('Rdarmormagic') == 2) && RcalcHDratio() >= MODULES["maps"].RenoughDamageCutoff && (game.global.soldierHealth <= game.global.soldierHealthMax*0.4)) || ((getPageSetting('Rcarmormagic') == 3 || getPageSetting('Rdarmormagic') == 3) && (game.global.soldierHealth <= game.global.soldierHealthMax*0.4)))
+	 RbuyArms();
+}
