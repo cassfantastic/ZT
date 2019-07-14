@@ -628,6 +628,23 @@ function calcCurrentStance() {
 
 //Radon
 
+function RgetCritMulti() {
+
+	var critChance = getPlayerCritChance();
+	var CritD = getPlayerCritDamageMult();
+
+	if (critChance < 0)
+		CritDHModifier = (1+critChance - critChance/5);
+	if (critChance >= 0 && critChance < 1)
+		CritDHModifier = (1-critChance + critChance * CritD);
+	if (critChance >= 1 && critChance < 2)
+		CritDHModifier = ((critChance-1) * getMegaCritDamageMult(2) * CritD + (2-critChance) * CritD);
+	if (critChance >= 2)
+		CritDHModifier = ((critChance-2) * Math.pow(getMegaCritDamageMult(2),2) * CritD + (3-critChance) * getMegaCritDamageMult(2) * CritD);
+
+  return CritDHModifier;
+}
+
 function RcalcOurDmg(minMaxAvg, incStance, incFlucts) {
 	var number = 6;
 	var fluctuation = .2;
