@@ -861,7 +861,7 @@ function RautoMap() {
 
     //Calc
     var ourBaseDamage = RcalcOurDmg("avg", false, true);
-    var enemyDamage = RcalcBadGuyDmg(null, RgetEnemyMaxAttack(game.global.world + 1, 50, 'Snimp', 1.0), true, true);
+    var enemyDamage = RcalcBadGuyDmg(null, RgetEnemyMaxAttack(game.global.world + 1, 50, 'Snimp', 1.0));
     var enemyHealth = RcalcEnemyHealth();
 
     if (getPageSetting('RDisableFarm') >= 1) {
