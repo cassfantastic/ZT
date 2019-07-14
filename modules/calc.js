@@ -730,8 +730,6 @@ function RcalcOurDmg(minMaxAvg, incStance, incFlucts) {
 		}
 	}
 
-return number;
-
   var min = number;
   var max = number;
   var avg = number;
