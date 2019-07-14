@@ -40,7 +40,7 @@ function printChangelog() {
     ,   hideCancel = true;
     tooltip('confirm', null, 'update', body+footer, action, title, acceptBtnText, null, hideCancel);
 }
-var runInterval=100,startupDelay=4000;setTimeout(delayStart,startupDelay);function delayStart(){initializeAutoTrimps(),printChangelog(),setTimeout(delayStartAgain,startupDelay)}function delayStartAgain(){game.global.addonUser=!0,game.global.autotrimps=!0,MODULESdefault=JSON.parse(JSON.stringify(MODULES)),setInterval(mainLoop,runInterval),setInterval(guiLoop,10*runInterval),autoTrimpSettings.PrestigeBackup!==void 0&&''!=autoTrimpSettings.PrestigeBackup.selected&&(document.getElementById('Prestige').value=autoTrimpSettings.PrestigeBackup.selected),''===document.getElementById('Prestige').value&&(document.getElementById('Prestige').value='Off')}
+var runInterval=100,startupDelay=4000;setTimeout(delayStart,startupDelay);function delayStart(){initializeAutoTrimps(),printChangelog(),setTimeout(delayStartAgain,startupDelay)}function delayStartAgain(){game.global.addonUser=!0,game.global.autotrimps=!0,MODULESdefault=JSON.parse(JSON.stringify(MODULES)),setInterval(mainLoop,runInterval),setInterval(guiLoop,10*runInterval)}
 var ATrunning=!0,ATmessageLogTabVisible=!0,enableDebug=!0,autoTrimpSettings={},MODULES={},MODULESdefault={},ATMODULES={},ATmoduleList=[],bestBuilding,scienceNeeded,RscienceNeeded,breedFire=!1,shouldFarm=!1,RshouldFarm=!1,enoughDamage=!0,RenoughDamage=!0,enoughHealth=!0,RenoughHealth=!0,baseDamage=1,baseBlock=1,baseHealth=1,preBuyAmt,preBuyFiring,preBuyTooltip,preBuymaxSplit,currentworld=0,lastrunworld=0,aWholeNewWorld=!1,needGymystic=!0,heirloomFlag=!1,heirloomCache=game.global.heirloomsExtra.length,magmiteSpenderChanged=!1,daily3=!1;
 
 function mainLoop() {
@@ -68,10 +68,14 @@ function mainLoop() {
             easterEggClicked();
         setTitle();
     }
-    setScienceNeeded();
-    RsetScienceNeeded();
-    autoLevelEquipment();
-    RautoLevelEquipment();
+    if (game.global.universe == 1) { 
+        setScienceNeeded();
+        autoLevelEquipment();
+    }
+    if (game.global.universe == 2) {
+        RsetScienceNeeded();
+        RautoLevelEquipment();
+    }
 
     //Core
     if (game.global.universe == 1 && getPageSetting('AutoMaps') > 0) autoMap();
@@ -153,7 +157,7 @@ function mainLoop() {
     
     //Combat
     if (game.global.universe == 1 && getPageSetting('ForceAbandon') == true || getPageSetting('fuckanti') > 0) trimpcide();
-    if (getPageSetting('trimpsnotdie') == true && game.global.world > 1) helptrimpsnotdie();
+    if (game.global.universe == 1 && getPageSetting('trimpsnotdie') == true && game.global.world > 1) helptrimpsnotdie();
     if (game.global.universe == 1 && !game.global.fighting) {
         if (getPageSetting('fightforever') == 0) fightalways();
         else if (getPageSetting('fightforever') > 0 && calcHDratio() <= getPageSetting('fightforever')) fightalways();
@@ -173,7 +177,7 @@ function mainLoop() {
 
     
     //RCombat
-    if (game.global.universe == 2 && getPageSetting('trimpsnotdie') == true && game.global.world > 1) helptrimpsnotdie();
+    if (game.global.universe == 2 && getPageSetting('trimpsnotdie') == true && game.global.world > 1) Rhelptrimpsnotdie();
     if (game.global.universe == 2 && !game.global.fighting) {
     if (game.global.universe == 2 && getPageSetting('Rfightforever') == 0) Rfightalways();
         else if (getPageSetting('Rfightforever') > 0 && RcalcHDratio() <= getPageSetting('Rfightforever')) Rfightalways();
