@@ -2,6 +2,8 @@ var critCC = 1;
 var critDD = 1;
 var trimpAA = 1;
 
+//Helium
+
 function getTrimpAttack() {
 	var dmg = 6;
         var equipmentList = ["Dagger", "Mace", "Polearm", "Battleaxe", "Greatsword", "Arbalest"];
@@ -622,4 +624,61 @@ function calcCurrentStance() {
         }
     }
     }
+}
+
+//Radon
+
+function RgetTrimpAttack() {
+	var dmg = 6;
+        var equipmentList = ["Dagger", "Mace", "Polearm", "Battleaxe", "Greatsword", "Arbalest"];
+        for(var i = 0; i < equipmentList.length; i++){
+            if(game.equipment[equipmentList[i]].locked !== 0) continue;
+            var attackBonus = game.equipment[equipmentList[i]].attackCalculated;
+            var level       = game.equipment[equipmentList[i]].level;
+            dmg += attackBonus*level;
+        }
+	dmg *= game.resources.trimps.maxSoldiers;
+	if (game.portal.Power.radLevel > 0) {
+		dmg += (dmg * game.portal.Power.radLevel * game.portal.Power.modifier);
+	}
+	return dmg;
+}
+
+function RcalcOurHealth() {
+	
+    //Health
+	
+    var health = 50;
+    if (game.resources.trimps.maxSoldiers > 0) {
+        var equipmentList = ["Shield", "Boots", "Helmet", "Pants", "Shoulderguards", "Breastplate", "Gambeson"];
+        for(var i = 0; i < equipmentList.length; i++){
+            if(game.equipment[equipmentList[i]].locked !== 0) continue;
+            var healthBonus = game.equipment[equipmentList[i]].healthCalculated;
+            var level       = game.equipment[equipmentList[i]].level;
+            health += healthBonus*level;
+        }
+    }
+    health *= game.resources.trimps.maxSoldiers;
+    if (game.portal.Toughness.radLevel > 0) {
+        health *= ((game.portal.Toughness.radLevel * game.portal.Toughness.modifier) + 1);
+    }
+    if (game.goldenUpgrades.Battle.currentBonus > 0) {
+        health *= game.goldenUpgrades.Battle.currentBonus + 1;
+    }
+    if (game.global.totalSquaredReward > 0) {
+        health *= (1 + (game.global.totalSquaredReward / 100));
+    }
+    var heirloomBonus = calcHeirloomBonus("Shield", "trimpHealth", 0, true);
+    if (heirloomBonus > 0) {
+        health *= ((heirloomBonus / 100) + 1);
+    }
+    if (typeof game.global.dailyChallenge.pressure !== 'undefined') {
+        health *= (dailyModifiers.pressure.getMult(game.global.dailyChallenge.pressure.strength, game.global.dailyChallenge.pressure.stacks));
+    }
+	
+    //Pris
+	
+    health += getMaxEnergyShield();
+	
+    return health;
 }
