@@ -804,7 +804,7 @@ function RcalcBadGuyDmg(enemy,attack) {
         number = enemy.attack;
     else
         number = attack;
-    if (game.global.challengeActive == "Daily")
+    if (game.global.challengeActive == "Daily") {
         number = RcalcDailyAttackMod(number);
     }
     if (!enemy && game.global.usingShriek) {
