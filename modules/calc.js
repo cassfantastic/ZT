@@ -628,20 +628,111 @@ function calcCurrentStance() {
 
 //Radon
 
-function RgetTrimpAttack() {
-	var dmg = 6;
+function RcalcOurDmg(minMaxAvg, incStance, incFlucts) {
+	var number = 6;
+	var fluctuation = .2;
+	var maxFluct = -1;
+	var minFluct = -1;
         var equipmentList = ["Dagger", "Mace", "Polearm", "Battleaxe", "Greatsword", "Arbalest"];
         for(var i = 0; i < equipmentList.length; i++){
             if(game.equipment[equipmentList[i]].locked !== 0) continue;
             var attackBonus = game.equipment[equipmentList[i]].attackCalculated;
             var level       = game.equipment[equipmentList[i]].level;
-            dmg += attackBonus*level;
+            number += attackBonus*level;
         }
-	dmg *= game.resources.trimps.maxSoldiers;
-	if (game.portal.Power.radLevel > 0) {
-		dmg += (dmg * game.portal.Power.radLevel * game.portal.Power.modifier);
+	number *= game.resources.trimps.maxSoldiers;
+  	if (game.buildings.Smithy.owned > 0) {
+		number *= Math.pow(1.25, game.buildings.Smithy.owned);
 	}
-	return dmg;
+	if (game.global.achievementBonus > 0){
+		number *= (1 + (game.global.achievementBonus / 100));
+	}
+	if (game.portal.Power.radLevel > 0) {
+		number += (number * game.portal.Power.radLevel * game.portal.Power.modifier);
+	}
+	if (game.portal.Range.radLevel > 0){
+		minFluct = fluctuation - (.02 * game.portal.Range.radLevel);
+	}
+	if (game.global.roboTrimpLevel > 0){
+		number *= ((0.2 * game.global.roboTrimpLevel) + 1);
+	}
+	number = calcHeirloomBonus("Shield", "trimpAttack", number)
+	if (game.goldenUpgrades.Battle.currentBonus > 0) {
+		number *= game.goldenUpgrades.Battle.currentBonus + 1;
+	}
+	if (game.global.totalSquaredReward > 0) {
+		number *= ((game.global.totalSquaredReward / 100) + 1);
+	}
+	if (Fluffy.isActive()){
+		number *= Fluffy.getDamageModifier();
+	}
+	if (playerSpireTraps.Strength.owned) {
+			var strBonus = playerSpireTraps.Strength.getWorldBonus();
+			number *= (1 + (strBonus / 100));
+	}
+	if (game.singleRunBonuses.sharpTrimps.owned){
+		number *= 1.5;
+	}
+	if (game.talents.voidPower.purchased && game.global.voidBuff) {
+		var vpAmt = (game.talents.voidPower2.purchased) ? ((game.talents.voidPower3.purchased) ? 65 : 35) : 15;
+		number *= ((vpAmt / 100) + 1);
+	}
+	if (game.global.voidBuff && game.talents.voidMastery.purchased){
+		number *= 5;
+	}
+	if (game.global.sugarRush > 0) {
+		number *= sugarRush.getAttackStrength();
+	}
+	if (incStance && game.talents.scry.purchased && game.global.formation == 4 && (mutations.Healthy.active() || mutations.Corruption.active())){
+		number *= 2;
+	}
+	if (game.global.challengeActive == "Daily" && game.talents.daily.purchased){
+		number *= 1.5;
+	}
+	if (game.global.challengeActive == "Daily"){
+		if (typeof game.global.dailyChallenge.minDamage !== 'undefined'){
+			if (minFluct == -1) minFluct = fluctuation;
+			minFluct += dailyModifiers.minDamage.getMult(game.global.dailyChallenge.minDamage.strength);
+		}
+		if (typeof game.global.dailyChallenge.maxDamage !== 'undefined'){
+			if (maxFluct == -1) maxFluct = fluctuation;
+			maxFluct += dailyModifiers.maxDamage.getMult(game.global.dailyChallenge.maxDamage.strength);
+		}
+		if (typeof game.global.dailyChallenge.oddTrimpNerf !== 'undefined' && ((game.global.world % 2) == 1)){
+				number *= dailyModifiers.oddTrimpNerf.getMult(game.global.dailyChallenge.oddTrimpNerf.strength);
+		}
+		if (typeof game.global.dailyChallenge.evenTrimpBuff !== 'undefined' && ((game.global.world % 2) == 0)){
+				number *= dailyModifiers.evenTrimpBuff.getMult(game.global.dailyChallenge.evenTrimpBuff.strength);
+		}
+		if (typeof game.global.dailyChallenge.rampage !== 'undefined'){
+			number *= dailyModifiers.rampage.getMult(game.global.dailyChallenge.rampage.strength, game.global.dailyChallenge.rampage.stacks);
+		}
+	}
+
+return number;
+
+  var min = number;
+  var max = number;
+  var avg = number;
+
+  min *= (RgetCritMulti(false)*0.8);
+  avg *= RgetCritMulti(false);
+  max *= (RgetCritMulti(false)*1.2);
+  
+  if (incFlucts) {
+    if (minFluct > 1) minFluct = 1;
+    if (maxFluct == -1) maxFluct = fluctuation;
+    if (minFluct == -1) minFluct = fluctuation;
+
+    min *= (1 - minFluct);
+    max *= (1 + maxFluct);
+    avg *= 1 + (maxFluct - minFluct)/2;
+  }
+
+  if (minMaxAvg == "min") return min;
+  else if (minMaxAvg == "max") return max;
+  else if (minMaxAvg == "avg") return avg;
+  
 }
 
 function RcalcOurHealth() {
