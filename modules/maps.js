@@ -1054,6 +1054,9 @@ function RautoMap() {
 		}
             }
         }
+	    else {
+                    selectedMap = "create";
+		}
     }
     if (!game.global.preMapsActive && game.global.mapsActive) {
         var doDefaultMapBonus = game.global.mapBonus < getPageSetting('RMaxMapBonuslimit') - 1;
