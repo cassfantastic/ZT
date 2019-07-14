@@ -845,7 +845,7 @@ function RautoMap() {
         }
         if (numUnbought >= customVars.SkipNumUnboughtPrestiges) {
             RneedPrestige = false;
-            skipped	 = true;
+            RskippedPrestige = true;
         }
     }
 
@@ -1045,14 +1045,14 @@ function RautoMap() {
     //Automaps
     if (RshouldDoMaps || RdoVoids || RneedPrestige) {
         if (selectedMap == "world") {
-            if (RneedPrestige || (extraMapLevels > 0)) {
-                if ((game.global.world + extraMapLevels) <= game.global.mapsOwnedArray[highestMap].level)
+            if (RneedPrestige) {
+                if (game.global.world == game.global.mapsOwnedArray[highestMap].level) {
                     selectedMap = game.global.mapsOwnedArray[highestMap].id;
-                else
+		}
+                else {
                     selectedMap = "create";
+		}
             }
-            else
-                selectedMap = "create";
         }
     }
     if (!game.global.preMapsActive && game.global.mapsActive) {
