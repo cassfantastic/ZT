@@ -496,14 +496,14 @@ function RequipEffect(gameResource, equip) {
     }
 }
 
-/*function RequipCost(gameResource, equip) {
+function RequipCost(gameResource, equip) {
     var price = parseFloat(getBuildingItemPrice(gameResource, equip.Resource, equip.Equip, 1));
     if (equip.Equip)
-        price = Math.ceil(price * (Math.pow(1 - game.portal.Artisanistry.modifier, game.portal.Artisanistry.level)));
+        price = Math.ceil(price * (Math.pow(1 - game.portal.Artisanistry.modifier, game.portal.Artisanistry.radLevel)));
     else
-        price = Math.ceil(price * (Math.pow(1 - game.portal.Resourceful.modifier, game.portal.Resourceful.level)));
+        price = Math.ceil(price * (Math.pow(1 - game.portal.Resourceful.modifier, game.portal.Resourceful.radLevel)));
     return price;
-}*/
+}
 
 function RPrestigeValue(what) {
     var name = game.upgrades[what].prestiges;
@@ -529,7 +529,7 @@ function RevaluateEquipmentEfficiency(equipName) {
         var CanAfford = canAffordTwoLevel(game.upgrades[equip.Upgrade]);
         if (equip.Equip) {
             var NextEffect = PrestigeValue(equip.Upgrade);
-            var NextCost = Math.ceil(getNextPrestigeCost(equip.Upgrade)/* * Math.pow(1 - game.portal.Artisanistry.modifier, game.portal.Artisanistry.level)*/);
+            var NextCost = Math.ceil(getNextPrestigeCost(equip.Upgrade) * Math.pow(1 - game.portal.Artisanistry.modifier, game.portal.Artisanistry.radLevel));
             Wall = (NextEffect / NextCost > Factor);
         }
 
