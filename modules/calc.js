@@ -736,9 +736,9 @@ return number;
   var max = number;
   var avg = number;
 
-  min *= (RgetCritMulti(false)*0.8);
-  avg *= RgetCritMulti(false);
-  max *= (RgetCritMulti(false)*1.2);
+  min *= (RgetCritMulti()*0.8);
+  avg *= RgetCritMulti();
+  max *= (RgetCritMulti()*1.2);
   
   if (incFlucts) {
     if (minFluct > 1) minFluct = 1;
@@ -825,4 +825,39 @@ function RcalcBadGuyDmg(enemy,attack,daily,maxormin,disableFlucts) {
     }
     else
         return number;
+}
+
+function RcalcEnemyBaseHealth(world, level, name) {
+			var amt = 0;
+			var healthBase = (game.global.universe == 2) ? 10e9 : 130;
+			amt += healthBase * Math.sqrt(world) * Math.pow(3.265, world / 2);
+			amt -= 110;
+			if (world == 1 || world == 2 && level < 10){
+				amt *= 0.6;
+			amt = (amt * 0.25) + ((amt * 0.72) * (level / 100));
+			}
+			else if (world < 60)
+				amt = (amt * 0.4) + ((amt * 0.4) * (level / 110));
+			else{
+				amt = (amt * 0.5) + ((amt * 0.8) * (level / 100));
+				amt *= Math.pow(1.1, world - 59);
+			}
+			if (world < 60) amt *= 0.75;
+			if (world > 5 && game.global.mapsActive) amt *= 1.1;
+		    amt *= game.badGuys[name].health;
+			if (game.global.universe == 2) amt *= Math.pow(1.4, world);
+			return Math.floor(amt);
+		}
+
+function RcalcEnemyHealth() {
+    var health = RcalcEnemyBaseHealth(game.global.world, 50, "Snimp");
+    return health;
+}
+
+function RcalcHDratio() {
+    var ratio = 0;
+    var ourBaseDamage = RcalcOurDmg("avg", false, true);
+
+    ratio = RcalcEnemyHealth() / ourBaseDamage;
+    return ratio;
 }
