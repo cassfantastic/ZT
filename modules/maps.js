@@ -747,7 +747,7 @@ function RupdateAutoMapsStatus(get) {
     if (RskippedPrestige)
         status += '<br><b style="font-size:.8em;color:pink;margin-top:0.2vw">Prestige Skipped</b>';
 
-    /*var getPercent = (game.stats.heliumHour.value() / (game.global.totalHeliumEarned - (game.global.heliumLeftover + game.resources.helium.owned))) * 100;
+    var getPercent = (game.stats.heliumHour.value() / (game.global.totalHeliumEarned - (game.global.heliumLeftover + game.resources.helium.owned))) * 100;
     var lifetime = (game.resources.helium.owned / (game.global.totalHeliumEarned - game.resources.helium.owned)) * 100;
     var hiderStatus = 'He/hr: ' + getPercent.toFixed(3) + '%<br>&nbsp;&nbsp;&nbsp;He: ' + lifetime.toFixed(3) + '%';
 
@@ -756,16 +756,18 @@ function RupdateAutoMapsStatus(get) {
     } else {
         document.getElementById('autoMapStatus').innerHTML = status;
         document.getElementById('hiderStatus').innerHTML = hiderStatus;
-    }*/
+    }
 }
+
+
 
 function RautoMap() {
 
     //Failsafes
     if (!game.global.mapsUnlocked || RcalcOurDmg("avg", false, true) <= 0) {
         RenoughDamage = true;
-        RRenoughHealth = true;
-        RRshouldFarm = false;
+        RenoughHealth = true;
+        RshouldFarm = false;
         RupdateAutoMapsStatus();
         return;
     }
@@ -779,7 +781,6 @@ function RautoMap() {
     if ((game.options.menu.repeatUntil.enabled == 1 || game.options.menu.repeatUntil.enabled == 2 || game.options.menu.repeatUntil.enabled == 3) && !game.global.mapsActive && !game.global.preMapsActive) toggleSetting('repeatUntil');
     if (game.options.menu.exitTo.enabled != 0) toggleSetting('exitTo');
     if (game.options.menu.repeatVoids.enabled != 0) toggleSetting('repeatVoids');
-    var challSQ = game.global.runningChallengeSquared;
     var extraMapLevels = 0;
 
     //Void Vars
@@ -792,8 +793,8 @@ function RautoMap() {
     if (game.global.challengeActive == "Daily" && getPageSetting('RDailyVoidMod') >= 1) {
         voidMapLevelSetting = getPageSetting('RDailyVoidMod');
     }
-    if (getPageSetting('RRunNewVoidsUntilNew') != 0 && game.global.challengeActive != "Daily") {
-	voidMapLevelPlus = getPageSetting('RRunNewVoidsUntilNew');
+    if (getPageSetting('RunNewVoidsUntilNew') != 0 && game.global.challengeActive != "Daily") {
+	voidMapLevelPlus = getPageSetting('RunNewVoidsUntilNew');
     }
     if (getPageSetting('RdRunNewVoidsUntilNew') != 0 && game.global.challengeActive == "Daily") {
 	voidMapLevelPlus = getPageSetting('RdRunNewVoidsUntilNew');
@@ -823,18 +824,18 @@ function RautoMap() {
         (getPageSetting('Rnovmsc2') == true && game.global.runningChallengeSquared) ||
         (game.global.challengeActive != "Daily" && game.global.totalVoidMaps > 0 && getPageSetting('Ronlystackedvoids') == true && voidArrayDoneS.length < 1)
        ) {
-        RRdoVoids = false;
+        RdoVoids = false;
     }
 
     //Prestige
     if ((getPageSetting('RForcePresZ') >= 0) && ((game.global.world + extraMapLevels) >= getPageSetting('RForcePresZ'))) {
         const prestigeList = ['Supershield', 'Dagadder', 'Megamace', 'Polierarm', 'Axeidic', 'Greatersword', 'Harmbalest', 'Bootboost', 'Hellishmet', 'Pantastic', 'Smoldershoulder', 'Bestplate', 'GambesOP'];
-        RRneedPrestige = prestigeList.some(prestige => game.mapUnlocks[prestige].last <= (game.global.world + extraMapLevels) - 5);
+        RneedPrestige = prestigeList.some(prestige => game.mapUnlocks[prestige].last <= (game.global.world + extraMapLevels) - 5);
     } else
-        RRneedPrestige = prestige != "Off" && game.mapUnlocks[prestige] && game.mapUnlocks[prestige].last <= (game.global.world + extraMapLevels) - 5;
+        RneedPrestige = prestige != "Off" && game.mapUnlocks[prestige] && game.mapUnlocks[prestige].last <= (game.global.world + extraMapLevels) - 5;
 
     RskippedPrestige = false;
-    if (RRneedPrestige && (getPageSetting('RPrestigeSkip1_2') == 1 || getPageSetting('PrestigeSkip1_2') == 2)) {
+    if (RneedPrestige && (getPageSetting('RPrestigeSkip1_2') == 1 || getPageSetting('PrestigeSkip1_2') == 2)) {
         var prestigeList = ['Dagadder', 'Megamace', 'Polierarm', 'Axeidic', 'Greatersword', 'Harmbalest', 'Bootboost', 'Hellishmet', 'Pantastic', 'Smoldershoulder', 'Bestplate', 'GambesOP'];
         var numUnbought = 0;
         for (var i in prestigeList) {
@@ -848,12 +849,12 @@ function RautoMap() {
         }
     }
 
-    if ((RRneedPrestige || RskippedPrestige) && (getPageSetting('RPrestigeSkip1_2') == 1 || getPageSetting('RPrestigeSkip1_2') == 3)) {
+    if ((RneedPrestige || RskippedPrestige) && (getPageSetting('RPrestigeSkip1_2') == 1 || getPageSetting('RPrestigeSkip1_2') == 3)) {
         const prestigeList = ['Dagadder', 'Megamace', 'Polierarm', 'Axeidic', 'Greatersword', 'Harmbalest'];
         const numLeft = prestigeList.filter(prestige => game.mapUnlocks[prestige].last <= (game.global.world + extraMapLevels) - 5);
         const shouldSkip = numLeft <= customVars.RUnearnedPrestigesRequired;
         if (shouldSkip != RskippedPrestige) {
-            RRneedPrestige = !RRneedPrestige;
+            RneedPrestige = !RneedPrestige;
             RskippedPrestige = !RskippedPrestige;
         }
     }
@@ -882,8 +883,7 @@ function RautoMap() {
 
     //Farming
     var selectedMap = "world";
-    var RshouldFarmLowerZone = false;
-    RRshouldDoMaps = false;
+    RshouldDoMaps = false;
     if (ourBaseDamage > 0) {
         RshouldDoMaps = (!RenoughDamage || RshouldFarm || RscryerStuck);
     }
@@ -932,7 +932,6 @@ function RautoMap() {
             if (game.global.world == game.options.menu.mapAtZone.setZone[x])
                 RshouldDoMaps = true;
         }
-    var maxlvl = game.talents.mapLoot.purchased ? game.global.world - 1 : game.global.world;
     var obj = {};
     for (var map in game.global.mapsOwnedArray) {
         if (!game.global.mapsOwnedArray[map].noRecycle) {
@@ -1040,7 +1039,6 @@ function RautoMap() {
         for (var map in voidArraySorted) {
             var theMap = voidArraySorted[map];
             RdoVoids = true;
-            var eAttack = getEnemyMaxAttack(game.global.world, theMap.size, 'Voidsnimp', theMap.difficulty);
             if (getPageSetting('RDisableFarm') <= 0)
                 RshouldFarm = RshouldFarm || false;
             if (!restartVoidMap)
