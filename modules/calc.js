@@ -804,10 +804,6 @@ function RcalcBadGuyDmg(enemy,attack) {
         number = enemy.attack;
     else
         number = attack;
-    var fluctuation = .2;
-    var maxFluct = -1;
-    var minFluct = -1;
-
     if (game.global.challengeActive == "Daily")
         number = RcalcDailyAttackMod(number);
     }
