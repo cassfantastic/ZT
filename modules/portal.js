@@ -326,7 +326,7 @@ function RautoPortal() {
             var portalzone = getPageSetting('RCustomAutoPortal');
             if (game.global.world > portalzone) {
                 if (autoTrimpSettings.RadonHourChallenge.selected != 'None')
-                    doPortal(autoTrimpSettings.RadonHourChallenge.selected);
+                    RdoPortal(autoTrimpSettings.RadonHourChallenge.selected);
                 else
                     RdoPortal();
             }
@@ -342,7 +342,6 @@ function RautoPortal() {
 }
 
 function RdoPortal(challenge) {
-    var c2done = true;
     if(!game.global.portalActive) return;
     if (getPageSetting('autoheirlooms') == true && getPageSetting('typetokeep') != 'None' && getPageSetting('raretokeep') != 'None') {
 	autoheirlooms3();
@@ -363,22 +362,15 @@ function RdoPortal(challenge) {
 	activateClicked();
 	cancelPortal();
 	debug('First Stage: Bought Max Looting II');
-    }
+    }*/
     portalClicked();
     if (!portalWindowOpen) {
 	portalClicked();
     }
     if (portalWindowOpen && getPageSetting('AutoAllocatePerks')==1 && (typeof MODULES["perks"] !== 'undefined' || typeof AutoPerks !== 'undefined')) {
         AutoPerks.clickAllocate();
-    }*/
-    /*if (portalWindowOpen && getPageSetting('c2runnerstart')==true && getPageSetting('c2runnerportal') > 0 && getPageSetting('c2runnerpercent') > 0) {
-        c2runner();
-        if (challengeSquaredMode == true) {
-            c2done = false;
-        }
-        else debug("C2 Runner: All C2s above Threshold!");
-    }*/
-    /*if (portalWindowOpen && getPageSetting('AutoStartDaily') == true && c2done) {
+    }
+    if (portalWindowOpen && getPageSetting('RAutoStartDaily') == true) {
         selectChallenge('Daily');
         checkCompleteDailies();
         var lastUndone = -7;
@@ -394,8 +386,8 @@ function RdoPortal(challenge) {
             getDailyChallenge(lastUndone);
             debug("Portaling into Daily for: " + getDailyTimeString(lastUndone, true) + " now!", "portal");
         }
-    }*/
-    else if(portalWindowOpen && challenge && c2done) {
+    }
+    else if(portalWindowOpen && challenge) {
         selectChallenge(challenge);
     }
     /*if (portalWindowOpen && getPageSetting('AutoAllocatePerks')==2) {
@@ -405,5 +397,5 @@ function RdoPortal(challenge) {
     }*/
     pushData();
     activatePortal();
-    lastRadonZone = 0; zonePostpone = 0;
+    lastRadonZone = 0; RzonePostpone = 0;
 }
