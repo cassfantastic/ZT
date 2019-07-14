@@ -956,7 +956,7 @@ function RautoMap() {
                     selectedMap = theMap.id;
                     break;
                 }
-                if (game.global.world > 15 && theMap.name == 'Dimension of Rage' && document.getElementById("portalBtn").style.display == "none" && game.upgrades.Rage.done == 0) {
+                if (game.global.world > 15 && theMap.name == 'Dimension of Rage' && document.getElementById("portalBtn").style.display == "none" && game.upgrades.Rage.done == 1) {
                     var theMapDifficulty = Math.ceil(theMap.difficulty / 2);
                     if (game.global.world < 15 + theMapDifficulty) continue;
                     selectedMap = theMap.id;
@@ -1091,7 +1091,7 @@ function RautoMap() {
             }
             if (RdoVoids && game.global.switchToMaps &&
                 (RneedPrestige || RdoVoids ||
-                    (!enoughDamage && RenoughHealth && game.global.lastClearedCell < 9) ||
+                    (!RenoughDamage && RenoughHealth && game.global.lastClearedCell < 9) ||
                     (RshouldFarm && game.global.lastClearedCell >= customVars.RshouldFarmCell) ||
                     (RscryerStuck)) &&
                 (
