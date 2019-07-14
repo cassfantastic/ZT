@@ -703,6 +703,10 @@ function RcalcOurDmg(minMaxAvg, incStance, incFlucts) {
 	if (incStance && game.talents.scry.purchased && game.global.formation == 4 && (mutations.Healthy.active() || mutations.Corruption.active())){
 		number *= 2;
 	}
+	if (game.global.challengeActive == "Melt") {
+		number *= 5;
+		number *= Math.pow(0.99, game.challenges.Melt.stacks);
+	}
 	if (game.global.challengeActive == "Daily" && game.talents.daily.purchased){
 		number *= 1.5;
 	}
