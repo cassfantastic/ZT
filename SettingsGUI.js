@@ -1719,6 +1719,12 @@ function updateCustomButtons() {
     document.getElementById('slot3modcr').value = autoTrimpSettings.slot3modcr.selected;
     document.getElementById('slot4modcr').value = autoTrimpSettings.slot4modcr.selected;
 
+    if (game.global.universe == 1)
+    document.getElementById('autoMapBtn').setAttribute('class','noselect settingsBtn settingBtn'+autoTrimpSettings.AutoMaps.value);
+    if (game.global.universe == 2)
+    document.getElementById('autoMapBtn').setAttribute('class','noselect settingsBtn settingBtn'+autoTrimpSettings.RAutoMaps.value);
+
+    
     if (getPageSetting('DisableFarm') < 1)
         shouldFarm = false;
 
