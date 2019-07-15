@@ -412,14 +412,14 @@ function RdoPortal(challenge) {
     if (getPageSetting('autonu') == true && getPageSetting('heirloomnu') != undefined) {
         spendNu(); spendNu(); spendNu(); spendNu(); spendNu(); spendNu();
     }
-    /*if (getPageSetting('AutoAllocatePerks')==2) {
+    if (getPageSetting('RAutoAllocatePerks')==2) {
         viewPortalUpgrades();
 	numTab(6, true)
-	buyPortalUpgrade('Looting_II');
+	buyPortalUpgrade('Looting');
 	activateClicked();
 	cancelPortal();
-	debug('First Stage: Bought Max Looting II');
-    }*/
+	debug('First Stage: Bought Max Looting');
+    }
     portalClicked();
     if (!portalWindowOpen) {
 	portalClicked();
@@ -447,11 +447,11 @@ function RdoPortal(challenge) {
     else if(portalWindowOpen && challenge) {
         selectChallenge(challenge);
     }
-    /*if (portalWindowOpen && getPageSetting('AutoAllocatePerks')==2) {
+    if (portalWindowOpen && getPageSetting('RAutoAllocatePerks')==2) {
 	numTab(6, true)
-	buyPortalUpgrade('Looting_II');
+	buyPortalUpgrade('Looting');
 	debug('Second Stage: Bought Max Looting II');
-    }*/
+    }
     pushData();
     activatePortal();
     lastRadonZone = 0; RzonePostpone = 0;
