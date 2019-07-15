@@ -7,7 +7,7 @@ var queuescript = document.createElement('script');
 queuescript.type = 'text/javascript';
 queuescript.src = 'https://Zorn192.github.io/AutoTrimps/FastPriorityQueue.js';
 head.appendChild(queuescript);
-
+if (game.global.universe == 1) {
 //[looting,toughness,power,motivation,pheromones,artisanistry,carpentry,resilience,coordinated,resourceful,overkill,cunning,curious,classy]
 var preset_space = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 var preset_Zek059 = [7, 0.6, 3, 0.8, 0.3, 3, 25, 0.6, 0, 0, 0, 0, 0, 0];
@@ -725,7 +725,6 @@ AutoPerks.getOwnedPerks = function() {
     }
     return perks;
 }
-if (game.global.universe == 1) {
 AutoPerks.displayGUI();
 }
 
@@ -1360,7 +1359,8 @@ RAutoPerks.initializePerks = function () {
     var pheromones = new RAutoPerks.VariablePerk("pheromones", 3, false,       4, 0.1);
     var artisanistry = new RAutoPerks.VariablePerk("artisanistry", 15, true,   5, 0.1);
     var carpentry = new RAutoPerks.VariablePerk("carpentry", 25, true,         6, 0.1);
-    var coordinated = new RAutoPerks.VariablePerk("coordinated", 150000, true, 7, 0.1);
+    var prismal = new RAutoPerks.VariablePerk("prismal", 1, true,         6, 0.1);
+    var coordinated = new RAutoPerks.VariablePerk("coordinated", 150000, true, 8, 0.1);
     //scruffy
 	//no
     //tier2
