@@ -436,6 +436,7 @@ function initializeAllSettings() {
     createSetting('RMinerRatio', 'Miner Ratio', '', 'value', '1', null, "Jobs");
     createSetting('RMaxScientists', 'Max Scientists', 'Advanced. Cap your scientists (This is an absolute number not a ratio). recommend: -1 (infinite still controls itself)', 'value', '-1', null, "Jobs");
     createSetting('RMaxExplorers', 'Max Explorers', 'Advanced. Cap your explorers (This is an absolute number not a ratio). recommend: -1', 'value', '-1', null, "Jobs");
+    createSetting('AutoMeteorologist', 'Auto Meteorologists', 'Auto buy Meteorologists. This value is the percent of food you want to spend on them. 100 would hire as soon as you can afford to. 1 would hire at 1% of your food. -1 or 0 to disable. ', 'value', -1, null, 'Jobs');
 
 
     
@@ -1402,6 +1403,7 @@ function updateCustomButtons() {
     radonon ? turnOn("RMinerRatio") : turnOff("RMinerRatio");
     radonon ? turnOn("RMaxScientists") : turnOff("RMaxScientists");
     radonon ? turnOn("RMaxExplorers") : turnOff("RMaxExplorers");
+    radonon ? turnOn("AutoMeteorologist") : turnOff("AutoMeteorologist");
 
 
 
