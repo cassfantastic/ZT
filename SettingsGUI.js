@@ -1234,7 +1234,6 @@ function updateCustomButtons() {
     !radonon && getPageSetting('AutoAllocatePerks')==1 ? turnOn("fastallocate"): turnOff("fastallocate");
 
     //Portal
-    document.getElementById("autoMapBtn").setAttribute("class", "noselect settingsBtn settingBtn" + autoTrimpSettings.AutoMaps.value);
     !radonon ? turnOn("AutoPortal"): turnOff("AutoPortal");
     (!radonon && autoTrimpSettings.AutoPortal.selected == "Custom") ? turnOn("CustomAutoPortal") : turnOff("CustomAutoPortal");
     var heHr = (autoTrimpSettings.AutoPortal.selected == "Helium Per Hour");
