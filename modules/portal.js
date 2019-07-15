@@ -290,7 +290,7 @@ function RautoPortal() {
             var OKtoPortal = false;
             if (!game.global.runningChallengeSquared) {
                 var minZone = getPageSetting('RHeHrDontPortalBefore');
-                //game.stats.bestHeliumHourThisRun.evaluate();
+                game.stats.bestHeliumHourThisRun.evaluate();
                 var bestHeHr = game.stats.bestHeliumHourThisRun.storedValue;
                 var bestHeHrZone = game.stats.bestHeliumHourThisRun.atZone;
                 var myHeliumHr = game.stats.heliumHour.value();
@@ -348,7 +348,7 @@ function RdailyAutoPortal() {
         var OKtoPortal = false;
         if (!game.global.runningChallengeSquared) {
             var minZone = getPageSetting('RdHeHrDontPortalBefore');
-            //game.stats.bestHeliumHourThisRun.evaluate();
+            game.stats.bestHeliumHourThisRun.evaluate();
             var bestHeHr = game.stats.bestHeliumHourThisRun.storedValue;
             var bestHeHrZone = game.stats.bestHeliumHourThisRun.atZone;
             var myHeliumHr = game.stats.heliumHour.value();
