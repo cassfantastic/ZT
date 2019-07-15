@@ -741,7 +741,7 @@ head.appendChild(queuescript);
 //[looting,toughness,power,motivation,pheromones,artisanistry,carpentry,prismal]
 var preset_Rspace = [0, 0, 0, 0, 0, 0, 0, 0];
 var preset_RZek059 = [7, 10, 5, 1, 0.5, 2, 15, 9];
-var RpresetList = [preset_RZek059,Rpreset_space];
+var RpresetList = [preset_RZek059,preset_Rspace];
 var RpresetListHtml = "\
 <option id='preset_Zek059'>Zek (z1-59)</option>\
 <option id='preset_space'>--------------</option>\
