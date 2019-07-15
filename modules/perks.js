@@ -760,7 +760,7 @@ RAutoPerks.createInput = function(perkname,div) {
     perk1label.setAttribute('style', 'margin-right: 0.7vw; width: calc(100vw/18); color: white; font-size: 0.9vw; font-weight: lighter; margin-left: 0.3vw; ');
     div.appendChild(perk1input);
     div.appendChild(perk1label);
-}
+};
 RAutoPerks.GUI = {};
 RAutoPerks.removeGUI = function() {
     Object.keys(RAutoPerks.GUI).forEach(function(key) {
@@ -774,7 +774,7 @@ RAutoPerks.removeGUI = function() {
         delete $elem;
       }
     });
-}
+};
 RAutoPerks.displayGUI = function() {
     let apGUI = RAutoPerks.GUI;
     var $buttonbar = document.getElementById("portalBtnContainer");
@@ -840,11 +840,11 @@ RAutoPerks.displayGUI = function() {
     apGUI.$ratiosLine1.appendChild(apGUI.$RratioPresetLabel);
     apGUI.$ratiosLine1.appendChild(apGUI.$RratioPreset);
     apGUI.$customRatios.appendChild(apGUI.$ratiosLine2);
-    var $portalWrapper = document.getElementById("portalWrapper")
+    var $portalWrapper = document.getElementById("portalWrapper");
     $portalWrapper.appendChild(apGUI.$customRatios);
     RAutoPerks.initializePerks();
     RAutoPerks.populateDumpPerkList();
-}
+};
 
 RAutoPerks.populateDumpPerkList = function() {
     var $dumpDropdown = document.getElementById('RdumpPerk');
@@ -860,13 +860,13 @@ RAutoPerks.populateDumpPerkList = function() {
         $dumpDropdown.selectedIndex = loadLastDump;
     else
         $dumpDropdown.selectedIndex = $dumpDropdown.length - 2;
-}
+};
 
 RAutoPerks.saveDumpPerk = function() {
     var $dump = document.getElementById("RdumpPerk");
     safeSetItems('RAutoperkSelectedDumpPresetID', $dump.selectedIndex);
     safeSetItems('RAutoperkSelectedDumpPresetName', $dump.value);
-}
+};
 
 RAutoPerks.saveCustomRatios = function() {
     if (document.getElementById("RratioPreset").selectedIndex == document.getElementById("RratioPreset").length-1) {
@@ -877,13 +877,13 @@ RAutoPerks.saveCustomRatios = function() {
         }
         safeSetItems('RAutoPerksCustomRatios', JSON.stringify(customRatios) );
     }
-}
+};
 
 RAutoPerks.switchToCustomRatios = function() {
     var $rp = document.getElementById("RratioPreset");
     if ($rp.selectedIndex != $rp.length-1)
         ($rp.selectedIndex = $rp.length-1);
-}
+};
 
 RAutoPerks.setDefaultRatios = function() {
     var $perkRatioBoxes = document.getElementsByClassName("RperkRatios");
@@ -912,7 +912,7 @@ RAutoPerks.setDefaultRatios = function() {
     }
     safeSetItems('RAutoperkSelectedRatioPresetID', ratioSet);
     safeSetItems('RAutoperkSelectedRatioPresetName', $rp.selectedOptions[0].id);
-}
+};
 
 RAutoPerks.updatePerkRatios = function() {
     var $perkRatioBoxes = document.getElementsByClassName('RperkRatios');
@@ -924,13 +924,13 @@ RAutoPerks.updatePerkRatios = function() {
     var tierIIPerks = RAutoPerks.getTierIIPerks();
     for(var i in tierIIPerks)
         tierIIPerks[i].updatedValue = tierIIPerks[i].parent.updatedValue / tierIIPerks[i].relativeIncrease;
-}
+};
 
 RAutoPerks.initialise = function() {
     RAutoPerks.saveCustomRatios();
     RAutoPerks.initializePerks();
     RAutoPerks.updatePerkRatios();
-}
+};
 
 RAutoPerks.clickAllocate = function() {
     RAutoPerks.initialise();
@@ -970,7 +970,7 @@ RAutoPerks.clickAllocate = function() {
     var perks = RAutoPerks.getOwnedPerks();
     RAutoPerks.applyCalculations(perks,remainingRadon);
     debug("RAutoPerks: Auto-Allocate Finished.","perks");
-}
+};
 
 RAutoPerks.getRadon = function() {
     var respecMax = (game.global.viewingUpgrades) ? game.global.radonLeftover : game.global.radonLeftover + game.resources.radon.owned;
@@ -981,13 +981,13 @@ RAutoPerks.getRadon = function() {
         respecMax += portUpgrade.radonSpent;
     }
     return respecMax;
-}
+};
 
 RAutoPerks.calculatePrice = function(perk, level) {
     if(perk.fluffy) return Math.ceil(perk.base * Math.pow(10,level));
     else if(perk.type == 'exponential') return Math.ceil(level/2 + perk.base * Math.pow(1.3, level));
     else if(perk.type == 'linear') return Math.ceil(perk.base + perk.increase * level);
-}
+};
 RAutoPerks.calculateTotalPrice = function(perk, finalLevel) {
     if(perk.type == 'linear' && !perk.fluffy)
         return RAutoPerks.calculateTIIprice(perk, finalLevel);
@@ -996,10 +996,10 @@ RAutoPerks.calculateTotalPrice = function(perk, finalLevel) {
         totalPrice += RAutoPerks.calculatePrice(perk, i);
     }
     return totalPrice;
-}
+};
 RAutoPerks.calculateTIIprice = function(perk, finalLevel) {
     return Math.ceil((((finalLevel - 1) * finalLevel) / 2 * perk.increase) + (perk.base * finalLevel));
-}
+};
 RAutoPerks.calculateIncrease = function(perk, level) {
     var increase = 0;
     var value;
@@ -1010,7 +1010,7 @@ RAutoPerks.calculateIncrease = function(perk, level) {
     if(perk.compounding) increase = perk.baseIncrease;
     else increase = (1 + (level + 1) * perk.baseIncrease) / ( 1 + level * perk.baseIncrease) - 1;
     return increase / perk.baseIncrease * value;
-}
+};
 
 RAutoPerks.spendRadon = function(radon) {
     debug("Beginning RAutoPerks1 calculate how to spend " + prettify(radon) + " Radon... This could take a while...","perks");
@@ -1025,7 +1025,7 @@ RAutoPerks.spendRadon = function(radon) {
     
     var perks = RAutoPerks.getVariablePerks();
 
-    var effQueue = new FastPriorityQueue(function(a,b) { return a.efficiency > b.efficiency } )
+    var effQueue = new FastPriorityQueue(function(a,b) { return a.efficiency > b.efficiency } );
 
     var mostEff, price, inc;
     for(var i in perks) {
@@ -1097,7 +1097,7 @@ RAutoPerks.spendRadon = function(radon) {
     }
     var r2results = heB4round2 - radon;
     debug("RAutoPerks1: Pass two complete. Round 2 cleanup spend of : " + prettify(r2results),"perks");
-}
+};
 
 RAutoPerks.spendRadon2 = function(radon) {
     debug("Beginning RAutoPerks2 calculate how to spend " + prettify(radon) + " Radon... This could take a while...","perks");
@@ -1112,7 +1112,7 @@ RAutoPerks.spendRadon2 = function(radon) {
 
     var perks = RAutoPerks.getVariablePerks();
 
-    var effQueue = new FastPriorityQueue(function(a,b) { return a.efficiency > b.efficiency } ) // Queue that keeps most efficient purchase at the top
+    var effQueue = new FastPriorityQueue(function(a,b) { return a.efficiency > b.efficiency } ); // Queue that keeps most efficient purchase at the top
     for(var i in perks) {
         var price = RAutoPerks.calculatePrice(perks[i], 0);
         var inc = RAutoPerks.calculateIncrease(perks[i], 0);
@@ -1195,7 +1195,7 @@ RAutoPerks.spendRadon2 = function(radon) {
     }
     var r2results = heB4round2 - radon;
     debug("RAutoPerks2: Pass Two Complete. Cleanup Spent Any Leftover Radon: " + prettify(r2results) + " He.","perks");
-}
+};
 
 
 
@@ -1227,7 +1227,7 @@ RAutoPerks.applyCalculationsRespec = function(perks,remainingRadon){
         RAutoPerks.GUI.$allocatorBtn1.setAttribute('class', 'btn inPortalBtn settingsBtn settingBtnfalse');
         tooltip("Automatic Perk Allocation Error", "customText", event, "A Respec would be required and is NOT available. You used it already, try again next portal. Press <b>esc</b> to close this tooltip." );
     }
-}
+};
 
 RAutoPerks.applyCalculations = function(perks,remainingRadon){
 
@@ -1272,19 +1272,19 @@ RAutoPerks.applyCalculations = function(perks,remainingRadon){
             console.log(exportPerks);
         }
     }
-}
+};
 
 RAutoPerks.lowercaseFirst = function(str) {
     return str.substr(0, 1).toLowerCase() + str.substr(1);
-}
+};
 RAutoPerks.capitaliseFirstLetter = function(str) {
     return str.charAt(0).toUpperCase() + str.slice(1);
-}
+};
 RAutoPerks.getPercent = function(spentRadon, totalRadon) {
     var frac = spentRadon / totalRadon;
     frac = (frac* 100).toPrecision(2);
     return frac + "%";
-}
+};
 
 RAutoPerks.FixedPerk = function(name, base, level, max, fluffy) {
     this.id = -1;
@@ -1300,7 +1300,7 @@ RAutoPerks.FixedPerk = function(name, base, level, max, fluffy) {
        this.type = "linear";
        this.increase = 10;
    }
-}
+};
 
 RAutoPerks.VariablePerk = function(name, base, compounding, value, baseIncrease, max, level) {
     this.id = -1;
@@ -1324,7 +1324,7 @@ RAutoPerks.VariablePerk = function(name, base, compounding, value, baseIncrease,
         return valueArray;
     }
     this.value = getRatiosFromPresets();
-}
+};
 
 RAutoPerks.ArithmeticPerk = function(name, base, increase, baseIncrease, parent, max, level) {
     this.id = -1;
@@ -1343,7 +1343,7 @@ RAutoPerks.ArithmeticPerk = function(name, base, increase, baseIncrease, parent,
     this.max = max || Number.MAX_VALUE;
     this.radLevel = level || 0;
     this.spent = 0;
-}
+};
 
 RAutoPerks.initializePerks = function () {
     //fixed
@@ -1378,20 +1378,20 @@ RAutoPerks.initializePerks = function () {
     }
     RAutoPerks.setPerksByName();
     RAutoPerks.setDefaultRatios();      
-}
+};
 
 RAutoPerks.getFixedPerks = function() {
     return RAutoPerks.getSomePerks(true);
-}
+};
 RAutoPerks.getVariablePerks = function() {
     return RAutoPerks.getSomePerks(null,true);
-}
+};
 RAutoPerks.getTierIIPerks = function() {
     return RAutoPerks.getSomePerks(null,null,true);
-}
+};
 RAutoPerks.getAllPerks = function() {
     return RAutoPerks.getSomePerks(null,null,null,true);
-}
+};
 RAutoPerks.getSomePerks = function(fixed,variable,tier2,allperks) {
     var perks = [];
     for(var i in RAutoPerks.perkHolder) {
@@ -1405,16 +1405,16 @@ RAutoPerks.getSomePerks = function(fixed,variable,tier2,allperks) {
         {   perks.push(RAutoPerks.perkHolder[i]);    }
     }
     return perks;
-}
+};
 
 RAutoPerks.perksByName = {};
 RAutoPerks.getPerkByName = function(name) {
     return RAutoPerks.perksByName[RAutoPerks.lowercaseFirst(name)];
-}
+};
 RAutoPerks.setPerksByName = function() {
     for(var i in RAutoPerks.perkHolder)
         RAutoPerks.perksByName[RAutoPerks.perkHolder[i].name] = RAutoPerks.perkHolder[i];
-}
+};
 
 RAutoPerks.getOwnedPerks = function() {
     var perks = [];
@@ -1424,7 +1424,7 @@ RAutoPerks.getOwnedPerks = function() {
         perks.push(RAutoPerks.getPerkByName(name));
     }
     return perks;
-}
+};
 
 if (game.global.universe == 2) {
 RAutoPerks.displayGUI();
