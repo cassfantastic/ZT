@@ -748,7 +748,7 @@ function RupdateAutoMapsStatus(get) {
         status += '<br><b style="font-size:.8em;color:pink;margin-top:0.2vw">Prestige Skipped</b>';
 
     var getPercent = (game.stats.heliumHour.value() / (game.global.totalRadonEarned - (game.global.radonLeftover + game.resources.radon.owned))) * 100;
-    var lifetime = (game.resources.radon.owned / (game.global.totalRadonEarned - game.resources.hradon.owned)) * 100;
+    var lifetime = (game.resources.radon.owned / (game.global.totalRadonEarned - game.resources.radon.owned)) * 100;
     var hiderStatus = 'Rn/hr: ' + getPercent.toFixed(3) + '%<br>&nbsp;&nbsp;&nbsp;Rn: ' + lifetime.toFixed(3) + '%';
 
     if (get) {
