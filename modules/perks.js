@@ -1317,8 +1317,8 @@ RAutoPerks.VariablePerk = function(name, base, compounding, value, baseIncrease,
     this.spent = 0;
     function getRatiosFromPresets() {
         var valueArray = [];
-        for (var i=0; i<presetList.length; i++) {
-            valueArray.push(presetList[i][value]);
+        for (var i=0; i<RpresetList.length; i++) {
+            valueArray.push(RpresetList[i][value]);
         }
         return valueArray;
     }
