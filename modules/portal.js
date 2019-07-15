@@ -287,16 +287,16 @@ function RautoPortal() {
     if (!game.global.portalActive) return;
     switch (autoTrimpSettings.RAutoPortal.selected) {
         case "Radon Per Hour":
-            /*var OKtoPortal = false;
+            var OKtoPortal = false;
             if (!game.global.runningChallengeSquared) {
-                var minZone = getPageSetting('HeHrDontPortalBefore');
-                game.stats.bestHeliumHourThisRun.evaluate();
+                var minZone = getPageSetting('RHeHrDontPortalBefore');
+                //game.stats.bestHeliumHourThisRun.evaluate();
                 var bestHeHr = game.stats.bestHeliumHourThisRun.storedValue;
                 var bestHeHrZone = game.stats.bestHeliumHourThisRun.atZone;
                 var myHeliumHr = game.stats.heliumHour.value();
-                var heliumHrBuffer = Math.abs(getPageSetting('HeliumHrBuffer'));
+                var heliumHrBuffer = Math.abs(getPageSetting('RHeliumHrBuffer'));
                 if (!aWholeNewWorld)
-                    heliumHrBuffer *= MODULES["portal"].bufferExceedFactor;
+                    heliumHrBuffer *= MODULES["portal"].RbufferExceedFactor;
                 var bufferExceeded = myHeliumHr < bestHeHr * (1 - (heliumHrBuffer / 100));
                 if (bufferExceeded && game.global.world >= minZone) {
                     OKtoPortal = true;
@@ -307,20 +307,20 @@ function RautoPortal() {
                     OKtoPortal = false;
                 if (OKtoPortal && zonePostpone == 0) {
                     zonePostpone += 1;
-                    debug("My HeliumHr was: " + myHeliumHr + " & the Best HeliumHr was: " + bestHeHr + " at zone: " + bestHeHrZone, "portal");
+                    debug("My RadonHr was: " + myHeliumHr + " & the Best RadonHr was: " + bestHeHr + " at zone: " + bestHeHrZone, "portal");
                     cancelTooltip();
                     tooltip('confirm', null, 'update', '<b>Auto Portaling NOW!</b><p>Hit Delay Portal to WAIT 1 more zone.', 'zonePostpone+=1', '<b>NOTICE: Auto-Portaling in 5 seconds....</b>', 'Delay Portal');
-                    setTimeout(cancelTooltip, MODULES["portal"].timeout);
+                    setTimeout(cancelTooltip, MODULES["portal"].Rtimeout);
                     setTimeout(function() {
                         if (zonePostpone >= 2)
                             return;
-                        if (autoTrimpSettings.HeliumHourChallenge.selected != 'None')
-                            doPortal(autoTrimpSettings.HeliumHourChallenge.selected);
+                        if (autoTrimpSettings.RadonHourChallenge.selected != 'None')
+                            RdoPortal(autoTrimpSettings.RadonHourChallenge.selected);
                         else
-                            doPortal();
-                    }, MODULES["portal"].timeout + 100);
+                            RdoPortal();
+                    }, MODULES["portal"].Rtimeout + 100);
                 }
-            }*/
+            }
             break;
         case "Custom":
             var portalzone = getPageSetting('RCustomAutoPortal');
