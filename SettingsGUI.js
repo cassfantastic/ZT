@@ -1780,23 +1780,22 @@ function getDailyHeHrStats(){var a="";if("Daily"==game.global.challengeActive){v
 function getDailyRnHrStats(){var a="";if("Daily"==game.global.challengeActive){var b=game.stats.heliumHour.value()/(game.global.totalRadonEarned-(game.global.radonLeftover+game.resources.radon.owned));b*=100+getDailyHeliumValue(countDailyWeight()),a="<b>After Daily Rn/Hr: "+b.toFixed(3)+"%"}return a}
 function settingsProfileMakeGUI(){}
 function toggleAutoMaps() {
-         if (game.global.universe == 1 && getPageSetting('AutoMaps')) {
+    if (game.global.universe == 1) {
+         if (getPageSetting('AutoMaps')) {
              setPageSetting('AutoMaps',0);
          }
          else {
              setPageSetting('AutoMaps',1);
          }
-         if (game.global.universe == 1) {
-             document.getElementById('autoMapBtn').setAttribute('class','noselect settingsBtn settingBtn'+autoTrimpSettings.AutoMaps.value);
-         }
-    
-         if (game.global.universe == 2 && getPageSetting('RAutoMaps')) {
+         document.getElementById('autoMapBtn').setAttribute('class','noselect settingsBtn settingBtn'+autoTrimpSettings.AutoMaps.value);
+    }
+    if (game.global.universe == 2) {
+         if (getPageSetting('RAutoMaps')) {
              setPageSetting('RAutoMaps',0);
          }
          else {
              setPageSetting('RAutoMaps',1);
          }
-         if (game.global.universe == 2) {
-             document.getElementById('autoMapBtn').setAttribute('class','noselect settingsBtn settingBtn'+autoTrimpSettings.RAutoMaps.value);
-         }
+         document.getElementById('autoMapBtn').setAttribute('class','noselect settingsBtn settingBtn'+autoTrimpSettings.RAutoMaps.value);
+    }
 }
