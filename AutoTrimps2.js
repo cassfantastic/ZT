@@ -99,6 +99,7 @@ function mainLoop() {
     if (game.global.universe == 2 && getPageSetting('RManualGather2') == 1) RmanualLabor2();
     if (game.global.universe == 2 && getPageSetting('RTrapTrimps') && game.global.trapBuildAllowed && game.global.trapBuildToggled == false) toggleAutoTrap();
     if (game.global.universe == 2 && getPageSetting('RBuyUpgradesNew') != 0) RbuyUpgrades();
+    if (game.global.universe == 2 && game.global.challengeActive == "Daily" && getPageSetting('buyradony') >= 1 && getDailyHeliumValue(countDailyWeight()) >= getPageSetting('buyradony') && game.global.b >= 100 && !game.singleRunBonuses.heliumy.owned) purchaseSingleRunBonus('heliumy');
 
 
     
@@ -152,7 +153,8 @@ function mainLoop() {
     
     //RPortal
     if (game.global.universe == 2 && autoTrimpSettings.RAutoPortal.selected != "Off" && game.global.challengeActive != "Daily" && !game.global.runningChallengeSquared) RautoPortal();
-
+    if (game.global.universe == 2 && getPageSetting('RAutoPortalDaily') > 0 && game.global.challengeActive == "Daily") RdailyAutoPortal();
+    
     
     
     //Combat
