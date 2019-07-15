@@ -1370,7 +1370,7 @@ RAutoPerks.initializePerks = function () {
     var carpentry_II = new RAutoPerks.ArithmeticPerk("carpentry_II", 100000, 10000, 0.0025, carpentry);
     var looting_II = new RAutoPerks.ArithmeticPerk("looting_II", 100000, 10000, 0.0025, looting);
 
-    RAutoPerks.perkHolder = [range, agility, bait, trumps, packrat, looting, toughness, power, motivation, pheromones, artisanistry, carpentry];
+    RAutoPerks.perkHolder = [range, agility, bait, trumps, packrat, looting, toughness, power, motivation, pheromones, artisanistry, carpentry, prismal];
     for(var i in RAutoPerks.perkHolder) {
         RAutoPerks.perkHolder[i].radLevel = 0;
         RAutoPerks.perkHolder[i].spent = 0;
