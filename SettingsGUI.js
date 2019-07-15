@@ -1553,6 +1553,8 @@ function updateCustomButtons() {
     !radonon ? turnOn("AutoRoboTrimp"): turnOff("AutoRoboTrimp");
     !radonon ? turnOn("addpoison"): turnOff("addpoison");
     !radonon ? turnOn("fullice"): turnOff("fullice");
+    !radonon ? turnOn("45stacks"): turnOff("45stacks");
+    !radonon ? turnOn("ForceAbandon"): turnOff("ForceAbandon");
     !radonon && getPageSetting('AutoStance')!=3 ? turnOn("IgnoreCrits") : turnOff("IgnoreCrits");
 
 
