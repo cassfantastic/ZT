@@ -452,6 +452,16 @@ function RbuyJobs() {
         RsafeBuyJob('Miner', game.jobs.Miner.owned * -1);
     if (!Rratiobuy('Lumberjack', lumberjackRatio) && breedFire)
         RsafeBuyJob('Lumberjack', game.jobs.Lumberjack.owned * -1);
+	
+    if (!game.jobs.Meteorologist.locked && getPageSetting('AutoMeteorologist') > 0) {
+	var meteor = game.jobs.Meteorologist;
+        if (game.resources.food.owned * (getPageSetting('AutoMeteorologistpercent')/100) < (resolvePow(meteor.cost.food, meteor, 1))) {
+            var old = preBuy2();
+	    game.global.buyAmt = 1;
+            buyJob('Meteorologist', true, true);
+            postBuy2(old);
+        }
+    }
 
     if ((game.resources.trimps.owned - game.resources.trimps.employed) < 2) {
         var a = (game.jobs.Farmer.owned > 2);
