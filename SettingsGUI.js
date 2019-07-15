@@ -41,7 +41,10 @@ function automationMenuInit() {
 
     newContainer = document.createElement("DIV");
     newContainer.setAttribute("style", "display: block; font-size: 1vw; text-align: center; margin-top: 2px; background-color: rgba(0,0,0,0.3);");
+    if (game.global.universe == 1) 
     newContainer.setAttribute("onmouseover", 'tooltip(\"Helium/Hr Info\", \"customText\", event, \"1st is Current He/hr % out of Lifetime He(not including current+unspent).<br> 0.5% is an ideal peak target. This can tell you when to portal... <br>2nd is Current run Total He earned / Lifetime He(not including current)<br>\" + getDailyHeHrStats())');
+    else if (game.global.universe == 2) 
+    newContainer.setAttribute("onmouseover", 'tooltip(\"Radon/Hr Info\", \"customText\", event, \"1st is Current Rn/hr % out of Lifetime Rn(not including current+unspent).<br> 0.5% is an ideal peak target. This can tell you when to portal... <br>2nd is Current run Total Rn earned / Lifetime Rn(not including current)<br>\" + getDailyRnHrStats())');
     newContainer.setAttribute("onmouseout", 'tooltip("hide")');
     abutton = document.createElement("SPAN");
     abutton.id = 'hiderStatus';
@@ -1772,6 +1775,7 @@ function checkPortalSettings() {
 }
 
 function getDailyHeHrStats(){var a="";if("Daily"==game.global.challengeActive){var b=game.stats.heliumHour.value()/(game.global.totalHeliumEarned-(game.global.heliumLeftover+game.resources.helium.owned));b*=100+getDailyHeliumValue(countDailyWeight()),a="<b>After Daily He/Hr: "+b.toFixed(3)+"%"}return a}
+function getDailyRnHrStats(){var a="";if("Daily"==game.global.challengeActive){var b=game.stats.heliumHour.value()/(game.global.totalRadonEarned-(game.global.radonLeftover+game.resources.radon.owned));b*=100+getDailyHeliumValue(countDailyWeight()),a="<b>After Daily Rn/Hr: "+b.toFixed(3)+"%"}return a}
 function settingsProfileMakeGUI(){}
 function toggleAutoMaps() {
          if (game.global.universe == 1 && getPageSetting('AutoMaps')) { 
