@@ -50,6 +50,7 @@ function evaluateHeirloomMods2(loom, location) {
 	else if (raretokeep == 'Ethereal') raretokeep = 6;
 	else if (raretokeep == 'Magmatic') raretokeep = 7;
 	else if (raretokeep == 'Plagued') raretokeep = 8;
+	else if (raretokeep == 'Radiating') raretokeep = 9;
 
   if (location.includes('Equipped'))
     loom = game.global[location];
@@ -90,10 +91,10 @@ function evaluateHeirloomMods2(loom, location) {
       if (getPageSetting('slot4modcr') == name) eff *= 4;
     }
     if (rarity >= raretokeep) {
-       eff *= 2;
+       eff *= 3;
     }
     else if (rarity < raretokeep) {
-       eff = 1;
+       eff /= 3;
     }
   }
   return eff;
@@ -265,7 +266,7 @@ function calcAutoNuRatio(slot) {
 	else if (heirloom.mods[slot][0] == "critDamage")
 		return 54;
 	else if (heirloom.mods[slot][0] == "trimpHealth")
-		return 18;
+		return 50;
 	else if (heirloom.mods[slot][0] == "storageSize")
 		return 7;
 	else if (heirloom.mods[slot][0] == "trimpBlock")
@@ -276,6 +277,10 @@ function calcAutoNuRatio(slot) {
 		return 2;
 	else if (heirloom.mods[slot][0] == "playerEfficiency")
 		return 0.3;
+	else if (heirloom.mods[slot][0] == "prismatic")
+		return 50;
+	else if (heirloom.mods[slot][0] == "gammaBurst")
+		return 25;
 	
 	//Staff
 	else if (heirloom.mods[slot][0] == "FluffyExp")
@@ -315,7 +320,7 @@ function calcAutoNuRatio(slot) {
 	else if (heirloom.mods[slot][0] == "strengthEffect")
 		return 50;
 	else if (heirloom.mods[slot][0] == "condenserEffect")
-		return 50;
+		return 150;
 }
 
 function nuRatio() {
