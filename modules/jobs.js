@@ -455,7 +455,7 @@ function RbuyJobs() {
 	
     if (!game.jobs.Meteorologist.locked && getPageSetting('AutoMeteorologist') > 0) {
 	var meteor = game.jobs.Meteorologist;
-        if (game.resources.food.owned * (getPageSetting('AutoMeteorologist')/100) < (resolvePow(meteor.cost.food, meteor, 1))) {
+        if (game.resources.food.owned * (getPageSetting('AutoMeteorologist')/100) <= (resolvePow(meteor.cost.food, meteor, 0))) {
             var old = preBuy2();
 	    game.global.buyAmt = 1;
             buyJob('Meteorologist', true, true);
