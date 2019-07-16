@@ -57,7 +57,7 @@ function pushData() {
 }
 
 var graphAnal=[];
-function trackHourlyGraphAnalytics(){graphAnal.push({currentTime:new Date().getTime(),totalPortals:game.global.totalPortals,heliumOwned:game.resources.helium.owned,highzone:game.global.highestLevelCleared,bones:game.global.b}),safeSetItems('graphAnal',JSON.stringify(graphAnal))}
+function trackHourlyGraphAnalytics(){graphAnal.push({currentTime:new Date().getTime(),totalPortals:game.global.totalPortals,heliumOwned:game.resources.helium.owned,radonOwned:game.resources.radon.owned,highzone:game.global.highestLevelCleared,bones:game.global.b}),safeSetItems('graphAnal',JSON.stringify(graphAnal))}
 trackHourlyGraphAnalytics();
 setInterval(trackHourlyGraphAnalytics, 3600000);
 function initializeData(){null===allSaveData&&(allSaveData=[]),0===allSaveData.length&&pushData()}
