@@ -289,12 +289,12 @@ function RautoPortal() {
         case "Radon Per Hour":
             var OKtoPortal = false;
             if (!game.global.runningChallengeSquared) {
-                var minZone = getPageSetting('RHeHrDontPortalBefore');
+                var minZone = getPageSetting('RnHrDontPortalBefore');
                 game.stats.bestHeliumHourThisRun.evaluate();
                 var bestHeHr = game.stats.bestHeliumHourThisRun.storedValue;
                 var bestHeHrZone = game.stats.bestHeliumHourThisRun.atZone;
                 var myHeliumHr = game.stats.heliumHour.value();
-                var heliumHrBuffer = Math.abs(getPageSetting('RHeliumHrBuffer'));
+                var heliumHrBuffer = Math.abs(getPageSetting('RadonHrBuffer'));
                 if (!aWholeNewWorld)
                     heliumHrBuffer *= MODULES["portal"].RbufferExceedFactor;
                 var bufferExceeded = myHeliumHr < bestHeHr * (1 - (heliumHrBuffer / 100));
