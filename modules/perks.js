@@ -789,7 +789,7 @@ RAutoPerks.displayGUI = function() {
     //Line 1 of the UI
     apGUI.$ratiosLine1 = document.createElement("DIV");
     apGUI.$ratiosLine1.setAttribute('style', 'display: inline-block; text-align: left; width: 100%');
-    var listratiosLine1 = ["Coordinated","Carpentry","Pheromones","Motivation","Artisanistry"];
+    var listratiosLine1 = ["Carpentry","Pheromones","Motivation","Artisanistry"];
     for (var i in listratiosLine1)
         RAutoPerks.createInput(listratiosLine1[i],apGUI.$ratiosLine1);
     apGUI.$customRatios.appendChild(apGUI.$ratiosLine1);
@@ -924,6 +924,15 @@ RAutoPerks.updatePerkRatios = function() {
     for(var i in tierIIPerks)
         tierIIPerks[i].updatedValue = tierIIPerks[i].parent.updatedValue / tierIIPerks[i].relativeIncrease;
 };
+
+RAutoPerks.updatePerkRatios = function() {
+    var $perkRatioBoxes = document.getElementsByClassName('RperkRatios');
+    var currentPerk;
+    for(var i = 0; i < $perkRatioBoxes.length; i++) {
+        currentPerk = RAutoPerks.getPerkByName($perkRatioBoxes[i].id.substring(0, $perkRatioBoxes[i].id.length - 5));
+        currentPerk.updatedValue = parseFloat($perkRatioBoxes[i].value);
+    }
+}
 
 RAutoPerks.initialise = function() {
     RAutoPerks.saveCustomRatios();
