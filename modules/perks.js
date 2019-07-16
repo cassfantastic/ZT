@@ -827,10 +827,10 @@ RAutoPerks.displayGUI = function() {
     var loadLastPreset = localStorage.getItem('RAutoperkSelectedRatioPresetID');
     var setID;
     if (loadLastPreset != null) { 
-       if (loadLastPreset == 9 && !localStorage.getItem('RAutoperkSelectedRatioPresetName'))
-            loadLastPreset = 11;
+       if (loadLastPreset == 8 && !localStorage.getItem('RAutoperkSelectedRatioPresetName'))
+            loadLastPreset = 4;
         if (localStorage.getItem('RAutoperkSelectedRatioPresetName')=="customPreset")
-            loadLastPreset = 11;
+            loadLastPreset = 4;
         setID = loadLastPreset;
     }
     else 
