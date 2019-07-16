@@ -738,8 +738,8 @@ queuescript.src = 'https://Zorn192.github.io/AutoTrimps/FastPriorityQueue.js';
 head.appendChild(queuescript);
 
 //[looting,toughness,power,motivation,pheromones,artisanistry,carpentry,prismal]
-var preset_Rspace = [0, 0, 0, 0, 0, 0, 0, 0, 0];
-var preset_RZek059 = [0, 7, 10, 5, 1, 0.5, 2, 15, 9];
+var preset_Rspace = [0, 0, 0, 0, 0, 0, 0, 0];
+var preset_RZek059 = [7, 10, 5, 1, 0.5, 2, 15, 9];
 var RpresetList = [preset_RZek059,preset_Rspace];
 var RpresetListHtml = "\
 <option id='preset_RZek059'>Zek (z1-59)</option>\
@@ -1325,25 +1325,6 @@ RAutoPerks.VariablePerk = function(name, base, compounding, value, baseIncrease,
     this.value = getRatiosFromPresets();
 };
 
-RAutoPerks.ArithmeticPerk = function(name, base, increase, baseIncrease, parent, max, level) {
-    this.id = -1;
-    this.name = name;
-    this.base = base;
-    this.increase = increase;
-    this.type = "linear";
-    this.fixed = false;
-    this.compounding = false;
-    this.baseIncrease = baseIncrease;
-    this.parent = parent;
-    this.relativeIncrease = parent.baseIncrease / baseIncrease;
-    this.value = parent.value.map(function(me) { return me * this.relativeIncrease; });
-    this.updatedValue = -1;
-    this.efficiency = -1;
-    this.max = max || Number.MAX_VALUE;
-    this.radLevel = level || 0;
-    this.spent = 0;
-};
-
 RAutoPerks.initializePerks = function () {
     //fixed
     var range = new RAutoPerks.FixedPerk("range", 1, 10, 10);
@@ -1359,17 +1340,11 @@ RAutoPerks.initializePerks = function () {
     var pheromones = new RAutoPerks.VariablePerk("pheromones", 3, false,       4, 0.1);
     var artisanistry = new RAutoPerks.VariablePerk("artisanistry", 15, true,   5, 0.1);
     var carpentry = new RAutoPerks.VariablePerk("carpentry", 25, true,         6, 0.1);
-    var prismal = new RAutoPerks.VariablePerk("prismal", 1, true,         6, 0.1);
-    var coordinated = new RAutoPerks.VariablePerk("coordinated", 150000, true, 8, 0.1);
+    var prismal = new RAutoPerks.VariablePerk("prismal", 1, true,              6, 0.1);
     //scruffy
 	//no
     //tier2
-    var toughness_II = new RAutoPerks.ArithmeticPerk("toughness_II", 20000, 500, 0.01, toughness);
-    var power_II = new RAutoPerks.ArithmeticPerk("power_II", 20000, 500, 0.01, power);
-    var motivation_II = new RAutoPerks.ArithmeticPerk("motivation_II", 50000, 1000, 0.01, motivation);
-    var carpentry_II = new RAutoPerks.ArithmeticPerk("carpentry_II", 100000, 10000, 0.0025, carpentry);
-    var looting_II = new RAutoPerks.ArithmeticPerk("looting_II", 100000, 10000, 0.0025, looting);
-
+	//no
     RAutoPerks.perkHolder = [range, agility, bait, trumps, packrat, looting, toughness, power, motivation, pheromones, artisanistry, carpentry, prismal];
     for(var i in RAutoPerks.perkHolder) {
         RAutoPerks.perkHolder[i].radLevel = 0;
