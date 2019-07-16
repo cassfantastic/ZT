@@ -375,14 +375,14 @@ function setGraphData(graph) {
             yType = 'Linear';
             precision = 4;
             break;
-            case 'Helium - He/Hr':
-            graphData = allPurposeGraph('heliumhr', true, null,
+        case 'Radon - Rn/Hr':
+            graphData = allPurposeGraph('radonhr', true, null,
                 function specialCalc(e1, e2) {
-                    return Math.floor(e1.heliumOwned / ((e1.currentTime - e1.portalTime) / 3600000));
+                    return Math.floor(e1.radonOwned / ((e1.currentTime - e1.portalTime) / 3600000));
                 });
-            title = 'Helium/Hour (Cumulative)';
+            title = 'Radon/Hour (Cumulative)';
             xTitle = 'Zone';
-            yTitle = 'Helium/Hour';
+            yTitle = 'Radon/Hour';
             yType = 'Linear';
             yminFloor = 0;
             precision = 2;
