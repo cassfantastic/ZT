@@ -667,8 +667,14 @@ function RcalcOurDmg(minMaxAvg, incStance, incFlucts) {
 	if (game.portal.Power.radLevel > 0) {
 		number += (number * game.portal.Power.radLevel * game.portal.Power.modifier);
 	}
+	if (game.portal.Equality.radLevel > 0) {
+                number *= game.portal.Equality.getMult();
+    	}
 	if (game.portal.Range.radLevel > 0){
 		minFluct = fluctuation - (.02 * game.portal.Range.radLevel);
+	}
+	if (what == "attack" && game.portal.Equality.radLevel) > 0) {
+		number *= game.portal.Equality.getMult();
 	}
 	if (game.global.roboTrimpLevel > 0){
 		number *= ((0.2 * game.global.roboTrimpLevel) + 1);
@@ -706,6 +712,9 @@ function RcalcOurDmg(minMaxAvg, incStance, incFlucts) {
 	if (game.global.challengeActive == "Melt") {
 		number *= 5;
 		number *= Math.pow(0.99, game.challenges.Melt.stacks);
+	}
+	if (game.global.challengeActive == "Unbalance") {
+		number *= game.challenges.Unbalance.getAttackMult();
 	}
 	if (game.global.challengeActive == "Daily" && game.talents.daily.purchased){
 		number *= 1.5;
@@ -802,8 +811,14 @@ function RcalcBadGuyDmg(enemy,attack) {
         number = enemy.attack;
     else
         number = attack;
+    if (game.portal.Equality.radLevel > 0) {
+        number *= game.portal.Equality.getMult();
+    }
     if (game.global.challengeActive == "Daily") {
         number = RcalcDailyAttackMod(number);
+    }
+    if (game.global.challengeActive == "Unbalance") {
+	number *= 1.5;
     }
     if (!enemy && game.global.usingShriek) {
         number *= game.mapUnlocks.roboTrimp.getShriekValue();
@@ -835,6 +850,9 @@ function RcalcEnemyBaseHealth(world, level, name) {
 
 function RcalcEnemyHealth() {
     var health = RcalcEnemyBaseHealth(game.global.world, 50, "Snimp");
+    if (game.global.challengeActive == "Unbalance") {
+	health *= 2;
+    }
     return health;
 }
 
