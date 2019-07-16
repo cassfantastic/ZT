@@ -813,7 +813,7 @@ function RcalcBadGuyDmg(enemy,attack) {
 
 function RcalcEnemyBaseHealth(world, level, name) {
 			var amt = 0;
-			var healthBase = (game.global.universe == 2) ? 10e9 : 130;
+			var healthBase = (game.global.universe == 2) ? 10e7 : 130;
 			amt += healthBase * Math.sqrt(world) * Math.pow(3.265, world / 2);
 			amt -= 110;
 			if (world == 1 || world == 2 && level < 10){
