@@ -14,7 +14,7 @@ function setScienceNeeded(){for(var a in scienceNeeded=0,upgradeList)if(a=upgrad
 function RsetScienceNeeded(){for(var a in RscienceNeeded=0,RupgradeList)if(a=RupgradeList[a],game.upgrades[a].allowed>game.upgrades[a].done){if(1==game.global.world&&1e3>=game.global.totalRadonEarned&&a.startsWith("Speed"))continue;RscienceNeeded+=getScienceCostToUpgrade(a)}}
 function RgetEnemyMaxAttack(world, level, name) {
 			var amt = 0;
-			var attackBase = (game.global.universe == 2) ? 2500 : 50;
+			var attackBase = (game.global.universe == 2) ? 750 : 50;
 			amt += attackBase * Math.sqrt(world) * Math.pow(3.27, world / 2);
 			amt -= 10;
 			if (world == 1){
@@ -41,7 +41,7 @@ function RgetEnemyMaxHealth(world, level) {
 			if (!level)
 				level = 30;
 			var amt = 0;
-			var healthBase = (game.global.universe == 2) ? 10e9 : 130;
+			var healthBase = (game.global.universe == 2) ? 10e7 : 130;
 			amt += healthBase * Math.sqrt(world) * Math.pow(3.265, world / 2);
 			amt -= 110;
 			if (world == 1 || world == 2 && level < 10){
