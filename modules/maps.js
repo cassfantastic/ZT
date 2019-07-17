@@ -962,18 +962,18 @@ function RautoMap() {
                     selectedMap = theMap.id;
                     break;
                 }
-				if (theMap.name == 'Prismatic Palace' && game.mapUnlocks.Prismalicious.canRunOnce) {
+		if (theMap.name == 'Prismatic Palace' && game.mapUnlocks.Prismalicious.canRunOnce) {
                     var theMapDifficulty = Math.ceil(theMap.difficulty / 2);
                     if (game.global.world < 20 + theMapDifficulty) continue;
                     selectedMap = theMap.id;
                     break;
                 }
-				if (theMap.name == 'Trimple Of Doom' && game.mapUnlocks.AncientTreasure.canRunOnce) {
+		/*if (theMap.name == 'Trimple Of Doom' && game.mapUnlocks.AncientTreasure.canRunOnce) {
                     var theMapDifficulty = Math.ceil(theMap.difficulty / 2);
                     if (game.global.world < 33 + theMapDifficulty) continue;
                     selectedMap = theMap.id;
                     break;
-                }
+                }*/
             }
         }
     }
