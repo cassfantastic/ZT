@@ -673,9 +673,6 @@ function RcalcOurDmg(minMaxAvg, incStance, incFlucts) {
 	if (game.portal.Range.radLevel > 0){
 		minFluct = fluctuation - (.02 * game.portal.Range.radLevel);
 	}
-	if (game.portal.Equality.radLevel > 0) {
-		number *= game.portal.Equality.getMult();
-	}
 	if (game.global.roboTrimpLevel > 0){
 		number *= ((0.2 * game.global.roboTrimpLevel) + 1);
 	}
