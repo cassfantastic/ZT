@@ -795,7 +795,7 @@ function RcalcOurHealth() {
 	health *= Math.pow(1.25, game.buildings.Smithy.owned);
     }
     if (Fluffy.isRewardActive("healthy")) {
-	health * = 1.5;
+	health *= 1.5;
     }
 	
     //Pris
