@@ -676,7 +676,9 @@ function RcalcOurDmg(minMaxAvg, incStance, incFlucts) {
 	if (game.global.roboTrimpLevel > 0){
 		number *= ((0.2 * game.global.roboTrimpLevel) + 1);
 	}
-	number = calcHeirloomBonus("Shield", "trimpAttack", number)
+	
+	number = calcHeirloomBonus("Shield", "trimpAttack", number);
+	
 	if (game.goldenUpgrades.Battle.currentBonus > 0) {
 		number *= game.goldenUpgrades.Battle.currentBonus + 1;
 	}
@@ -775,27 +777,25 @@ function RcalcOurHealth() {
         }
     }
     health *= game.resources.trimps.maxSoldiers;
+    if (game.buildings.Smithy.owned > 0) {
+	health *= Math.pow(1.25, game.buildings.Smithy.owned);
+    }
     if (game.portal.Toughness.radLevel > 0) {
         health *= ((game.portal.Toughness.radLevel * game.portal.Toughness.modifier) + 1);
     }
+    if (Fluffy.isRewardActive("healthy")) {
+	health *= 1.5;
+    }
+    health = calcHeirloomBonus("Shield", "trimpHealth", health);
     if (game.goldenUpgrades.Battle.currentBonus > 0) {
         health *= game.goldenUpgrades.Battle.currentBonus + 1;
     }
     if (game.global.totalSquaredReward > 0) {
         health *= (1 + (game.global.totalSquaredReward / 100));
     }
-    var heirloomBonus = calcHeirloomBonus("Shield", "trimpHealth", 0, true);
-    if (heirloomBonus > 0) {
-        health *= ((heirloomBonus / 100) + 1);
-    }
+	
     if (typeof game.global.dailyChallenge.pressure !== 'undefined') {
         health *= (dailyModifiers.pressure.getMult(game.global.dailyChallenge.pressure.strength, game.global.dailyChallenge.pressure.stacks));
-    }
-    if (game.buildings.Smithy.owned > 0) {
-	health *= Math.pow(1.25, game.buildings.Smithy.owned);
-    }
-    if (Fluffy.isRewardActive("healthy")) {
-	health *= 1.5;
     }
 	
     //Pris
