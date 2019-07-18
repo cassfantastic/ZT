@@ -950,7 +950,7 @@ function RautoMap() {
         for (var map in game.global.mapsOwnedArray) {
             var theMap = game.global.mapsOwnedArray[map];
             if (theMap.noRecycle) {
-                if (theMap.name == 'Big Wall' && !game.upgrades.Bounty.allowed && !game.upgrades.bounty.done) {
+                if (theMap.name == 'Big Wall' && !game.upgrades.Bounty.allowed && !game.upgrades.Bounty.done) {
                     var theMapDifficulty = Math.ceil(theMap.difficulty / 2);
                     if (game.global.world < 7 + theMapDifficulty) continue;
                     selectedMap = theMap.id;
