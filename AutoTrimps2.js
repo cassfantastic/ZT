@@ -7,7 +7,7 @@ function initializeAutoTrimps() {
     loadPageVariables();
     ATscriptLoad('','SettingsGUI');
     ATscriptLoad('','Graphs');
-    ATmoduleList = ['query'/*, 'calc', 'portal', 'upgrades', 'heirlooms', 'buildings', 'jobs', 'equipment', 'gather', 'stance', 'maps', 'breedtimer', 'dynprestige', 'fight', 'scryer', 'magmite', 'nature',*/ 'other', 'import-export', 'perks', 'fight-info', 'performance'];
+    ATmoduleList = ['query',/* 'calc', 'portal', 'upgrades', 'heirlooms', 'buildings', 'jobs', 'equipment', 'gather', 'stance', 'maps', 'breedtimer', 'dynprestige', 'fight', 'scryer', 'magmite', 'nature',*/ 'other', 'import-export', 'perks', 'fight-info', 'performance'];
     for (var m in ATmoduleList) {
         ATscriptLoad(modulepath, ATmoduleList[m]);
     }
