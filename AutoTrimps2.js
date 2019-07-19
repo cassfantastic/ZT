@@ -7,7 +7,7 @@ function initializeAutoTrimps() {
     loadPageVariables();
     ATscriptLoad('','SettingsGUI');
     ATscriptLoad('','Graphs');
-    ATmoduleList = ['query', 'calc', 'portal', 'upgrades', 'heirlooms', /*'buildings',*/ /*'jobs',*/ 'equipment', 'gather', 'stance', 'maps', 'breedtimer', 'dynprestige', 'fight', 'scryer', 'magmite', 'nature', 'other', 'import-export', 'perks', 'fight-info', 'performance'];
+    ATmoduleList = ['query', 'calc', 'portal', 'upgrades', 'heirlooms', 'buildings', 'jobs', 'equipment', /*'gather',*/ 'stance', 'maps', 'breedtimer', 'dynprestige', 'fight', 'scryer', 'magmite', 'nature', 'other', 'import-export', 'perks', 'fight-info', 'performance'];
     for (var m in ATmoduleList) {
         ATscriptLoad(modulepath, ATmoduleList[m]);
     }
@@ -96,13 +96,13 @@ function mainLoop() {
     //RCore
     if (game.global.universe == 2 && getPageSetting('RAutoMaps') > 0) RautoMap();
     if (game.global.universe == 2 && getPageSetting('Rshowautomapstatus') == true) RupdateAutoMapsStatus();
-    if (game.global.universe == 2 && getPageSetting('RManualGather2') == 1) RmanualLabor2();
+    //if (game.global.universe == 2 && getPageSetting('RManualGather2') == 1) RmanualLabor2();
     if (game.global.universe == 2 && getPageSetting('RTrapTrimps') && game.global.trapBuildAllowed && game.global.trapBuildToggled == false) toggleAutoTrap();
     if (game.global.universe == 2 && getPageSetting('RBuyUpgradesNew') != 0) RbuyUpgrades();
     if (game.global.universe == 2 && game.global.challengeActive == "Daily" && getPageSetting('buyradony') >= 1 && getDailyHeliumValue(countDailyWeight()) >= getPageSetting('buyradony') && game.global.b >= 100 && !game.singleRunBonuses.heliumy.owned) purchaseSingleRunBonus('heliumy');
 
 
-    /*    
+        
     //Buildings
     if (game.global.universe == 1 && getPageSetting('BuyBuildingsNew') === 0 && getPageSetting('hidebuildings') == true) buyBuildings();
     else if (game.global.universe == 1 && getPageSetting('BuyBuildingsNew') == 1) {
@@ -125,9 +125,9 @@ function mainLoop() {
     else if (game.global.universe == 2 && getPageSetting('RBuyBuildingsNew') == 3) {
              RbuyStorage();
     }
-*/
 
-/*
+
+
     //Jobs
     if (game.global.universe == 1 && getPageSetting('BuyJobsNew') == 1) {
         workerRatios();
@@ -142,7 +142,7 @@ function mainLoop() {
         RbuyJobs();
     } 
     else if (game.global.universe == 2 && getPageSetting('RBuyJobsNew') == 2) RbuyJobs();
-*/
+
     
     
     //Portal
