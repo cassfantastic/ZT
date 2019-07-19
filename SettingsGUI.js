@@ -1665,6 +1665,7 @@ function updateCustomButtons() {
     (nuratio) ? turnOn('slot3nu') : turnOff('slot3nu');
     (nuratio) ? turnOn('slot4nu') : turnOff('slot4nu');
     (nuratio) ? turnOn('slot5nu') : turnOff('slot5nu');
+    (nuratio) ? turnOn('slot6nu') : turnOff('slot6nu');
 
     var autoheirloomenable = (getPageSetting('autoheirlooms')==true);
     var keepshieldenable = (autoheirloomenable && getPageSetting('keepshields')==true);
@@ -1681,12 +1682,14 @@ function updateCustomButtons() {
     (keepshieldenable) ? turnOn('slot3modsh') : turnOff('slot3modsh');
     (keepshieldenable) ? turnOn('slot4modsh') : turnOff('slot4modsh');
     (keepshieldenable) ? turnOn('slot5modsh') : turnOff('slot5modsh');
+    (keepshieldenable) ? turnOn('slot6modsh') : turnOff('slot5modsh');
 
     (keepstaffenable) ? turnOn('slot1modst') : turnOff('slot1modst');
     (keepstaffenable) ? turnOn('slot2modst') : turnOff('slot2modst');
     (keepstaffenable) ? turnOn('slot3modst') : turnOff('slot3modst');
     (keepstaffenable) ? turnOn('slot4modst') : turnOff('slot4modst');
     (keepstaffenable) ? turnOn('slot5modst') : turnOff('slot5modst');
+    (keepstaffenable) ? turnOn('slot6modst') : turnOff('slot5modst');
 
     (keepcoreenable) ? turnOn('slot1modcr') : turnOff('slot1modcr');
     (keepcoreenable) ? turnOn('slot2modcr') : turnOff('slot2modcr');
@@ -1720,12 +1723,14 @@ function updateCustomButtons() {
     document.getElementById('slot2modsh').value = autoTrimpSettings.slot2modsh.selected;
     document.getElementById('slot3modsh').value = autoTrimpSettings.slot3modsh.selected;
     document.getElementById('slot4modsh').value = autoTrimpSettings.slot4modsh.selected;
-    document.getElementById('slot5modsh').value = autoTrimpSettings.slot5modsh.selected;
+    document.getElementById('slot5modsh').value = autoTrimpSettings.slot6modsh.selected;
+    document.getElementById('slot6modsh').value = autoTrimpSettings.slot5modsh.selected;
     document.getElementById('slot1modst').value = autoTrimpSettings.slot1modst.selected;
     document.getElementById('slot2modst').value = autoTrimpSettings.slot2modst.selected;
     document.getElementById('slot3modst').value = autoTrimpSettings.slot3modst.selected;
     document.getElementById('slot4modst').value = autoTrimpSettings.slot4modst.selected;
     document.getElementById('slot5modst').value = autoTrimpSettings.slot5modst.selected;
+    document.getElementById('slot6modst').value = autoTrimpSettings.slot6modst.selected;
     document.getElementById('slot1modcr').value = autoTrimpSettings.slot1modcr.selected;
     document.getElementById('slot2modcr').value = autoTrimpSettings.slot2modcr.selected;
     document.getElementById('slot3modcr').value = autoTrimpSettings.slot3modcr.selected;
