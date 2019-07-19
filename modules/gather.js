@@ -167,14 +167,14 @@ function RmanualLabor2() {
     else if (!game.global.trapBuildToggled && (game.global.buildingsQueue[0] == 'Barn.1' || game.global.buildingsQueue[0] == 'Shed.1' || game.global.buildingsQueue[0] == 'Forge.1')){
              setGather('buildings');
     }
-    else if (game.resources.science.owned >= RscienceNeeded && document.getElementById('scienceCollectBtn').style.display != 'none' && document.getElementById('science').style.visibility != 'hidden') {
-        if ((getPlayerModifier() < getPerSecBeforeManual('Scientist') && hasTurkimp)||getPageSetting('RManualGather2') == 2){
+    /*else if (game.resources.science.owned >= RscienceNeeded && document.getElementById('scienceCollectBtn').style.display != 'none' && document.getElementById('science').style.visibility != 'hidden') {
+        if (game.global.challengeActive != "Transmute" && (getPlayerModifier() < getPerSecBeforeManual('Scientist') && hasTurkimp)||getPageSetting('RManualGather2') == 2){
             setGather('metal');
         }
         else if (getPageSetting('RManualGather2') != 2){
                  setGather('science');
         }
-    }
+    }*/
     else if (trapTrimpsOK){
         if (game.buildings.Trap.owned < 5 && canAffordBuilding('Trap')) {
             safeBuyBuilding('Trap');
@@ -210,7 +210,7 @@ function RmanualLabor2() {
                 }
             }
          }
-        if (game.global.playerGathering != lowestResource && !haveWorkers && !breedFire) {
+        if (game.global.challengeActive == "Transmute" && game.global.playerGathering != lowestResource && !haveWorkers && !breedFire) {
             if (hasTurkimp)
                 setGather('metal');
             else
@@ -218,7 +218,7 @@ function RmanualLabor2() {
         } else if (getPageSetting('RManualGather2') != 2 && document.getElementById('scienceCollectBtn').style.display != 'none' && document.getElementById('science').style.visibility != 'hidden') {
             if (game.resources.science.owned < getPsString('science', true) * MODULES["gather"].minScienceSeconds && game.global.turkimpTimer < 1 && haveWorkers)
                 setGather('science');
-            else if (hasTurkimp)
+            else if (game.global.challengeActive == "Transmute" && hasTurkimp)
                      setGather('metal');
             else
                 setGather(lowestResource);
