@@ -9,18 +9,20 @@ function dlowdmgshield(){for(loom of game.global.heirloomsCarried)if(loom.name==
 
 function getHeirloomEff(name, type) {
   if (type == "staff") {
-    if (getPageSetting('slot1modst') == name) return 5;
-    else if (getPageSetting('slot2modst') == name) return 4;
-    else if (getPageSetting('slot3modst') == name) return 3;
-    else if (getPageSetting('slot4modst') == name) return 2;
+    if (getPageSetting('slot1modst') == name) return 6;
+    else if (getPageSetting('slot2modst') == name) return 5;
+    else if (getPageSetting('slot3modst') == name) return 4;
+    else if (getPageSetting('slot4modst') == name) return 3;
+    else if (getPageSetting('slot5modst') == name) return 2;
     else if (getPageSetting('slot5modst') == name) return 1;
 	else return 0;
   }
   else if (type == "shield") {
-    if (getPageSetting('slot1modsh') == name) return 5;
-    else if (getPageSetting('slot2modsh') == name) return 4;
-    else if (getPageSetting('slot3modsh') == name) return 3;
-    else if (getPageSetting('slot4modsh') == name) return 2;
+    if (getPageSetting('slot1modsh') == name) return 6;
+    else if (getPageSetting('slot2modsh') == name) return 5;
+    else if (getPageSetting('slot3modsh') == name) return 4;
+    else if (getPageSetting('slot4modsh') == name) return 3;
+    else if (getPageSetting('slot5modsh') == name) return 2;
     else if (getPageSetting('slot5modsh') == name) return 1;
 	else return 0;
   }
@@ -76,6 +78,7 @@ function evaluateHeirloomMods2(loom, location) {
       if (getPageSetting('slot3modsh') == name) eff *= 4;
       if (getPageSetting('slot4modsh') == name) eff *= 4;
       if (getPageSetting('slot5modsh') == name) eff *= 4;
+      if (getPageSetting('slot6modsh') == name) eff *= 4;
     }
     if (name == "empty" && type == "Staff") {
       if (getPageSetting('slot1modst') == name) eff *= 4;
@@ -83,6 +86,7 @@ function evaluateHeirloomMods2(loom, location) {
       if (getPageSetting('slot3modst') == name) eff *= 4;
       if (getPageSetting('slot4modst') == name) eff *= 4;
       if (getPageSetting('slot5modst') == name) eff *= 4;
+      if (getPageSetting('slot6modst') == name) eff *= 4;
     }
     if (name == "empty" && type == "Core") {
       if (getPageSetting('slot1modcr') == name) eff *= 4;
@@ -326,21 +330,23 @@ function calcAutoNuRatio(slot) {
 function nuRatio() {
 
     //Find Nu Ratio
-    var slot1, slot1r, slot2, slot2r, slot3, slot3r, slot4, slot4r, slot5, slot5r, slot1spend, slot1spendr, slot2spend, slot2spendr, slot3spend, slot3spendr, slot4spend, slot4spendr, slot5spend, slot5spendr;
+    var slot1, slot1r, slot2, slot2r, slot3, slot3r, slot4, slot4r, slot5, slot6, slot5r, slot6r, slot1spend, slot1spendr, slot2spend, slot2spendr, slot3spend, slot3spendr, slot4spend, slot4spendr, slot5spend, slot5spendr, slot6spend, slot6spendr;
 
     slot1 = calcLoomNuInfinity(0) ? calcLoomNu(0) : 0;
     slot2 = calcLoomNuInfinity(1) ? calcLoomNu(1) : 0;
     slot3 = calcLoomNuInfinity(2) ? calcLoomNu(2) : 0;
     slot4 = calcLoomNuInfinity(3) ? calcLoomNu(3) : 0;
     slot5 = calcLoomNuInfinity(4) ? calcLoomNu(4) : 0;
+    slot6 = calcLoomNuInfinity(5) ? calcLoomNu(5) : 0;
 
-    var total = (slot1 + slot2 + slot3 + slot4 + slot5);
+    var total = (slot1 + slot2 + slot3 + slot4 + slot5 + slot6);
 
     slot1r = (slot1 != 0 && calcLoomNuInfinity(0)) ? ((slot1 / total)*100) : 1;
     slot2r = (slot2 != 0 && calcLoomNuInfinity(1)) ? ((slot2 / total)*100) : 1;
     slot3r = (slot3 != 0 && calcLoomNuInfinity(2)) ? ((slot3 / total)*100) : 1;
     slot4r = (slot4 != 0 && calcLoomNuInfinity(3)) ? ((slot4 / total)*100) : 1;
     slot5r = (slot5 != 0 && calcLoomNuInfinity(4)) ? ((slot5 / total)*100) : 1;
+    slot5r = (slot6 != 0 && calcLoomNuInfinity(5)) ? ((slot6 / total)*100) : 1;
 
     //Find Player ratio
     if (getPageSetting('autonu') == true && getPageSetting('rationu') == 0 && getPageSetting('heirloomnu') != undefined) { 
@@ -349,6 +355,7 @@ function nuRatio() {
 	slot3spend = (getPageSetting('slot3nu') > 0 && calcLoomNuInfinity(2)) ? getPageSetting('slot3nu') : 0;
 	slot4spend = (getPageSetting('slot4nu') > 0 && calcLoomNuInfinity(3)) ? getPageSetting('slot4nu') : 0;
 	slot5spend = (getPageSetting('slot5nu') > 0 && calcLoomNuInfinity(4)) ? getPageSetting('slot5nu') : 0;
+	slot5spend = (getPageSetting('slot6nu') > 0 && calcLoomNuInfinity(5)) ? getPageSetting('slot6nu') : 0;
 	}
 	
     if (getPageSetting('autonu') == true && getPageSetting('rationu') == 1 && getPageSetting('heirloomnu') != undefined) { 
@@ -357,15 +364,17 @@ function nuRatio() {
 	slot3spend = (calcLoomNuInfinity(2)) ? calcAutoNuRatio(2) : 0;
 	slot4spend = (calcLoomNuInfinity(3)) ? calcAutoNuRatio(3) : 0;
 	slot5spend = (calcLoomNuInfinity(4)) ? calcAutoNuRatio(4) : 0;
+	slot5spend = (calcLoomNuInfinity(5)) ? calcAutoNuRatio(5) : 0;
 	}
 
-    var totalspend = (slot1spend + slot2spend + slot3spend + slot4spend + slot5spend);
+    var totalspend = (slot1spend + slot2spend + slot3spend + slot4spend + slot5spend + slot6spend);
 
     slot1spendr = (slot1spend > 0) ? ((slot1spend / totalspend)*100) : 0;
     slot2spendr = (slot2spend > 0) ? ((slot2spend / totalspend)*100) : 0;
     slot3spendr = (slot3spend > 0) ? ((slot3spend / totalspend)*100) : 0;
     slot4spendr = (slot4spend > 0) ? ((slot4spend / totalspend)*100) : 0;
     slot5spendr = (slot5spend > 0) ? ((slot5spend / totalspend)*100) : 0;
+    slot6spendr = (slot6spend > 0) ? ((slot6spend / totalspend)*100) : 0;
 
     //Find Next Spend
     var slot1final = slot1spendr - slot1r;
@@ -373,6 +382,7 @@ function nuRatio() {
     var slot3final = slot3spendr - slot3r;
     var slot4final = slot4spendr - slot4r;
     var slot5final = slot5spendr - slot5r;
+    var slot6final = slot6spendr - slot6r;
 
     var ratios = [];
     if (slot1final != -1) {
@@ -390,6 +400,9 @@ function nuRatio() {
     if (slot5final != -1) {
 	ratios.push(slot5final);
     }
+    if (slot6final != -1) {
+	ratios.push(slot6final);
+    }
 
     if (ratios.length > 0) {
         ratios.sort(function(a, b){return b-a;});
@@ -406,6 +419,8 @@ function nuRatio() {
 	return 3;
     if (ratios[0] == slot5final)
 	return 4;
+    if (ratios[0] == slot6final)
+	return 5;
 }
 
 function spendNu() {
