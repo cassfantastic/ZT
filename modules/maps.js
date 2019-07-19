@@ -698,7 +698,6 @@ function autoMap() {
 
 //Radon
 
-MODULES.maps.RnumHitsSurvived=8;
 MODULES.maps.RMapTierZone=[72,47,16];
 MODULES.maps.RMapTier0Sliders=[9,9,9,"Mountain"];
 MODULES.maps.RMapTier1Sliders=[9,9,9,"Depths"];
@@ -782,6 +781,8 @@ function RautoMap() {
     if (game.options.menu.exitTo.enabled != 0) toggleSetting('exitTo');
     if (game.options.menu.repeatVoids.enabled != 0) toggleSetting('repeatVoids');
     var extraMapLevels = 0;
+    var hitsSurvived = 10;
+    if (getPageSetting("Rhitssurvived") > 0) hitsSurvived = getPageSetting("Rhitssurvived");
 
     //Void Vars
     var voidMapLevelSetting = 0;
@@ -872,7 +873,7 @@ function RautoMap() {
     var mapbonusmulti = 1 + (0.20 * game.global.mapBonus);
     var ourBaseDamage2 = ourBaseDamage;
     ourBaseDamage2 /= mapbonusmulti;
-    RenoughHealth = (RcalcOurHealth() > customVars.RnumHitsSurvived * enemyDamage);
+    RenoughHealth = (RcalcOurHealth() > hitsSurvived * enemyDamage);
     RenoughDamage = (ourBaseDamage * mapenoughdamagecutoff > enemyHealth);
     RupdateAutoMapsStatus();
 
