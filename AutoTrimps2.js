@@ -102,7 +102,7 @@ function mainLoop() {
     if (game.global.universe == 2 && game.global.challengeActive == "Daily" && getPageSetting('buyradony') >= 1 && getDailyHeliumValue(countDailyWeight()) >= getPageSetting('buyradony') && game.global.b >= 100 && !game.singleRunBonuses.heliumy.owned) purchaseSingleRunBonus('heliumy');
 
 
-    
+    /*    
     //Buildings
     if (game.global.universe == 1 && getPageSetting('BuyBuildingsNew') === 0 && getPageSetting('hidebuildings') == true) buyBuildings();
     else if (game.global.universe == 1 && getPageSetting('BuyBuildingsNew') == 1) {
@@ -125,9 +125,9 @@ function mainLoop() {
     else if (game.global.universe == 2 && getPageSetting('RBuyBuildingsNew') == 3) {
              RbuyStorage();
     }
+*/
 
-
-
+/*
     //Jobs
     if (game.global.universe == 1 && getPageSetting('BuyJobsNew') == 1) {
         workerRatios();
@@ -142,7 +142,7 @@ function mainLoop() {
         RbuyJobs();
     } 
     else if (game.global.universe == 2 && getPageSetting('RBuyJobsNew') == 2) RbuyJobs();
-
+*/
     
     
     //Portal
