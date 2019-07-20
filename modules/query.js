@@ -33,7 +33,14 @@ function RgetEnemyMaxAttack(world, level, name) {
 			}
 			if (world < 60) amt *= 0.85;
 			if (world > 6 && game.global.mapsActive) amt *= 1.1;
-			if (game.global.universe == 2) amt *= Math.pow(1.5, world);
+		        amt *= game.badGuys[name].attack;
+			if (game.global.universe == 2){
+				var part1 = (world > 40) ? 40 : world;
+				var part2 = (world - 40);
+				if (part2 < 0) part2 = 0;
+				amt *= Math.pow(1.5, part1);
+				amt *= Math.pow(1.4, part2);
+			}
 			return Math.floor(amt);
 }
 
