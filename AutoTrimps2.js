@@ -41,7 +41,7 @@ function printChangelog() {
     tooltip('confirm', null, 'update', body+footer, action, title, acceptBtnText, null, hideCancel);
 }
 var runInterval=100,startupDelay=4000;setTimeout(delayStart,startupDelay);function delayStart(){initializeAutoTrimps(),printChangelog(),setTimeout(delayStartAgain,startupDelay)}function delayStartAgain(){game.global.addonUser=!0,game.global.autotrimps=!0,MODULESdefault=JSON.parse(JSON.stringify(MODULES)),setInterval(mainLoop,runInterval),setInterval(guiLoop,10*runInterval)}
-var ATrunning=!0,ATmessageLogTabVisible=!0,enableDebug=!0,autoTrimpSettings={},MODULES={},MODULESdefault={},ATMODULES={},ATmoduleList=[],bestBuilding,scienceNeeded,RscienceNeeded,breedFire=!1,shouldFarm=!1,RshouldFarm=!1,enoughDamage=!0,RenoughDamage=!0,enoughHealth=!0,RenoughHealth=!0,baseDamage=1,baseBlock=1,baseHealth=1,preBuyAmt,preBuyFiring,preBuyTooltip,preBuymaxSplit,currentworld=0,lastrunworld=0,aWholeNewWorld=!1,needGymystic=!0,heirloomFlag=!1,heirloomCache=game.global.heirloomsExtra.length,magmiteSpenderChanged=!1,daily3=!1;
+var ATrunning=!0,ATmessageLogTabVisible=!0,enableDebug=!0,autoTrimpSettings={},MODULES={},MODULESdefault={},ATMODULES={},ATmoduleList=[],bestBuilding,scienceNeeded,RscienceNeeded,breedFire=!1,shouldFarm=!1,RshouldFarm=!1,enoughDamage=!0,RenoughDamage=!0,enoughHealth=!0,RenoughHealth=!0,baseDamage=1,baseBlock=1,baseHealth=1,preBuyAmt,preBuyFiring,preBuyTooltip,preBuymaxSplit,currentworld=0,lastrunworld=0,aWholeNewWorld=!1,needGymystic=!0,heirloomFlag=!1,heirloomCache=game.global.heirloomsExtra.length,magmiteSpenderChanged=!1,daily3=!1,lastHeliumZone=0,lastRadonZone=0;
 
 function mainLoop() {
     if (ATrunning == false) return;
@@ -272,11 +272,5 @@ function mainCleanup() {
             autoTrimpSettings["RAutoMaps"].value = 1;
         return true;
     }
-}
-var userscriptOn = true;
-var globalvar0,globalvar1,globalvar2,globalvar3,globalvar4,globalvar5,globalvar6,globalvar7,globalvar8,globalvar9;
-function userscripts()
-{
-
 }
 function throwErrorfromMain(){throw new Error("We have successfully read the thrown error message out of the main file")}
