@@ -15,7 +15,7 @@ function manualLabor2() {
     var trapTrimpsOK = getPageSetting('TrapTrimps');
     var targetBreed = getPageSetting('GeneticistTimer');
     var trapperTrapUntilFull = game.global.challengeActive == "Trapper" && notFullPop;
-    var hasTurkimp = game.talents.turkimp4.purchased || game.global.turkimpTimer > 0;
+    var hasTurkimp = game.talents.turkimp2.purchased || game.global.turkimpTimer > 0;
 
     //FRESH GAME NO HELIUM CODE.
     if (game.global.world <=3 && game.global.totalHeliumEarned<=5000) {
@@ -134,7 +134,7 @@ function RmanualLabor2() {
     //Vars
     var lowOnTraps = game.buildings.Trap.owned < 5;
     var trapTrimpsOK = getPageSetting('RTrapTrimps');
-    var hasTurkimp = game.talents.turkimp4.purchased || game.global.turkimpTimer > 0;
+    var hasTurkimp = game.talents.turkimp2.purchased || game.global.turkimpTimer > 0;
     var needToTrap = (game.resources.trimps.max - game.resources.trimps.owned >= game.resources.trimps.max * 0.05) || (game.resources.trimps.getCurrentSend() > game.resources.trimps.owned - game.resources.trimps.employed);
 
     //FRESH GAME NO RADON CODE.
