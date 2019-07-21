@@ -5,8 +5,6 @@
 // @updateURL    https://zsaur192.github.io/ZT/.user.js
 // @description  Automate all the trimps!
 // @author       zininzinin, spindrjr, Ishkaru, genBTC, Zeker0
-// @include      *trimps.github.io*
-// @include      *kongregate.com/games/GreenSatellite/trimps
 // @include      *trimpstesting5.netlify.com*
 // @connect      *zsaur192.github.io/ZT*
 // @connect      *trimps.github.io*
