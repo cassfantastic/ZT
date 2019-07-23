@@ -717,27 +717,27 @@ function Praiding() {
                     return;
                 }
             }
-            if (game.global.preMapsActive && game.global.mapsActive && mapbought1 && pMap1 != undefined && !prestraid) {
+            if (game.global.preMapsActive && !game.global.mapsActive && mapbought1 && pMap1 != undefined && !prestraid) {
                 selectMap(pMap1);
                 runMap();
                 pMap1 = undefined;
             }
-            if (game.global.preMapsActive && game.global.mapsActive && mapbought2 && pMap2 != undefined && !prestraid) {
+            if (game.global.preMapsActive && !game.global.mapsActive && mapbought2 && pMap2 != undefined && !prestraid) {
                 selectMap(pMap2);
                 runMap();
                 pMap2 = undefined;
             }
-            if (game.global.preMapsActive && game.global.mapsActive && mapbought3 && pMap3 != undefined && !prestraid) {
+            if (game.global.preMapsActive && !game.global.mapsActive && mapbought3 && pMap3 != undefined && !prestraid) {
                 selectMap(pMap3);
                 runMap();
                 pMap3 = undefined;
             }
-            if (game.global.preMapsActive && game.global.mapsActive && mapbought4 && pMap4 != undefined && !prestraid) {
+            if (game.global.preMapsActive && !game.global.mapsActive && mapbought4 && pMap4 != undefined && !prestraid) {
                 selectMap(pMap4);
                 runMap();
                 pMap4 = undefined;
             }
-            if (game.global.preMapsActive && game.global.mapsActive && mapbought5 && pMap5 != undefined && !prestraid) {
+            if (game.global.preMapsActive && !game.global.mapsActive && mapbought5 && pMap5 != undefined && !prestraid) {
                 selectMap(pMap5);
                 runMap();
                 pMap5 = undefined;
