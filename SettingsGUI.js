@@ -263,7 +263,7 @@ function initializeAllSettings() {
     $pauseScript.parentNode.style.setProperty('float', 'right');
     $pauseScript.parentNode.style.setProperty('margin-right', '1vw');
     $pauseScript.parentNode.style.setProperty('margin-left', '0');
-    createSetting('radonsettings', ['Helium', 'Radon'], 'Switch between Heilum (U1) and Radon (U2) settings. ', 'multitoggle', 0, null, 'Core');
+    createSetting('radonsettings', ['Helium', 'Radon'], 'Switch between Helium (U1) and Radon (U2) settings. ', 'multitoggle', 0, null, 'Core');
     var $radonsettings = document.getElementById('radonsettings');
     $radonsettings.parentNode.style.setProperty('float', 'right');
     $radonsettings.parentNode.style.setProperty('margin-right', '1vw');
