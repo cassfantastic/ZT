@@ -633,9 +633,7 @@ function Praiding() {
 
     if (getPageSetting('Praidingzone').length) {
         if (getPageSetting('Praidingzone').includes(game.global.world) && !prestraid && !failpraid) {
-            debug('World Zone matches a Praiding Zone!');
             prestraidon = true;
-
             if (getPageSetting('AutoMaps') == 1 && !prestraid && !failpraid) {
                 autoTrimpSettings["AutoMaps"].value = 0;
             }
