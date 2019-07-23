@@ -952,7 +952,7 @@ function RautoMap() {
             var theMap = game.global.mapsOwnedArray[map];
             if (theMap.noRecycle) {
                 if (theMap.name == 'Big Wall' && !game.upgrades.Bounty.allowed && !game.upgrades.Bounty.done) {
-                    if ((game.global.world < 8 || RcalcHDratio() > 8) continue;
+                    if (game.global.world < 8 || RcalcHDratio() > 8) continue;
                     selectedMap = theMap.id;
                     break;
                 }
