@@ -58,7 +58,7 @@ function manualLabor2() {
             setGather('science');
         }
     }
-    else if (trapTrimpsOK && targetBreed < getBreedTime(true)){
+    else if (trapTrimpsOK){
         //combined to optimize code.
         if (game.buildings.Trap.owned < 5 && canAffordBuilding('Trap')) {
             safeBuyBuilding('Trap');
