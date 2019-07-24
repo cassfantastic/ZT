@@ -797,6 +797,9 @@ function RcalcOurHealth() {
     if (game.portal.Toughness.radLevel > 0) {
         health *= ((game.portal.Toughness.radLevel * game.portal.Toughness.modifier) + 1);
     }
+    if (game.portal.Resilience.radLevel > 0) {
+        health *= (Math.pow(game.portal.Resilience.modifier + 1, game.portal.Resilience.radLevel));
+    }
     if (Fluffy.isRewardActive("healthy")) {
 	health *= 1.5;
     }
