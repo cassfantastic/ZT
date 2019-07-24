@@ -439,8 +439,9 @@ function calcEnemyBaseHealth(zone, level, name) {
     return health;
 }
 
-function calcEnemyHealth() {
-    var health = calcEnemyBaseHealth(game.global.world, 50, "Snimp");
+function calcEnemyHealth(world) {
+    world = !world ? game.global.world : world;
+    var health = calcEnemyBaseHealth(world, 50, "Snimp");
     var corrupt = mutations.Corruption.active();
     var healthy = mutations.Healthy.active();
     if (corrupt && !healthy) {
