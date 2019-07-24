@@ -733,58 +733,69 @@ function Praiding() {
                 game.options.menu.repeatUntil.enabled = 2;
             }
             if (game.global.preMapsActive && !game.global.mapsActive && !prestraid) {
-
+		debug("Map Loop");
                 if (pcheck5() == true && pMap5 == undefined && !mapbought5 && game.global.preMapsActive && !prestraid) {
+			debug("Check complete for 5th map");
                     plusPres5();
                     if ((updateMapCost(true) <= game.resources.fragments.owned)) {
                         buyMap();
                         mapbought5 = true;
                         if (mapbought5) {
                             pMap5 = game.global.mapsOwnedArray[game.global.mapsOwnedArray.length - 1].id;
+				debug("5th map bought");
                         }
                     }
                 }
                 if (pcheck4() == true && pMap4 == undefined && !mapbought4 && game.global.preMapsActive && !prestraid) {
+			debug("Check complete for 4th map");
                     plusPres4();
                     if ((updateMapCost(true) <= game.resources.fragments.owned)) {
                         buyMap();
                         mapbought4 = true;
                         if (mapbought4) {
                             pMap4 = game.global.mapsOwnedArray[game.global.mapsOwnedArray.length - 1].id;
+				debug("4th map bought");
                         }
                     }
                 }
                 if (pcheck3() == true && pMap3 == undefined && !mapbought3 && game.global.preMapsActive && !prestraid) {
+			debug("Check complete for 3rd map");
                     plusPres3();
                     if ((updateMapCost(true) <= game.resources.fragments.owned)) {
                         buyMap();
                         mapbought3 = true;
                         if (mapbought3) {
                             pMap3 = game.global.mapsOwnedArray[game.global.mapsOwnedArray.length - 1].id;
+				debug("3rd map bought");
                         }
                     }
                 }
                 if (pcheck2() == true && pMap2 == undefined && !mapbought2 && game.global.preMapsActive && !prestraid) {
+			debug("Check complete for 2nd map");
                     plusPres2();
                     if ((updateMapCost(true) <= game.resources.fragments.owned)) {
                         buyMap();
                         mapbought2 = true;
                         if (mapbought2) {
                             pMap2 = game.global.mapsOwnedArray[game.global.mapsOwnedArray.length - 1].id;
+				debug("2nd map bought");
                         }
                     }
                 }
                 if (pcheck1() == true && pMap1 == undefined && !mapbought1 && game.global.preMapsActive && !prestraid) {
+			debug("Check complete for 1st map");
                     plusPres1();
                     if ((updateMapCost(true) <= game.resources.fragments.owned)) {
                         buyMap();
                         mapbought1 = true;
                         if (mapbought1) {
                             pMap1 = game.global.mapsOwnedArray[game.global.mapsOwnedArray.length - 1].id;
+				debug("1st map bought");
                         }
                     }
                 }
                 if (!mapbought1 && !mapbought2 && !mapbought3 && !mapbought4 && !mapbought5) {
+			debug("nothing bought you broke ass motherfucker");
                     if (getPageSetting('AutoMaps') == 0 && !prestraid) {
                         autoTrimpSettings["AutoMaps"].value = 1;
                         game.options.menu.repeatUntil.enabled = 0;
@@ -802,36 +813,43 @@ function Praiding() {
                 }
             }
             if (game.global.preMapsActive && !game.global.mapsActive && mapbought1 && pMap1 != undefined && !prestraid) {
+		    debug("running map 1");
                 selectMap(pMap1);
                 runMap();
                 pMap1 = undefined;
             }
             if (game.global.preMapsActive && !game.global.mapsActive && mapbought2 && pMap2 != undefined && !prestraid) {
+		    debug("running map 2");
                 selectMap(pMap2);
                 runMap();
                 pMap2 = undefined;
             }
             if (game.global.preMapsActive && !game.global.mapsActive && mapbought3 && pMap3 != undefined && !prestraid) {
+		    debug("running map 3");
                 selectMap(pMap3);
                 runMap();
                 pMap3 = undefined;
             }
             if (game.global.preMapsActive && !game.global.mapsActive && mapbought4 && pMap4 != undefined && !prestraid) {
+		    debug("running map 4");
                 selectMap(pMap4);
                 runMap();
                 pMap4 = undefined;
             }
             if (game.global.preMapsActive && !game.global.mapsActive && mapbought5 && pMap5 != undefined && !prestraid) {
+		    debug("running map 5");
                 selectMap(pMap5);
                 runMap();
                 pMap5 = undefined;
             }
             if (!prestraid && !game.global.repeatMap) {
+		 debug("repeat was off dumbass bitch");
                 repeatClicked();
             }
         }
     }
     if (game.global.preMapsActive && mapbought1 && mapbought2 && mapbought3 && mapbought4 && mapbought5 && pMap1 == undefined && pMap2 == undefined && pMap3 == undefined && pMap4 == undefined && pMap5 == undefined && !prestraid && !failpraid) {
+	    debug("all maps that were bought were run so prestraid is set to true");
         prestraid = true;
         failpraid = false;
         mapbought1 = false;
@@ -841,6 +859,7 @@ function Praiding() {
         mapbought5 = false;
     }
     if (getPageSetting('AutoMaps') == 0 && game.global.preMapsActive && prestraid && !failpraid && prestraidon) {
+	    debug("running map 1");
         praidDone = true;
         prestraidon = false;
         autoTrimpSettings["AutoMaps"].value = 1;
@@ -854,6 +873,7 @@ function Praiding() {
         debug("Turning AutoMaps back on");
     }
     if (getPageSetting('Praidingzone').every(isBelowThreshold)) {
+	    debug("resetting vars cuz out of praid zone");
         prestraid = false;
         failpraid = false;
         prestraidon = false;
