@@ -448,7 +448,7 @@ function calcEnemyHealth(world, map) {
 	corrupt = false;
 	healthy = false;
 	if (game.global.universe == 1) {
-	    health =* 0.5;
+	    health *= 0.5;
 	}
     }
     if (corrupt && !healthy) {
