@@ -703,6 +703,181 @@ function pcheck5() {
     return go;
 }
 
+function pcheckmap1() {
+	var go = false;
+	if (game.global.world % 10 == 0 && plusMapToRun1() == 1) {
+	    go = true;
+        }
+	if (game.global.world % 10 == 1 && plusMapToRun1() == 1) {
+	    go = true;
+        }
+	if (game.global.world % 10 == 2 && plusMapToRun1() == 1) {
+	    go = true;
+        }
+	if (game.global.world % 10 == 3 && plusMapToRun1() == 1) {
+	    go = true;
+        }
+	if (game.global.world % 10 == 4 && plusMapToRun1() == 1) {
+	    go = true;
+        }
+	if (game.global.world % 10 == 5 && plusMapToRun1() == 6) {
+	    go = true;
+        }
+	if (game.global.world % 10 == 6 && plusMapToRun1() == 5) {
+	    go = true;
+        }
+	if (game.global.world % 10 == 7 && plusMapToRun1() == 4) {
+	    go = true;
+        }
+	if (game.global.world % 10 == 8 && plusMapToRun1() == 3) {
+	    go = true;
+        }
+	if (game.global.world % 10 == 9 && plusMapToRun1() == 2) {
+	    go = true;
+        }
+	return go;
+}
+
+function pcheckmap2() {
+	var go = false;
+	if (game.global.world % 10 == 0 && plusMapToRun2() == 2) {
+	    go = true;
+        }
+	if (game.global.world % 10 == 1 && plusMapToRun2() == 2) {
+	    go = true;
+        }
+	if (game.global.world % 10 == 2 && plusMapToRun2() == 2) {
+	    go = true;
+        }
+	if (game.global.world % 10 == 3 && plusMapToRun2() == 2) {
+	    go = true;
+        }
+	if (game.global.world % 10 == 4 && plusMapToRun2() == 8) {
+	    go = true;
+        }
+	if (game.global.world % 10 == 5 && plusMapToRun2() == 7) {
+	    go = true;
+        }
+	if (game.global.world % 10 == 6 && plusMapToRun2() == 6) {
+	    go = true;
+        }
+	if (game.global.world % 10 == 7 && plusMapToRun2() == 5) {
+	    go = true;
+        }
+	if (game.global.world % 10 == 8 && plusMapToRun2() == 4) {
+	    go = true;
+        }
+	if (game.global.world % 10 == 9 && plusMapToRun2() == 3) {
+	    go = true;
+        }
+	return go;
+}
+
+function pcheckmap3() {
+	var go = false;
+	if (game.global.world % 10 == 0 && plusMapToRun3() == 3) {
+	    go = true;
+        }
+	if (game.global.world % 10 == 1 && plusMapToRun3() == 3) {
+	    go = true;
+        }
+	if (game.global.world % 10 == 2 && plusMapToRun3() == 3) {
+	    go = true;
+        }
+	if (game.global.world % 10 == 3 && plusMapToRun3() == 10) {
+	    go = true;
+        }
+	if (game.global.world % 10 == 4 && plusMapToRun3() == 9) {
+	    go = true;
+        }
+	if (game.global.world % 10 == 5 && plusMapToRun3() == 8) {
+	    go = true;
+        }
+	if (game.global.world % 10 == 6 && plusMapToRun3() == 7) {
+	    go = true;
+        }
+	if (game.global.world % 10 == 7 && plusMapToRun3() == 6) {
+	    go = true;
+        }
+	if (game.global.world % 10 == 8 && plusMapToRun3() == 5) {
+	    go = true;
+        }
+	if (game.global.world % 10 == 9 && plusMapToRun3() == 4) {
+	    go = true;
+        }
+	return go;
+}
+
+function pcheckmap4() {
+	var go = false;
+	if (game.global.world % 10 == 0 && plusMapToRun4() == 4) {
+	    go = true;
+        }
+	if (game.global.world % 10 == 1 && plusMapToRun4() == 4) {
+	    go = true;
+        }
+	if (game.global.world % 10 == 2) {
+	    go = false;
+        }
+	if (game.global.world % 10 == 3) {
+	    go = false;
+        }
+	if (game.global.world % 10 == 4 && plusMapToRun4() == 10) {
+	    go = true;
+        }
+	if (game.global.world % 10 == 5 && plusMapToRun4() == 9) {
+	    go = true;
+        }
+	if (game.global.world % 10 == 6 && plusMapToRun4() == 8) {
+	    go = true;
+        }
+	if (game.global.world % 10 == 7 && plusMapToRun4() == 7) {
+	    go = true;
+        }
+	if (game.global.world % 10 == 8 && plusMapToRun4() == 6) {
+	    go = true;
+        }
+	if (game.global.world % 10 == 9 && plusMapToRun4() == 5) {
+	    go = true;
+        }
+	return go;
+}
+
+function pcheckmap5() {
+	var go = false;
+	if (game.global.world % 10 == 0 && plusMapToRun5() == 5) {
+	    go = true;
+        }
+	if (game.global.world % 10 == 1) {
+	    go = false;
+        }
+	if (game.global.world % 10 == 2) {
+	    go = false;
+        }
+	if (game.global.world % 10 == 3) {
+	    go = false;
+        }
+	if (game.global.world % 10 == 4) {
+	    go = false;
+        }
+	if (game.global.world % 10 == 5 && plusMapToRun5() == 10) {
+	    go = true;
+        }
+	if (game.global.world % 10 == 6 && plusMapToRun5() == 9) {
+	    go = true;
+        }
+	if (game.global.world % 10 == 7 && plusMapToRun5() == 8) {
+	    go = true;
+        }
+	if (game.global.world % 10 == 8 && plusMapToRun5() == 7) {
+	    go = true;
+        }
+	if (game.global.world % 10 == 9 && plusMapToRun5() == 6) {
+	    go = true;
+        }
+	return go;
+}
+
 var pMap1;
 var pMap2;
 var pMap3;  
@@ -734,7 +909,7 @@ function Praiding() {
             }
             if (game.global.preMapsActive && !game.global.mapsActive && !prestraid) {
 		debug("Map Loop");
-                if (pcheck5() == true && pMap5 == undefined && !mapbought5 && game.global.preMapsActive && !prestraid) {
+                if (pcheckmap5() == true && pcheck5() == true && pMap5 == undefined && !mapbought5 && game.global.preMapsActive && !prestraid) {
 			debug("Check complete for 5th map");
                     plusPres5();
                     if ((updateMapCost(true) <= game.resources.fragments.owned)) {
@@ -746,7 +921,7 @@ function Praiding() {
                         }
                     }
                 }
-                if (pcheck4() == true && pMap4 == undefined && !mapbought4 && game.global.preMapsActive && !prestraid) {
+                if (pcheckmap4() == true && pcheck4() == true && pMap4 == undefined && !mapbought4 && game.global.preMapsActive && !prestraid) {
 			debug("Check complete for 4th map");
                     plusPres4();
                     if ((updateMapCost(true) <= game.resources.fragments.owned)) {
@@ -758,7 +933,7 @@ function Praiding() {
                         }
                     }
                 }
-                if (pcheck3() == true && pMap3 == undefined && !mapbought3 && game.global.preMapsActive && !prestraid) {
+                if (pcheckmap3() == true && pcheck3() == true && pMap3 == undefined && !mapbought3 && game.global.preMapsActive && !prestraid) {
 			debug("Check complete for 3rd map");
                     plusPres3();
                     if ((updateMapCost(true) <= game.resources.fragments.owned)) {
@@ -770,7 +945,7 @@ function Praiding() {
                         }
                     }
                 }
-                if (pcheck2() == true && pMap2 == undefined && !mapbought2 && game.global.preMapsActive && !prestraid) {
+                if (pcheckmap2() == true && pcheck2() == true && pMap2 == undefined && !mapbought2 && game.global.preMapsActive && !prestraid) {
 			debug("Check complete for 2nd map");
                     plusPres2();
                     if ((updateMapCost(true) <= game.resources.fragments.owned)) {
@@ -782,7 +957,7 @@ function Praiding() {
                         }
                     }
                 }
-                if (pcheck1() == true && pMap1 == undefined && !mapbought1 && game.global.preMapsActive && !prestraid) {
+                if (pcheckmap1() == true && pcheck1() == true && pMap1 == undefined && !mapbought1 && game.global.preMapsActive && !prestraid) {
 			debug("Check complete for 1st map");
                     plusPres1();
                     if ((updateMapCost(true) <= game.resources.fragments.owned)) {
@@ -795,7 +970,6 @@ function Praiding() {
                     }
                 }
                 if (!mapbought1 && !mapbought2 && !mapbought3 && !mapbought4 && !mapbought5) {
-			debug("nothing bought you broke ass motherfucker");
                     if (getPageSetting('AutoMaps') == 0 && !prestraid) {
                         autoTrimpSettings["AutoMaps"].value = 1;
                         game.options.menu.repeatUntil.enabled = 0;
