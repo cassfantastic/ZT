@@ -627,10 +627,10 @@ function pcheck1() {
 	go = (getPageSetting('PraidingHD') >= calcHDratio(game.global.world + plusMapToRun1()));
     }
     if (getPageSetting('PraidingP') > 0 && getEmpowerment() == "Poison") {
-	go = (getPageSetting('PraidingP') >= game.global.world + plusMapToRun1());
+	go = (getPageSetting('PraidingP') >= plusMapToRun1());
     }
     if (getPageSetting('PraidingI') > 0 && getEmpowerment() == "Ice") {
-	go = (getPageSetting('PraidingI') >= game.global.world + plusMapToRun1());
+	go = (getPageSetting('PraidingI') >= plusMapToRun1());
     }
     return go;
 }
@@ -644,10 +644,10 @@ function pcheck2() {
 	go = (getPageSetting('PraidingHD') >= calcHDratio(game.global.world + plusMapToRun2()));
     }
     if (getPageSetting('PraidingP') > 0 && getEmpowerment() == "Poison") {
-	go = (getPageSetting('PraidingP') >= game.global.world + plusMapToRun2());
+	go = (getPageSetting('PraidingP') >= plusMapToRun2());
     }
     if (getPageSetting('PraidingI') > 0 && getEmpowerment() == "Ice") {
-	go = (getPageSetting('PraidingI') >= game.global.world + plusMapToRun2());
+	go = (getPageSetting('PraidingI') >= plusMapToRun2());
     }
     return go;
 }
@@ -661,10 +661,10 @@ function pcheck3() {
 	go = (getPageSetting('PraidingHD') >= calcHDratio(game.global.world + plusMapToRun3()));
     }
     if (getPageSetting('PraidingP') > 0 && getEmpowerment() == "Poison") {
-	go = (getPageSetting('PraidingP') >= game.global.world + plusMapToRun3());
+	go = (getPageSetting('PraidingP') >= plusMapToRun3());
     }
     if (getPageSetting('PraidingI') > 0 && getEmpowerment() == "Ice") {
-	go = (getPageSetting('PraidingI') >= game.global.world + plusMapToRun3());
+	go = (getPageSetting('PraidingI') >= plusMapToRun3());
     }
     return go;
 }
@@ -678,10 +678,10 @@ function pcheck4() {
 	go = (getPageSetting('PraidingHD') >= calcHDratio(game.global.world + plusMapToRun4()));
     }
     if (getPageSetting('PraidingP') > 0 && getEmpowerment() == "Poison") {
-	go = (getPageSetting('PraidingP') >= game.global.world + plusMapToRun4());
+	go = (getPageSetting('PraidingP') >= plusMapToRun4());
     }
     if (getPageSetting('PraidingI') > 0 && getEmpowerment() == "Ice") {
-	go = (getPageSetting('PraidingI') >= game.global.world + plusMapToRun4());
+	go = (getPageSetting('PraidingI') >= plusMapToRun4());
     }
     return go;
 }
@@ -695,10 +695,10 @@ function pcheck5() {
 	go = (getPageSetting('PraidingHD') >= calcHDratio(game.global.world + plusMapToRun5()));
     }
     if (getPageSetting('PraidingP') > 0 && getEmpowerment() == "Poison") {
-	go = (getPageSetting('PraidingP') >= game.global.world + plusMapToRun5());
+	go = (getPageSetting('PraidingP') >= plusMapToRun5());
     }
     if (getPageSetting('PraidingI') > 0 && getEmpowerment() == "Ice") {
-	go = (getPageSetting('PraidingI') >= game.global.world + plusMapToRun5());
+	go = (getPageSetting('PraidingI') >= plusMapToRun5());
     }
     return go;
 }
