@@ -726,6 +726,9 @@ function RcalcOurDmg(minMaxAvg, incStance, incFlucts) {
 	if (game.global.challengeActive == "Unbalance") {
 		number *= game.challenges.Unbalance.getAttackMult();
 	}
+        if (game.global.challengeActive == "Quest") {
+		number *= game.challenges.Quest.getAttackMult();
+	}
 	if (game.global.challengeActive == "Daily" && game.talents.daily.purchased){
 		number *= 1.5;
 	}
@@ -845,6 +848,9 @@ function RcalcBadGuyDmg(enemy,attack) {
     }
     if (game.global.challengeActive == "Unbalance") {
 	number *= 1.5;
+    }
+    if (game.global.challengeActive == "Quest") {
+	number *= game.challenges.Quest.getHealthMult();
     }
     if (!enemy && game.global.usingShriek) {
         number *= game.mapUnlocks.roboTrimp.getShriekValue();
