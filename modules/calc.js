@@ -519,7 +519,7 @@ function calcHDratio(map) {
         ratio = calcEnemyHealth() / ourBaseDamage;
     }
     if (map || map >= 1)
-	ratio = calcEnemyhealth(map, true)
+	ratio = calcEnemyHealth(map, true)
     return ratio;
 }
 
