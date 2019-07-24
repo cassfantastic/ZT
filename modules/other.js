@@ -626,6 +626,12 @@ function pcheck1() {
     else if (getPageSetting('PraidingHD') > 0) {
 	go = (getPageSetting('PraidingHD') >= calcHDratio(game.global.world + plusMapToRun1()));
     }
+    if (getPageSetting('PraidingP') > 0 && getEmpowerment() == "Poison") {
+	go = (getPageSetting('PraidingP') >= game.global.world + plusMapToRun1());
+    }
+    if (getPageSetting('PraidingI') > 0 && getEmpowerment() == "Ice") {
+	go = (getPageSetting('PraidingI') >= game.global.world + plusMapToRun1());
+    }
     return go;
 }
 
@@ -636,6 +642,12 @@ function pcheck2() {
     }
     else if (getPageSetting('PraidingHD') > 0) {
 	go = (getPageSetting('PraidingHD') >= calcHDratio(game.global.world + plusMapToRun2()));
+    }
+    if (getPageSetting('PraidingP') > 0 && getEmpowerment() == "Poison") {
+	go = (getPageSetting('PraidingP') >= game.global.world + plusMapToRun2());
+    }
+    if (getPageSetting('PraidingI') > 0 && getEmpowerment() == "Ice") {
+	go = (getPageSetting('PraidingI') >= game.global.world + plusMapToRun2());
     }
     return go;
 }
@@ -648,6 +660,12 @@ function pcheck3() {
     else if (getPageSetting('PraidingHD') > 0) {
 	go = (getPageSetting('PraidingHD') >= calcHDratio(game.global.world + plusMapToRun3()));
     }
+    if (getPageSetting('PraidingP') > 0 && getEmpowerment() == "Poison") {
+	go = (getPageSetting('PraidingP') >= game.global.world + plusMapToRun3());
+    }
+    if (getPageSetting('PraidingI') > 0 && getEmpowerment() == "Ice") {
+	go = (getPageSetting('PraidingI') >= game.global.world + plusMapToRun3());
+    }
     return go;
 }
 
@@ -659,6 +677,12 @@ function pcheck4() {
     else if (getPageSetting('PraidingHD') > 0) {
 	go = (getPageSetting('PraidingHD') >= calcHDratio(game.global.world + plusMapToRun4()));
     }
+    if (getPageSetting('PraidingP') > 0 && getEmpowerment() == "Poison") {
+	go = (getPageSetting('PraidingP') >= game.global.world + plusMapToRun4());
+    }
+    if (getPageSetting('PraidingI') > 0 && getEmpowerment() == "Ice") {
+	go = (getPageSetting('PraidingI') >= game.global.world + plusMapToRun4());
+    }
     return go;
 }
 
@@ -669,6 +693,12 @@ function pcheck5() {
     }
     else if (getPageSetting('PraidingHD') > 0) {
 	go = (getPageSetting('PraidingHD') >= calcHDratio(game.global.world + plusMapToRun5()));
+    }
+    if (getPageSetting('PraidingP') > 0 && getEmpowerment() == "Poison") {
+	go = (getPageSetting('PraidingP') >= game.global.world + plusMapToRun5());
+    }
+    if (getPageSetting('PraidingI') > 0 && getEmpowerment() == "Ice") {
+	go = (getPageSetting('PraidingI') >= game.global.world + plusMapToRun5());
     }
     return go;
 }
@@ -766,7 +796,7 @@ function Praiding() {
                         pMap3 = undefined;
                         pMap4 = undefined;
                         pMap5 = undefined;
-                        debug("Failed to prestige raid. Looks like you can't afford to or you are too weak..");
+                        debug("Failed to Prestige Raid. Looks like you can't afford to or you are too weak or you have limited yourself in a P/I zone. ");
                     }
                     return;
                 }
@@ -815,6 +845,11 @@ function Praiding() {
         prestraidon = false;
         autoTrimpSettings["AutoMaps"].value = 1;
         game.options.menu.repeatUntil.enabled = 0;
+	pMap1 = undefined;
+        pMap2 = undefined;
+        pMap3 = undefined;
+        pMap4 = undefined;
+        pMap5 = undefined;
         debug("Prestige raiding successful!");
         debug("Turning AutoMaps back on");
     }
