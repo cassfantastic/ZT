@@ -851,7 +851,7 @@ function pcheckmap5() {
 	if (game.global.world % 10 == 1 && plusMapToRun5() == 10) {
 	    go = false;
         }
-	if (game.global.world % 10 == 2 && && plusMapToRun5() == 10) {
+	if (game.global.world % 10 == 2 && plusMapToRun5() == 10) {
 	    go = false;
         }
 	if (game.global.world % 10 == 3 && plusMapToRun5() == 10) {
