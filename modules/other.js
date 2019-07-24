@@ -618,6 +618,61 @@ function plusPres5() {
 	}
 }
 
+function pcheck1() {
+    var go = false;
+    if (getPageSetting('PraidingHD') <= 0) {
+	go = true;
+    }
+    else if (getPageSetting('PraidingHD') > 0) {
+	go = (getPageSetting('PraidingHD') >= calcHDratio(game.global.world + plusMapToRun1()));
+    }
+    return go;
+}
+
+function pcheck2() {
+    var go = false;
+    if (getPageSetting('PraidingHD') <= 0) {
+	go = true;
+    }
+    else if (getPageSetting('PraidingHD') > 0) {
+	go = (getPageSetting('PraidingHD') >= calcHDratio(game.global.world + plusMapToRun2()));
+    }
+    return go;
+}
+
+function pcheck3() {
+    var go = false;
+    if (getPageSetting('PraidingHD') <= 0) {
+	go = true;
+    }
+    else if (getPageSetting('PraidingHD') > 0) {
+	go = (getPageSetting('PraidingHD') >= calcHDratio(game.global.world + plusMapToRun3()));
+    }
+    return go;
+}
+
+function pcheck4() {
+    var go = false;
+    if (getPageSetting('PraidingHD') <= 0) {
+	go = true;
+    }
+    else if (getPageSetting('PraidingHD') > 0) {
+	go = (getPageSetting('PraidingHD') >= calcHDratio(game.global.world + plusMapToRun4()));
+    }
+    return go;
+}
+
+function pcheck5() {
+    var go = false;
+    if (getPageSetting('PraidingHD') <= 0) {
+	go = true;
+    }
+    else if (getPageSetting('PraidingHD') > 0) {
+	go = (getPageSetting('PraidingHD') >= calcHDratio(game.global.world + plusMapToRun5()));
+    }
+    return go;
+}
+
 var pMap1;
 var pMap2;
 var pMap3;  
@@ -648,7 +703,8 @@ function Praiding() {
                 game.options.menu.repeatUntil.enabled = 2;
             }
             if (game.global.preMapsActive && !game.global.mapsActive && !prestraid) {
-                if (pMap5 == undefined && !mapbought5 && game.global.preMapsActive && !prestraid) {
+
+                if (pcheck5() == true && pMap5 == undefined && !mapbought5 && game.global.preMapsActive && !prestraid) {
                     plusPres5();
                     if ((updateMapCost(true) <= game.resources.fragments.owned)) {
                         buyMap();
@@ -658,7 +714,7 @@ function Praiding() {
                         }
                     }
                 }
-                if (pMap4 == undefined && !mapbought4 && game.global.preMapsActive && !prestraid) {
+                if (pcheck4() == true && pMap4 == undefined && !mapbought4 && game.global.preMapsActive && !prestraid) {
                     plusPres4();
                     if ((updateMapCost(true) <= game.resources.fragments.owned)) {
                         buyMap();
@@ -668,7 +724,7 @@ function Praiding() {
                         }
                     }
                 }
-                if (pMap3 == undefined && !mapbought3 && game.global.preMapsActive && !prestraid) {
+                if (pcheck3() == true && pMap3 == undefined && !mapbought3 && game.global.preMapsActive && !prestraid) {
                     plusPres3();
                     if ((updateMapCost(true) <= game.resources.fragments.owned)) {
                         buyMap();
@@ -678,7 +734,7 @@ function Praiding() {
                         }
                     }
                 }
-                if (pMap2 == undefined && !mapbought2 && game.global.preMapsActive && !prestraid) {
+                if (pcheck2() == true && pMap2 == undefined && !mapbought2 && game.global.preMapsActive && !prestraid) {
                     plusPres2();
                     if ((updateMapCost(true) <= game.resources.fragments.owned)) {
                         buyMap();
@@ -688,7 +744,7 @@ function Praiding() {
                         }
                     }
                 }
-                if (pMap1 == undefined && !mapbought1 && game.global.preMapsActive && !prestraid) {
+                if (pcheck1() == true && pMap1 == undefined && !mapbought1 && game.global.preMapsActive && !prestraid) {
                     plusPres1();
                     if ((updateMapCost(true) <= game.resources.fragments.owned)) {
                         buyMap();
@@ -710,7 +766,7 @@ function Praiding() {
                         pMap3 = undefined;
                         pMap4 = undefined;
                         pMap5 = undefined;
-                        debug("Failed to prestige raid. Looks like you can't afford to..");
+                        debug("Failed to prestige raid. Looks like you can't afford to or you are too weak..");
                     }
                     return;
                 }
