@@ -439,11 +439,18 @@ function calcEnemyBaseHealth(zone, level, name) {
     return health;
 }
 
-function calcEnemyHealth(world) {
+function calcEnemyHealth(world, map) {
     world = !world ? game.global.world : world;
     var health = calcEnemyBaseHealth(world, 50, "Snimp");
     var corrupt = mutations.Corruption.active();
     var healthy = mutations.Healthy.active();
+    if (map) {
+	corrupt = false;
+	healthy = false;
+	if (game.global.universe == 1) {
+	    health =* 0.5;
+	}
+    }
     if (corrupt && !healthy) {
         var cptnum = getCorruptedCellsNum();
         var cpthlth = getCorruptScale("health");
@@ -492,7 +499,7 @@ function calcEnemyHealth(world) {
     return health;
 }
 
-function calcHDratio() {
+function calcHDratio(map) {
     var ratio = 0;
     var ourBaseDamage = calcOurDmg("avg", false, true);
 
@@ -508,8 +515,11 @@ function calcHDratio() {
         ourBaseDamage *= trimpAA;
 	ourBaseDamage *= getCritMulti(true);
     }
-
-    ratio = calcEnemyHealth() / ourBaseDamage;
+    if (!map || map < 1) {
+        ratio = calcEnemyHealth() / ourBaseDamage;
+    }
+    if (map || map >= 1)
+	ratio = calcEnemyhealth(map, true)
     return ratio;
 }
 
