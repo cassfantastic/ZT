@@ -843,12 +843,11 @@ function Praiding() {
                 pMap5 = undefined;
             }
             if (!prestraid && !game.global.repeatMap) {
-		 debug("repeat was off dumbass bitch");
                 repeatClicked();
             }
         }
     }
-    if (game.global.preMapsActive && mapbought1 && mapbought2 && mapbought3 && mapbought4 && mapbought5 && pMap1 == undefined && pMap2 == undefined && pMap3 == undefined && pMap4 == undefined && pMap5 == undefined && !prestraid && !failpraid) {
+    if (game.global.preMapsActive && (mapbought1 || mapbought2 || mapbought3 || mapbought4 || mapbought5) && pMap1 == undefined && pMap2 == undefined && pMap3 == undefined && pMap4 == undefined && pMap5 == undefined && !prestraid && !failpraid) {
 	    debug("all maps that were bought were run so prestraid is set to true");
         prestraid = true;
         failpraid = false;
