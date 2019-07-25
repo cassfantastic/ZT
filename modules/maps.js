@@ -794,8 +794,8 @@ function RautoMap() {
     if (game.global.challengeActive == "Daily" && getPageSetting('RDailyVoidMod') >= 1) {
         voidMapLevelSetting = getPageSetting('RDailyVoidMod');
     }
-    if (getPageSetting('RunNewVoidsUntilNew') != 0 && game.global.challengeActive != "Daily") {
-	voidMapLevelPlus = getPageSetting('RunNewVoidsUntilNew');
+    if (getPageSetting('RRunNewVoidsUntilNew') != 0 && game.global.challengeActive != "Daily") {
+	voidMapLevelPlus = getPageSetting('RRunNewVoidsUntilNew');
     }
     if (getPageSetting('RdRunNewVoidsUntilNew') != 0 && game.global.challengeActive == "Daily") {
 	voidMapLevelPlus = getPageSetting('RdRunNewVoidsUntilNew');
