@@ -972,10 +972,10 @@ function RautoMap() {
                     selectedMap = theMap.id;
                     break;
                 }*/
-		if (theMap.name == 'Melting Point' && game.global.challengeActive == "Melt") {
-                        if (game.global.world < 51 || RcalcHDratio() > 500) continue;
-                        selectedMap = theMap.id;
-                        break;
+		if (theMap.name == 'Melting Point' && (game.global.challengeActive == "Melt" || getPageSetting('Rmeltsmithy') > 0)) {
+                    if (game.global.world < 51 || ((RcalcHDratio() > 500) || (getPageSetting('Rmeltsmithy') > game.buildings.Smithy.owned))) continue;
+                    selectedMap = theMap.id;
+                    break;
                 }
             }
         }
