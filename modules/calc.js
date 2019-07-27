@@ -729,6 +729,9 @@ function RcalcOurDmg(minMaxAvg, incStance, incFlucts) {
         if (game.global.challengeActive == "Quest") {
 		number *= game.challenges.Quest.getAttackMult();
 	}
+	if (getHeirloomBonus("Shield", "gammaBurst") > 0 && (RcalcOurHealth() / (RcalcBadGuyDmg(null, RgetEnemyMaxAttack(game.global.world, 50, 'Snimp', 1.0))) >= 5)) {
+	    	number *= getHeirloomBonus("Shield", "gammaBurst") / 5;
+	}
 	if (game.global.challengeActive == "Daily" && game.talents.daily.purchased){
 		number *= 1.5;
 	}
