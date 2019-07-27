@@ -421,6 +421,7 @@ function initializeAllSettings() {
     //Line 2
     createSetting('RMaxCollector', 'Max Collectors', 'recommend: -1', 'value', '-1', null, "Buildings");
     createSetting('RMaxTribute', 'Max Tributes', 'Advanced. recommend: -1 ', 'value', '-1', null, "Buildings");
+    createSetting('Rmeltsmithy', 'Melt Smithy', 'Run the Melting Point Map to gain one extra Smithy when at or above this value. ', 'value', '-1', null, "Buildings");
 
 
     //Jobs
@@ -1398,6 +1399,7 @@ function updateCustomButtons() {
     radonon ? turnOn("RMaxGateway") : turnOff("RMaxGateway");
     radonon ? turnOn("RMaxCollector") : turnOff("RMaxCollector");
     radonon ? turnOn("RMaxTribute") : turnOff("RMaxTribute");
+    radonon ? turnOn("Rmeltsmithy") : turnOff("Rmeltsmithy");
 
 
 
