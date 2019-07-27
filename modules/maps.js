@@ -957,7 +957,7 @@ function RautoMap() {
                     break;
                 }
                 if (theMap.name == 'Dimension of Rage' && document.getElementById("portalBtn").style.display == "none" && game.upgrades.Rage.done == 1) {
-                    if (game.global.world < 16 || RcalcHDratio() > 8) continue;
+                    if (game.global.world < 16 || RcalcHDratio() < 2) continue;
                     selectedMap = theMap.id;
                     break;
                 }
@@ -973,7 +973,7 @@ function RautoMap() {
                     break;
                 }*/
 		if (theMap.name == 'Melting Point' && game.global.challengeActive == "Melt") {
-                        if (game.global.world < 51 || RcalcHDratio() > 16) continue;
+                        if (game.global.world < 51 || RcalcHDratio() > 500) continue;
                         selectedMap = theMap.id;
                         break;
                 }
