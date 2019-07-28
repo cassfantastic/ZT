@@ -357,6 +357,10 @@ function RbuyBuildings() {
         RsafeBuyBuilding('Smithy');
     }
 	
+    if (!game.buildings.Microchip.locked && canAffordBuilding('Microchip')) {
+        RsafeBuyBuilding('Microchip');
+    }
+	
     RbuyFoodEfficientHousing();
     RbuyGemEfficientHousing();
 
