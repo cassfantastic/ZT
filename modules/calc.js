@@ -678,6 +678,9 @@ function RcalcOurDmg(minMaxAvg, incStance, incFlucts) {
 	if (game.portal.Power.radLevel > 0) {
 		number += (number * game.portal.Power.radLevel * game.portal.Power.modifier);
 	}
+	if (game.global.mapBonus > 0){
+		number *= ((game.global.mapBonus * .2) + 1);
+	}
 	if (game.portal.Equality.radLevel > 0) {
                 number *= game.portal.Equality.getMult();
     	}
