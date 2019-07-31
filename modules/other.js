@@ -1961,7 +1961,7 @@ function RPraidHarder() {
   }
 }
 
-function BWraiding() {
+function RBWraiding() {
   var RbwraidZ;
   var bwraidSetting;
   var RbwraidMax;
@@ -1986,23 +1986,12 @@ function BWraiding() {
     ispraidon = Rprestraidon;
   }
 
-  // Convert old BWraid settings to multivalue
-  if (typeof(autoTrimpSettings['RBWraidingz'].value) == "number")
-    setPageSetting('RBWraidingz', Array.of(autoTrimpSettings['RBWraidingz'].value));
-  if (typeof(autoTrimpSettings['RBWraidingmax'].value) == "number")
-    setPageSetting('RBWraidingmax', Array.of(autoTrimpSettings['RBWraidingmax'].value));
-  if (typeof(autoTrimpSettings['RdBWraidingz'].value) == "number")
-      setPageSetting('RdBWraidingz', Array.of(autoTrimpSettings['RdBWraidingz'].value));
-  if (typeof(autoTrimpSettings['RdBWraidingmax'].value) == "number")
-      setPageSetting('RdBWraidingmax', Array.of(autoTrimpSettings['RdBWraidingmax'].value));
-
-
   RisRbwraidZ = getPageSetting(RbwraidZ).includes(game.global.world);
   bwIndex = getPageSetting(RbwraidZ).indexOf(game.global.world);
   if (bwIndex == -1 || typeof(getPageSetting(RbwraidMax)[bwIndex]) === "undefined") targetBW = -1;
   else targetBW = getPageSetting(RbwraidMax)[bwIndex];
 
-  if ((!isPraidZ || RpraidDone) && !ispraidon && RisRbwraidZ && !Rbwraided && !Rfailbwraid && getPageSetting(RbwraidSetting)) {
+  if ((!isPraidZ || RpraidDone) && !ispraidon && RisRbwraidZ && !Rbwraided && !Rfailbwraid && bwraidSetting) {
     if (getPageSetting('RAutoMaps') == 1 && !Rbwraided && !Rfailbwraid) {
       autoTrimpSettings["RAutoMaps"].value = 0;
     }
