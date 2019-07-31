@@ -837,10 +837,10 @@ function pcheckmap4() {
 	    go = true;
         }
 	if (game.global.world % 10 == 2 && plusMapToRun4() >= 9) {
-	    go = false;
+	    go = true;
         }
 	if (game.global.world % 10 == 3 && plusMapToRun4() >= 8) {
-	    go = false;
+	    go = true;
         }
 	if (game.global.world % 10 == 4 && plusMapToRun4() >= 7) {
 	    go = true;
@@ -869,16 +869,16 @@ function pcheckmap5() {
 	    go = true;
         }
 	if (game.global.world % 10 == 1 && (plusMapToRun5() == 4 || plusMapToRun5() == 10)) {
-	    go = false;
+	    go = true;
         }
 	if (game.global.world % 10 == 2 && (plusMapToRun5() == 3 || plusMapToRun5() >= 9)) {
-	    go = false;
+	    go = true;
         }
 	if (game.global.world % 10 == 3 && (plusMapToRun5() == 2 || plusMapToRun5() >= 8)) {
-	    go = false;
+	    go = true;
         }
 	if (game.global.world % 10 == 4 && (plusMapToRun5() == 1 || plusMapToRun5() >= 7)) {
-	    go = false;
+	    go = true;
         }
 	if (game.global.world % 10 == 5 && plusMapToRun5() >= 6) {
 	    go = true;
