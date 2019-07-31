@@ -358,8 +358,8 @@ function initializeAllSettings() {
     createSetting('RdHeliumHrBuffer', 'D: Rn/Hr Portal Buffer %', 'IMPORTANT SETTING. When using the Daily Rn/Hr Autoportal, it will portal if your Rn/Hr drops by this amount of % lower than your best for current run in dailies, default is 0% (ie: set to 5 to portal at 95% of your best in dailies). Now with stuck protection - Allows portaling midzone if we exceed set buffer amount by 5x. (ie a normal 2% buffer setting would now portal mid-zone you fall below 10% buffer).', 'value', '0', null, 'Daily');
     createSetting('RDailyVoidMod', 'Daily Void Zone', 'What zone to do void maps in dailies. Disable with -1', 'value', -1, null, 'Daily');
     createSetting('RdRunNewVoidsUntilNew', 'Daily New Voids Mod', '<b>0 to disable. Positive numbers are added to your Void Map zone. -1 for no cap.</b> This allows you to run new Void Maps in Dailies obtained after your Void Map zone by adding this number to your Void Map zone. <br> <b>Example</b> Void map zone=187 and This setting=10. New Voids run until 197).<br>This means that any new void maps gained until Z197. CAUTION: May severely slow you down by trying to do too-high level void maps. Default 0 (OFF).', 'value', '0', null, 'Daily');
-    createSetting('Rdrunnewvoidspoison', 'New Voids Poison', 'Only run new voids in poison zones.', 'boolean', false, null, 'Daily');
-
+    
+    
 
     //C2
 
@@ -538,7 +538,6 @@ function initializeAllSettings() {
     //Line 2
     createSetting('RVoidMaps', 'Void Maps', '<b>0 to disable</b> The zone at which you want all your void maps to be cleared inclusive of the zone you type. Runs them at Cell 70. Use odd zones on Lead.<br>', 'value', '0', null, "Maps");
     createSetting('RRunNewVoidsUntilNew', 'New Voids Mod', '<b>0 to disable. Positive numbers are added to your Void Map zone. -1 for no cap.</b> This allows you to run new Void Maps obtained after your Void Map zone by adding this number to your Void Map zone. <br> <b>Example</b> Void map zone=187 and This setting=10. New Voids run until 197).<br>This means that any new void maps gained until Z197. CAUTION: May severely slow you down by trying to do too-high level void maps. Default 0 (OFF).', 'value', '0', null, 'Maps');
-    createSetting('Rrunnewvoidspoison', 'New Voids Poison', 'Only run new voids in poison zones.', 'boolean', false, null, 'Maps');
     createSetting('Ronlystackedvoids', 'Stacked Voids Only', 'Only run stacked voids. ', 'boolean', false, null, 'Maps');
     createSetting('Rscryvoidmaps', 'VM Scryer', 'Only use if you have Scryhard II, for er, obvious reasons. Works without the scryer options. ', 'boolean', false, null, 'Maps');
     createSetting('Rbuywepsvoid', 'VM Buy Weps', 'Buys gear in Void maps regardless of your H:D ratio. Useful if you want to overkill as much as possible. ', 'boolean', false, null, 'Maps');
@@ -1332,7 +1331,6 @@ function updateCustomButtons() {
     radonon ? turnOn("RdIgnoreSpiresUntil"): turnOff("RdIgnoreSpiresUntil");
     radonon ? turnOn("RDailyVoidMod"): turnOff("RDailyVoidMod");
     radonon ? turnOn("RdRunNewVoidsUntilNew"): turnOff("RdRunNewVoidsUntilNew");
-    radonon ? turnOn("Rdrunnewvoidspoison"): turnOff("Rdrunnewvoidspoison");
     radonon ? turnOn("Ravoidempower"): turnOff("Ravoidempower");
     radonon ? turnOn("Rdfightforever"): turnOff("Rdfightforever");
     radonon ? turnOn("Rdarmormagic"): turnOff("Rdarmormagic");
@@ -1498,7 +1496,6 @@ function updateCustomButtons() {
     radonon ? turnOn("RDisableFarm"): turnOff("RDisableFarm");
     radonon ? turnOn("RVoidMaps"): turnOff("RVoidMaps");
     radonon ? turnOn("RRunNewVoidsUntilNew"): turnOff("RRunNewVoidsUntilNew");
-    radonon ? turnOn("Rrunnewvoidspoison"): turnOff("Rrunnewvoidspoison");
     radonon ? turnOn("Ronlystackedvoids"): turnOff("Ronlystackedvoids");
     radonon ? turnOn("Rscryvoidmaps"): turnOff("Rscryvoidmaps");
     radonon ? turnOn("Rbuywepsvoid"): turnOff("Rbuywepsvoid");
