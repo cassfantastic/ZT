@@ -40,8 +40,67 @@ function printChangelog() {
     ,   hideCancel = true;
     tooltip('confirm', null, 'update', body+footer, action, title, acceptBtnText, null, hideCancel);
 }
-var runInterval=100,startupDelay=4000;setTimeout(delayStart,startupDelay);function delayStart(){initializeAutoTrimps(),printChangelog(),setTimeout(delayStartAgain,startupDelay)}function delayStartAgain(){game.global.addonUser=!0,game.global.autotrimps=!0,MODULESdefault=JSON.parse(JSON.stringify(MODULES)),setInterval(mainLoop,runInterval),setInterval(guiLoop,10*runInterval)}
-var ATrunning=!0,ATmessageLogTabVisible=!0,enableDebug=!0,autoTrimpSettings={},MODULES={},MODULESdefault={},ATMODULES={},ATmoduleList=[],bestBuilding,scienceNeeded,RscienceNeeded,breedFire=!1,shouldFarm=!1,RshouldFarm=!1,enoughDamage=!0,RenoughDamage=!0,enoughHealth=!0,RenoughHealth=!0,baseDamage=1,baseBlock=1,baseHealth=1,preBuyAmt,preBuyFiring,preBuyTooltip,preBuymaxSplit,currentworld=0,lastrunworld=0,aWholeNewWorld=!1,needGymystic=!0,heirloomFlag=!1,heirloomCache=game.global.heirloomsExtra.length,magmiteSpenderChanged=!1,daily3=!1,lastHeliumZone=0,lastRadonZone=0;
+
+var runInterval = 100;
+var startupDelay = 4000;
+
+setTimeout(delayStart, startupDelay);
+
+function delayStart() {
+    initializeAutoTrimps();
+    printChangelog();
+    setTimeout(delayStartAgain, startupDelay);
+}
+
+function delayStartAgain(){
+    game.global.addonUser = true;
+    game.global.autotrimps = true;
+    MODULESdefault = JSON.parse(JSON.stringify(MODULES));
+    setInterval(mainLoop, runInterval);
+    setInterval(guiLoop, runInterval*10);
+}
+
+var ATrunning = true;
+var ATmessageLogTabVisible = true;
+var enableDebug = true;
+
+var autoTrimpSettings = {};
+var MODULES = {};
+var MODULESdefault = {};
+var ATMODULES = {};
+var ATmoduleList = [];
+
+var bestBuilding;
+var scienceNeeded;
+var RscienceNeeded;
+var breedFire = false;
+
+var shouldFarm = false;
+var RshouldFarm = false;
+var enoughDamage = true;
+var RenoughDamage = true;
+var enoughHealth = true;
+var RenoughHealth = true;
+
+var baseDamage = 0;
+var baseBlock = 0;
+var baseHealth = 0;
+
+var preBuyAmt;
+var preBuyFiring;
+var preBuyTooltip;
+var preBuymaxSplit;
+
+var currentworld = 0;
+var lastrunworld = 0;
+var aWholeNewWorld = false;
+var needGymystic = true;
+var heirloomFlag = false;
+var daily3 = false;
+var heirloomCache = game.global.heirloomsExtra.length;
+var magmiteSpenderChanged = false;
+var lastHeliumZone = 0;
+var lastRadonZone = 0;
 
 function mainLoop() {
     if (ATrunning == false) return;
