@@ -878,6 +878,36 @@ function pcheckmap5() {
 	return go;
 }
 
+function checkprest1() {
+	var go = false;
+	go = (game.mapUnlocks.GambesOP.last - 5 <= (game.global.world + plusMapToRun1()));
+	return go;
+}
+
+function checkprest2() {
+	var go = false;
+	go = (game.mapUnlocks.GambesOP.last - 5 <= (game.global.world + plusMapToRun2()));
+	return go;
+}
+
+function checkprest3() {
+	var go = false;
+	go = (game.mapUnlocks.GambesOP.last - 5 <= (game.global.world + plusMapToRun3()));
+	return go;
+}
+
+function checkprest4() {
+	var go = false;
+	go = (game.mapUnlocks.GambesOP.last - 5 <= (game.global.world + plusMapToRun4()));
+	return go;
+}
+
+function checkprest5() {
+	var go = false;
+	go = (game.mapUnlocks.GambesOP.last - 5 <= (game.global.world + plusMapToRun5()));
+	return go;
+}
+
 var pMap1;
 var pMap2;
 var pMap3;  
