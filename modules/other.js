@@ -55,6 +55,8 @@ return map;
 
 function plusMapToRun2() { 
 var map = 2;
+if (game.global.world % 10 == 4)
+	map = 7;
 if (game.global.world % 10 == 5)
 	map = 7;
 if (game.global.world % 10 == 6)
@@ -70,6 +72,10 @@ return map;
 
 function plusMapToRun3() { 
 var map = 3;
+if (game.global.world % 10 == 3)
+	map = 8;
+if (game.global.world % 10 == 4)
+	map = 8;
 if (game.global.world % 10 == 5)
 	map = 8;
 if (game.global.world % 10 == 6)
@@ -85,6 +91,12 @@ return map;
 
 function plusMapToRun4() { 
 var map = 4;
+if (game.global.world % 10 == 2)
+	map = 9;
+if (game.global.world % 10 == 3)
+	map = 9;
+if (game.global.world % 10 == 4)
+	map = 9;
 if (game.global.world % 10 == 5)
 	map = 9;
 if (game.global.world % 10 == 6)
@@ -100,6 +112,14 @@ return map;
 
 function plusMapToRun5() { 
 var map = 5;
+if (game.global.world % 10 == 1)
+	map = 10;
+if (game.global.world % 10 == 2)
+	map = 10;
+if (game.global.world % 10 == 3)
+	map = 10;
+if (game.global.world % 10 == 4)
+	map = 10;
 if (game.global.world % 10 == 5)
 	map = 10;
 if (game.global.world % 10 == 6)
