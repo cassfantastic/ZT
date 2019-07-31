@@ -880,31 +880,31 @@ function pcheckmap5() {
 
 function checkprest1() {
 	var go = false;
-	go = (game.mapUnlocks.GambesOP.last - 5 <= (game.global.world + plusMapToRun1()));
+	go = (game.mapUnlocks.GambesOP.last - 5 < (game.global.world + plusMapToRun1()));
 	return go;
 }
 
 function checkprest2() {
 	var go = false;
-	go = (game.mapUnlocks.GambesOP.last - 5 <= (game.global.world + plusMapToRun2()));
+	go = (game.mapUnlocks.GambesOP.last - 5 < (game.global.world + plusMapToRun2()));
 	return go;
 }
 
 function checkprest3() {
 	var go = false;
-	go = (game.mapUnlocks.GambesOP.last - 5 <= (game.global.world + plusMapToRun3()));
+	go = (game.mapUnlocks.GambesOP.last - 5 < (game.global.world + plusMapToRun3()));
 	return go;
 }
 
 function checkprest4() {
 	var go = false;
-	go = (game.mapUnlocks.GambesOP.last - 5 <= (game.global.world + plusMapToRun4()));
+	go = (game.mapUnlocks.GambesOP.last - 5 < (game.global.world + plusMapToRun4()));
 	return go;
 }
 
 function checkprest5() {
 	var go = false;
-	go = (game.mapUnlocks.GambesOP.last - 5 <= (game.global.world + plusMapToRun5()));
+	go = (game.mapUnlocks.GambesOP.last - 5 < (game.global.world + plusMapToRun5()));
 	return go;
 }
 
@@ -939,7 +939,7 @@ function Praiding() {
             }
             if (game.global.preMapsActive && !game.global.mapsActive && !prestraid) {
 		debug("Map Loop");
-                if (pcheckmap5() == true && pcheck5() == true && pMap5 == undefined && !mapbought5 && game.global.preMapsActive && !prestraid) {
+                if (checkprest5() == true && pcheckmap5() == true && pcheck5() == true && pMap5 == undefined && !mapbought5 && game.global.preMapsActive && !prestraid) {
 			debug("Check complete for 5th map");
                     plusPres5();
                     if ((updateMapCost(true) <= game.resources.fragments.owned)) {
@@ -951,7 +951,7 @@ function Praiding() {
                         }
                     }
                 }
-                if (pcheckmap4() == true && pcheck4() == true && pMap4 == undefined && !mapbought4 && game.global.preMapsActive && !prestraid) {
+                if (checkprest4() == true && pcheckmap4() == true && pcheck4() == true && pMap4 == undefined && !mapbought4 && game.global.preMapsActive && !prestraid) {
 			debug("Check complete for 4th map");
                     plusPres4();
                     if ((updateMapCost(true) <= game.resources.fragments.owned)) {
@@ -963,7 +963,7 @@ function Praiding() {
                         }
                     }
                 }
-                if (pcheckmap3() == true && pcheck3() == true && pMap3 == undefined && !mapbought3 && game.global.preMapsActive && !prestraid) {
+                if (checkprest3() == true && pcheckmap3() == true && pcheck3() == true && pMap3 == undefined && !mapbought3 && game.global.preMapsActive && !prestraid) {
 			debug("Check complete for 3rd map");
                     plusPres3();
                     if ((updateMapCost(true) <= game.resources.fragments.owned)) {
@@ -975,7 +975,7 @@ function Praiding() {
                         }
                     }
                 }
-                if (pcheckmap2() == true && pcheck2() == true && pMap2 == undefined && !mapbought2 && game.global.preMapsActive && !prestraid) {
+                if (checkprest2() == true && pcheckmap2() == true && pcheck2() == true && pMap2 == undefined && !mapbought2 && game.global.preMapsActive && !prestraid) {
 			debug("Check complete for 2nd map");
                     plusPres2();
                     if ((updateMapCost(true) <= game.resources.fragments.owned)) {
@@ -987,7 +987,7 @@ function Praiding() {
                         }
                     }
                 }
-                if (pcheckmap1() == true && pcheck1() == true && pMap1 == undefined && !mapbought1 && game.global.preMapsActive && !prestraid) {
+                if (checkprest1() == true && pcheckmap1() == true && pcheck1() == true && pMap1 == undefined && !mapbought1 && game.global.preMapsActive && !prestraid) {
 			debug("Check complete for 1st map");
                     plusPres1();
                     if ((updateMapCost(true) <= game.resources.fragments.owned)) {
