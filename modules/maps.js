@@ -206,9 +206,8 @@ function autoMap() {
 			   )
 			  )
 			 )
-		    )
-		   )
-		);
+                        )
+);
 
     var voidArrayDoneS = [];
     if (game.global.challengeActive != "Daily" && getPageSetting('onlystackedvoids') == true) {
