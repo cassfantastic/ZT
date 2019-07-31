@@ -1052,7 +1052,6 @@ function Praiding() {
         }
     }
     if (game.global.preMapsActive && (mapbought1 || mapbought2 || mapbought3 || mapbought4 || mapbought5) && pMap1 == undefined && pMap2 == undefined && pMap3 == undefined && pMap4 == undefined && pMap5 == undefined && !prestraid && !failpraid) {
-	    debug("all maps that were bought were run so prestraid is set to true");
         prestraid = true;
         failpraid = false;
         mapbought1 = false;
@@ -1062,7 +1061,6 @@ function Praiding() {
         mapbought5 = false;
     }
     if (getPageSetting('AutoMaps') == 0 && game.global.preMapsActive && prestraid && !failpraid && prestraidon) {
-	    debug("running map 1");
         praidDone = true;
         prestraidon = false;
         autoTrimpSettings["AutoMaps"].value = 1;
@@ -1076,7 +1074,6 @@ function Praiding() {
         debug("Turning AutoMaps back on");
     }
     if (getPageSetting('Praidingzone').every(isBelowThreshold)) {
-	    debug("resetting vars cuz out of praid zone");
         prestraid = false;
         failpraid = false;
         prestraidon = false;
