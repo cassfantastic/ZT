@@ -300,7 +300,6 @@ function RbuyFoodEfficientHousing() {
     buildorder.sort(function (a, b) {
         return a.ratio - b.ratio;
     });
-	console.log(buildorder);
     var bestfoodBuilding = null;
     var bb = buildorder[0];
     var max = getPageSetting('RMax' + bb.name);
