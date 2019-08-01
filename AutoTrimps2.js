@@ -7,7 +7,7 @@ function initializeAutoTrimps() {
     loadPageVariables();
     ATscriptLoad('','SettingsGUI');
     //ATscriptLoad('','Graphs');
-    ATmoduleList = ['import-export', 'query', /*'calc', 'portal', 'upgrades', 'heirlooms', 'buildings', 'jobs', 'equipment', 'gather', 'stance', 'maps', 'breedtimer', 'dynprestige', 'fight', 'scryer', 'magmite', 'nature', 'other', 'perks', 'fight-info', */'performance'];
+    ATmoduleList = ['import-export', 'query', 'calc', 'portal', 'upgrades', 'heirlooms', 'buildings', 'jobs', 'equipment', 'gather', 'stance', 'maps', 'breedtimer', 'dynprestige', 'fight', 'scryer', 'magmite', 'nature', 'other', 'perks', 'fight-info', 'performance'];
     for (var m in ATmoduleList) {
         ATscriptLoad(modulepath, ATmoduleList[m]);
     }
@@ -127,7 +127,7 @@ function mainLoop() {
             easterEggClicked();
         setTitle();
     }
-    /*if (game.global.universe == 1) { 
+    if (game.global.universe == 1) { 
         setScienceNeeded();
         autoLevelEquipment();
     }
@@ -310,7 +310,7 @@ function mainLoop() {
     if (Ragu && Ragu != 'Off' && (!game.global.runningChallengeSquared && game.global.challengeActive != "Daily")) RautoGoldenUpgradesAT(Ragu);
     if (Rdagu && Rdagu != 'Off' && game.global.challengeActive == "Daily") RautoGoldenUpgradesAT(Rdagu);
     if (Rcagu && Rcagu != 'Off' && game.global.runningChallengeSquared) RautoGoldenUpgradesAT(Rcagu);
-*/}
+}
 
 function guiLoop(){updateCustomButtons(),safeSetItems('storedMODULES',JSON.stringify(compareModuleVars())),getPageSetting('EnhanceGrids')&&MODULES.fightinfo.Update(),'undefined'!=typeof MODULES&&'undefined'!=typeof MODULES.performance&&MODULES.performance.isAFK&&MODULES.performance.UpdateAFKOverlay()}
 function mainCleanup() {
