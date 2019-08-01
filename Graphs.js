@@ -841,8 +841,8 @@ setInterval(getLootData, 15000);
             return toReturn;
         };
 
-    const oldFunction = window.addResCheckMax;
-    window.addResCheckMax = (a, b, c, d, e) => filterLoot(a, b, null, d) || oldFunction(a, b, c, d, e);
+    /*const oldFunction = window.addResCheckMax;
+    window.addResCheckMax = (a, b, c, d, e) => filterLoot(a, b, null, d) || oldFunction(a, b, c, d, e);*/
 })();
 
 function lookUpZoneData(a,b){null==b&&(b=getTotalPortals(true));for(var c=allSaveData.length-1;0<=c;c--)if(allSaveData[c].totalPortals==b&&allSaveData[c].world==a)return allSaveData[c]}
