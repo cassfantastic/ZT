@@ -684,6 +684,9 @@ function RcalcOurDmg(minMaxAvg, incStance, incFlucts) {
 	if (game.portal.Equality.radLevel > 0) {
                 number *= game.portal.Equality.getMult();
     	}
+	if (game.portal.Tenacity.radLevel > 0) {
+		number *= game.portal.Tenacity.getMult();
+	}
 	if (game.portal.Range.radLevel > 0){
 		minFluct = fluctuation - (.02 * game.portal.Range.radLevel);
 	}
@@ -703,24 +706,14 @@ function RcalcOurDmg(minMaxAvg, incStance, incFlucts) {
 		number *= Fluffy.getDamageModifier();
 	}
 	if (playerSpireTraps.Strength.owned) {
-			var strBonus = playerSpireTraps.Strength.getWorldBonus();
-			number *= (1 + (strBonus / 100));
+		var strBonus = playerSpireTraps.Strength.getWorldBonus();
+		number *= (1 + (strBonus / 100));
 	}
 	if (game.singleRunBonuses.sharpTrimps.owned){
 		number *= 1.5;
 	}
-	if (game.talents.voidPower.purchased && game.global.voidBuff) {
-		var vpAmt = (game.talents.voidPower2.purchased) ? ((game.talents.voidPower3.purchased) ? 65 : 35) : 15;
-		number *= ((vpAmt / 100) + 1);
-	}
-	if (game.global.voidBuff && game.talents.voidMastery.purchased){
-		number *= 5;
-	}
 	if (game.global.sugarRush > 0) {
 		number *= sugarRush.getAttackStrength();
-	}
-	if (incStance && game.talents.scry.purchased && game.global.formation == 4 && (mutations.Healthy.active() || mutations.Corruption.active())){
-		number *= 2;
 	}
 	if (game.global.challengeActive == "Melt") {
 		number *= 5;
@@ -732,6 +725,9 @@ function RcalcOurDmg(minMaxAvg, incStance, incFlucts) {
         if (game.global.challengeActive == "Quest") {
 		number *= game.challenges.Quest.getAttackMult();
 	}
+	if (game.global.challengeActive == "Revenge" && game.challenges.Revenge.stacks > 0) {
+		number *= game.challenges.Revenge.getMult();
+	}
 	if (getHeirloomBonus("Shield", "gammaBurst") > 0 && (RcalcOurHealth() / (RcalcBadGuyDmg(null, RgetEnemyMaxAttack(game.global.world, 50, 'Snimp', 1.0))) >= 5)) {
 	    	number *= ((getHeirloomBonus("Shield", "gammaBurst") / 100) + 1) / 5;
 	}
@@ -739,21 +735,21 @@ function RcalcOurDmg(minMaxAvg, incStance, incFlucts) {
 		number *= 1.5;
 	}
 	if (game.global.challengeActive == "Daily"){
-		if (typeof game.global.dailyChallenge.minDamage !== 'undefined'){
+		if (typeof game.global.dailyChallenge.minDamage !== 'undefined') {
 			if (minFluct == -1) minFluct = fluctuation;
 			minFluct += dailyModifiers.minDamage.getMult(game.global.dailyChallenge.minDamage.strength);
 		}
-		if (typeof game.global.dailyChallenge.maxDamage !== 'undefined'){
+		if (typeof game.global.dailyChallenge.maxDamage !== 'undefined') {
 			if (maxFluct == -1) maxFluct = fluctuation;
 			maxFluct += dailyModifiers.maxDamage.getMult(game.global.dailyChallenge.maxDamage.strength);
 		}
-		if (typeof game.global.dailyChallenge.oddTrimpNerf !== 'undefined' && ((game.global.world % 2) == 1)){
+		if (typeof game.global.dailyChallenge.oddTrimpNerf !== 'undefined' && ((game.global.world % 2) == 1)) {
 				number *= dailyModifiers.oddTrimpNerf.getMult(game.global.dailyChallenge.oddTrimpNerf.strength);
 		}
-		if (typeof game.global.dailyChallenge.evenTrimpBuff !== 'undefined' && ((game.global.world % 2) == 0)){
+		if (typeof game.global.dailyChallenge.evenTrimpBuff !== 'undefined' && ((game.global.world % 2) == 0)) {
 				number *= dailyModifiers.evenTrimpBuff.getMult(game.global.dailyChallenge.evenTrimpBuff.strength);
 		}
-		if (typeof game.global.dailyChallenge.rampage !== 'undefined'){
+		if (typeof game.global.dailyChallenge.rampage !== 'undefined') {
 			number *= dailyModifiers.rampage.getMult(game.global.dailyChallenge.rampage.strength, game.global.dailyChallenge.rampage.stacks);
 		}
 	}
@@ -816,7 +812,9 @@ function RcalcOurHealth() {
     if (game.global.totalSquaredReward > 0) {
         health *= (1 + (game.global.totalSquaredReward / 100));
     }
-	
+    if (game.global.challengeActive == "Revenge" && game.challenges.Revenge.stacks > 0) {
+		number *= game.challenges.Revenge.getMult();
+    }
     if (typeof game.global.dailyChallenge.pressure !== 'undefined') {
         health *= (dailyModifiers.pressure.getMult(game.global.dailyChallenge.pressure.strength, game.global.dailyChallenge.pressure.stacks));
     }
@@ -858,9 +856,6 @@ function RcalcBadGuyDmg(enemy,attack) {
     if (game.global.challengeActive == "Unbalance") {
 	number *= 1.5;
     }
-    if (game.global.challengeActive == "Quest") {
-	number *= game.challenges.Quest.getHealthMult();
-    }
     if (!enemy && game.global.usingShriek) {
         number *= game.mapUnlocks.roboTrimp.getShriekValue();
     }
@@ -884,15 +879,27 @@ function RcalcEnemyBaseHealth(world, level, name) {
 			}
 			if (world < 60) amt *= 0.75;
 			if (world > 5 && game.global.mapsActive) amt *= 1.1;
-		    amt *= game.badGuys[name].health;
-			if (game.global.universe == 2) amt *= Math.pow(1.4, world);
+		        amt *= game.badGuys[name].health;
+			if (game.global.universe == 2) {
+				var part1 = (world > 60) ? 60 : world;
+				var part2 = (world - 60);
+				if (part2 < 0) part2 = 0;
+				amt *= Math.pow(1.4, part1);
+				amt *= Math.pow(1.32, part2);
+			}
 			return Math.floor(amt);
-		}
+}
 
 function RcalcEnemyHealth() {
     var health = RcalcEnemyBaseHealth(game.global.world, 50, "Snimp");
     if (game.global.challengeActive == "Unbalance") {
 	health *= 2;
+    }
+    if (game.global.challengeActive == "Quest"){
+	health *= game.challenges.Quest.getHealthMult();
+    }
+    if (game.global.challengeActive == "Revenge" && game.global.world % 2 == 0) {
+	health *= 10;
     }
     return health;
 }
