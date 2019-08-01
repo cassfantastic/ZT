@@ -301,6 +301,7 @@ function RbuyFoodEfficientHousing() {
     });
     var bestfoodBuilding = null;
     var bb = buildorder[0];
+	console.log(bb);
     var max = getPageSetting('RMax' + bb.name);
     if (game.buildings[bb.name].owned < max || max == -1) {
         bestfoodBuilding = bb.name;
