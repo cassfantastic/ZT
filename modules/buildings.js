@@ -286,6 +286,7 @@ function RbuyFoodEfficientHousing() {
         }
     }
     var buildorder = [];
+    if (unlockedHousing.length > 0) {
     for (var house in unlockedHousing) {
         var building = game.buildings[unlockedHousing[house]];
         var cost = getBuildingItemPrice(building, "food", false, 1);
@@ -309,6 +310,7 @@ function RbuyFoodEfficientHousing() {
     if (bestfoodBuilding) {
         document.getElementById(bestfoodBuilding).style.border = "1px solid #00CC01";
         RsafeBuyBuilding(bestfoodBuilding);
+    }
     }
 }
 
