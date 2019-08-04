@@ -255,11 +255,11 @@ function mainLoop() {
     
     
     //Stance
-    if ((getPageSetting('UseScryerStance') == true) || (getPageSetting('scryvoidmaps') == true && game.global.challengeActive != "Daily") || (getPageSetting('dscryvoidmaps') == true && game.global.challengeActive == "Daily")) useScryerStance();
-    else if ((getPageSetting('AutoStance') == 3) || (getPageSetting('use3daily') == true && game.global.challengeActive == "Daily")) windStance();
-    else if (getPageSetting('AutoStance') == 1) autoStance();
-    else if (getPageSetting('AutoStance') == 2) autoStance2();
-    if (getPageSetting('AutoStanceNew') == true) autoStanceNew();
+    if (game.global.universe == 1 && (getPageSetting('UseScryerStance') == true) || (getPageSetting('scryvoidmaps') == true && game.global.challengeActive != "Daily") || (getPageSetting('dscryvoidmaps') == true && game.global.challengeActive == "Daily")) useScryerStance();
+    else if (game.global.universe == 1 && (getPageSetting('AutoStance') == 3) || (getPageSetting('use3daily') == true && game.global.challengeActive == "Daily")) windStance();
+    else if (game.global.universe == 1 && getPageSetting('AutoStance') == 1) autoStance();
+    else if (game.global.universe == 1 && getPageSetting('AutoStance') == 2) autoStance2();
+    if (game.global.universe == 1 && getPageSetting('AutoStanceNew') == true) autoStanceNew();
 
     //Spire
     if (game.global.universe == 1 && getPageSetting('ExitSpireCell') > 0 && game.global.challengeActive != "Daily" && getPageSetting('IgnoreSpiresUntil') <= game.global.world && game.global.spireActive) exitSpireCell();
