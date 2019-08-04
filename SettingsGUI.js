@@ -541,6 +541,7 @@ function initializeAllSettings() {
     createSetting('Ronlystackedvoids', 'Stacked Voids Only', 'Only run stacked voids. ', 'boolean', false, null, 'Maps');
     createSetting('Rscryvoidmaps', 'VM Scryer', 'Only use if you have Scryhard II, for er, obvious reasons. Works without the scryer options. ', 'boolean', false, null, 'Maps');
     createSetting('Rbuywepsvoid', 'VM Buy Weps', 'Buys gear in Void maps regardless of your H:D ratio. Useful if you want to overkill as much as possible. ', 'boolean', false, null, 'Maps');
+    createSetting('Rprispalace', 'Prismatic Palace', 'Run Prismatic Palace when its unlocked. ', 'boolean', true, null, 'Maps');
 
 
     
@@ -1499,6 +1500,7 @@ function updateCustomButtons() {
     radonon ? turnOn("Ronlystackedvoids"): turnOff("Ronlystackedvoids");
     radonon ? turnOn("Rscryvoidmaps"): turnOff("Rscryvoidmaps");
     radonon ? turnOn("Rbuywepsvoid"): turnOff("Rbuywepsvoid");
+    radonon ? turnOn("Rprispalace"): turnOff("Rprispalace");
 
 
     
