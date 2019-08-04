@@ -1574,7 +1574,10 @@ function updateCustomButtons() {
     (!radonon && ATGAon) ? turnOn("dATGA2Auto") : turnOff("dATGA2Auto");
 
     
+    
     //Combat
+    !radonon ? turnOn("AutoStance"): turnOff("AutoStance");
+    !radonon ? turnOn("AutoStanceNew"): turnOff("AutoStanceNew");
     !radonon ? turnOn("DynamicGyms"): turnOff("DynamicGyms");
     !radonon ? turnOn("AutoRoboTrimp"): turnOff("AutoRoboTrimp");
     !radonon ? turnOn("addpoison"): turnOff("addpoison");
