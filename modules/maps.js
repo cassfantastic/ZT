@@ -983,17 +983,11 @@ function RautoMap() {
                     selectedMap = theMap.id;
                     break;
                 }
-		if (theMap.name == 'Prismatic Palace' && game.mapUnlocks.Prismalicious.canRunOnce) {
+		if (getPageSetting('Rprispalace') == true && theMap.name == 'Prismatic Palace' && game.mapUnlocks.Prismalicious.canRunOnce) {
                     if (game.global.world < 21 || RcalcHDratio() > 8) continue;
                     selectedMap = theMap.id;
                     break;
                 }
-		/*if (theMap.name == 'Trimple Of Doom' && game.mapUnlocks.AncientTreasure.canRunOnce) {
-                    var theMapDifficulty = Math.ceil(theMap.difficulty / 2);
-                    if (game.global.world < 33 + theMapDifficulty) continue;
-                    selectedMap = theMap.id;
-                    break;
-                }*/
 		if (theMap.name == 'Melting Point' && (game.global.challengeActive == "Melt" || getPageSetting('Rmeltsmithy') > 0)) {
                     if (game.global.world < 51 || ((RcalcHDratio() > 500) || (getPageSetting('Rmeltsmithy') > game.buildings.Smithy.owned))) continue;
                     selectedMap = theMap.id;
