@@ -813,7 +813,10 @@ function RcalcOurHealth() {
         health *= (1 + (game.global.totalSquaredReward / 100));
     }
     if (game.global.challengeActive == "Revenge" && game.challenges.Revenge.stacks > 0) {
-		number *= game.challenges.Revenge.getMult();
+	health *= game.challenges.Revenge.getMult();
+    }
+    if (game.global.challengeActive == "Wither" && game.challenges.Wither.trimpStacks > 0) {
+	health *= game.challenges.Wither.getTrimpHealthMult();
     }
     if (typeof game.global.dailyChallenge.pressure !== 'undefined') {
         health *= (dailyModifiers.pressure.getMult(game.global.dailyChallenge.pressure.strength, game.global.dailyChallenge.pressure.stacks));
@@ -855,6 +858,9 @@ function RcalcBadGuyDmg(enemy,attack) {
     }
     if (game.global.challengeActive == "Unbalance") {
 	number *= 1.5;
+    }
+    if (game.global.challengeActive == "Wither" && game.challenges.Wither.enemyStacks > 0) {
+	number *= game.challenges.Wither.getEnemyAttackMult();
     }
     if (!enemy && game.global.usingShriek) {
         number *= game.mapUnlocks.roboTrimp.getShriekValue();
