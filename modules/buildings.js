@@ -354,6 +354,7 @@ function RbuyBuildings() {
 	
     //Smithy
     if (!game.buildings.Smithy.locked && canAffordBuilding('Smithy')) {
+	if (game.global.challengeActive == "Quest" && ((questcheck() != 7) || (RcalcHDratio() * 10 >= getPageSetting('Rmapcuntoff')))
         RsafeBuyBuilding('Smithy');
     }
 	
