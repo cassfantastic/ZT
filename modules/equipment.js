@@ -404,8 +404,6 @@ function areWeAttackLevelCapped(){var a=[];for(var b in equipmentList){var c=equ
 MODULES["equipment"].RnumHitsSurvived = 10;
 MODULES["equipment"].RnumHitsSurvivedScry = 80;
 MODULES["equipment"].RcapDivisor = 10;
-MODULES["equipment"].alwaysLvl2 = getPageSetting('Ralways2');
-MODULES["equipment"].RwaitTill60 = true;
 MODULES["equipment"].RequipHealthDebugMessage = false;
 var RequipmentList = {
     'Dagger': {
@@ -500,8 +498,8 @@ function RequipCost(gameResource, equip) {
     var price = parseFloat(getBuildingItemPrice(gameResource, equip.Resource, equip.Equip, 1));
     if (equip.Equip)
         price = Math.ceil(price * (Math.pow(1 - game.portal.Artisanistry.modifier, game.portal.Artisanistry.radLevel)));
-    else
-        price = Math.ceil(price * (Math.pow(1 - game.portal.Resourceful.modifier, game.portal.Resourceful.radLevel)));
+    /*else
+        price = Math.ceil(price * (Math.pow(1 - game.portal.Resourceful.modifier, game.portal.Resourceful.radLevel)));*/
     return price;
 }
 
@@ -553,7 +551,6 @@ function RevaluateEquipmentEfficiency(equipName) {
         }
     }
     if (game.jobs[Rmapresourcetojob[equip.Resource]].locked && (game.global.challengeActive != 'Transmute')) {
-
         Factor = 0;
         Wall = true;
     }
@@ -569,10 +566,7 @@ function RevaluateEquipmentEfficiency(equipName) {
         Factor = 0;
         Wall = true;
     }
-    if (game.global.world < 60 && game.global.world >= 58 && MODULES["equipment"].RwaitTill60) {
-        Wall = true;
-    }
-    if (gameResource.level < 2 && MODULES["equipment"].RalwaysLvl2) {
+    if (gameResource.level < 2 && getPageSetting('Ralways2')) {
         Factor = 999 - gameResource.prestige;
     }
     return {
@@ -680,7 +674,7 @@ function RautoLevelEquipment() {
                 $equipUpgrade.style.color = evaluation.StatusBorder;
             if (evaluation.StatusBorder == 'yellow' && $equipUpgrade)
                 $equipUpgrade.style.color = 'white';
-            if (evaluation.StatusBorder == 'red' && !(game.global.world < 60 && game.global.world >= 58 && MODULES["equipment"].RwaitTill60)) {
+            if (evaluation.StatusBorder == 'red') {
                 var BuyWeaponUpgrades = ((getPageSetting('RBuyWeaponsNew') == 1) || (getPageSetting('RBuyWeaponsNew') == 2));
                 var BuyArmorUpgrades = ((getPageSetting('RBuyArmorNew') == 1) || (getPageSetting('RBuyArmorNew') == 2));
                 var DelayArmorWhenNeeded = getPageSetting('RDelayArmorWhenNeeded');
@@ -728,7 +722,7 @@ function RautoLevelEquipment() {
                     buyEquipment(eqName, null, true);
                 }
             }
-            var aalvl2 = MODULES["equipment"].RalwaysLvl2;
+            var aalvl2 = getPageSetting('Ralways2');
             if (BuyArmorLevels && (DaThing.Stat == 'health') && aalvl2 && game.equipment[eqName].level < 2) {
                 game.global.buyAmt = 1;
                 if (DaThing.Equip && !RBest[stat].Wall && canAffordBuilding(eqName, null, null, true)) {
